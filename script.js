@@ -104,3 +104,10 @@ function increaseQuantity(index) {
 checkoutBtn.addEventListener("click", () => {
   window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
 });
+// Hamburger Menü Aç/Kapat
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("menu");
+
+hamburger.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
