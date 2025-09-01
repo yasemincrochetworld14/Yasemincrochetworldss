@@ -27,10 +27,10 @@ body.dark .navbar {
 .logo {
   display: flex;
   align-items: center;
+}.logo img {
+  height: 25px;  /* Küçük */
+  margin-right: 8px;
 }
-.logo img {
-  height: 40px;
-  margin-right: 10px;
 }
 .navbar nav a {
   margin: 0 10px;
