@@ -177,3 +177,4 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 
 /* ========== Footer ========== */
 .site-footer { padding:24px 20px; text-align:center; color:var(--muted); }
+.store.etsy:hover { color:#f1641e; }
