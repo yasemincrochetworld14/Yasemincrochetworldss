@@ -1,15 +1,13 @@
-// DARK MODE
+// Dark Mode
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
 
-// LocalStorage'dan kontrol et
 if (localStorage.getItem("dark-mode") === "enabled") {
   body.classList.add("dark-mode");
 }
 
 darkModeToggle.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
-
   if (body.classList.contains("dark-mode")) {
     localStorage.setItem("dark-mode", "enabled");
   } else {
@@ -17,7 +15,54 @@ darkModeToggle.addEventListener("click", () => {
   }
 });
 
-// HAMBURGER MENÜ
+// Sepet
+const cartToggle = document.getElementById("cartToggle");
+const cartOverlay = document.getElementById("cartOverlay");
+const closeCart = document.getElementById("closeCart");
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+
+let cart = [];
+let total = 0;
+
+cartToggle.addEventListener("click", () => {
+  cartOverlay.classList.add("active");
+});
+
+closeCart.addEventListener("click", () => {
+  cartOverlay.classList.remove("active");
+});
+
+// Overlay’e tıklayınca kapansın
+cartOverlay.addEventListener("click", (e) => {
+  if (e.target === cartOverlay) {
+    cartOverlay.classList.remove("active");
+  }
+});
+
+// Sepete Ekle
+document.querySelectorAll(".add-to-cart").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const productCard = e.target.closest(".product-card");
+    const name = productCard.querySelector("h3").innerText;
+    const price = parseFloat(
+      productCard.querySelector("span").innerText.replace("₺", "").replace(",", ".")
+    );
+
+    cart.push({ name, price });
+    total += price;
+
+    const li = document.createElement("li");
+    li.textContent = `${name} - ₺${price.toFixed(2)}`;
+    cartItems.appendChild(li);
+
+    cartCount.innerText = cart.length;
+    cartTotal.innerText = `₺${total.toFixed(2)}`;
+  });
+});
+
+// Hamburger Menü
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("menu");
 
@@ -25,100 +70,33 @@ hamburger.addEventListener("click", () => {
   menu.classList.toggle("active");
 });
 
-// SEPET SİSTEMİ
-const cartToggle = document.getElementById("cartToggle");
-const cartPanel = document.getElementById("cartPanel");
-const cartItems = document.getElementById("cartItems");
-const cartTotal = document.getElementById("cartTotal");
-const cartCount = document.getElementById("cartCount");
-const checkoutBtn = document.getElementById("checkoutBtn");
+// Back to Top
+const backToTop = document.getElementById("backToTop");
 
-let cart = [];
-
-// Sepet panelini aç/kapat
-cartToggle.addEventListener("click", () => {
-  cartPanel.classList.toggle("active");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
 });
 
-// "Sepete Ekle" butonlarını yakala
-const addToCartButtons = document.querySelectorAll(".add-to-cart");
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-addToCartButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    const productCard = button.parentElement;
-    const productName = productCard.querySelector("h3").innerText;
-    const productPrice = parseFloat(
-      productCard.querySelector("span").innerText.replace("₺", "").replace(",", ".")
-    );
+// Fade-in Animasyon
+const fadeElems = document.querySelectorAll(".fade-in");
 
-    const existingItem = cart.find(item => item.name === productName);
-
-    if (existingItem) {
-      existingItem.quantity++;
-    } else {
-      cart.push({ name: productName, price: productPrice, quantity: 1 });
+function checkFadeIn() {
+  const triggerBottom = window.innerHeight * 0.9;
+  fadeElems.forEach((el) => {
+    const boxTop = el.getBoundingClientRect().top;
+    if (boxTop < triggerBottom) {
+      el.classList.add("visible");
     }
-
-    updateCart();
-  });
-});
-
-// Sepeti güncelle
-function updateCart() {
-  cartItems.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.price * item.quantity;
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.name} - ₺${item.price.toFixed(2)} x ${item.quantity}
-      <button class="decrease" data-index="${index}">-</button>
-      <button class="increase" data-index="${index}">+</button>
-      <button class="remove" data-index="${index}">x</button>
-    `;
-    cartItems.appendChild(li);
-  });
-
-  cartTotal.innerText = `₺${total.toFixed(2)}`;
-  cartCount.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  // Butonlara event ekle
-  document.querySelectorAll(".increase").forEach(btn => {
-    btn.addEventListener("click", () => {
-      cart[btn.dataset.index].quantity++;
-      updateCart();
-    });
-  });
-
-  document.querySelectorAll(".decrease").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (cart[btn.dataset.index].quantity > 1) {
-        cart[btn.dataset.index].quantity--;
-      } else {
-        cart.splice(btn.dataset.index, 1);
-      }
-      updateCart();
-    });
-  });
-
-  document.querySelectorAll(".remove").forEach(btn => {
-    btn.addEventListener("click", () => {
-      cart.splice(btn.dataset.index, 1);
-      updateCart();
-    });
   });
 }
 
-// Satın al butonu
-checkoutBtn.addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Sepetiniz boş!");
-  } else {
-    alert("Satın alma işlemi başlatılıyor...");
-    cart = [];
-    updateCart();
-    cartPanel.classList.remove("active");
-  }
-});
+window.addEventListener("scroll", checkFadeIn);
+window.addEventListener("load", checkFadeIn);
