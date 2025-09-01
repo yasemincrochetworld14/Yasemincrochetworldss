@@ -119,14 +119,8 @@ body.dark .product-card {
 }
 
 /* Footer */
-footer {
-  background: #111;
-  color: #fff;
-  text-align: center;
-  padding: 15px;
-}
-/* ---- BURAYA KADAR VAR OLAN KODLARIN ---- */
 
+/*
 
 /* Menü dropdown */
 .dropdown {
@@ -166,24 +160,9 @@ footer {
   padding: 20px;
   background: #f8f8f8;
   margin-top: 40px;
-}
 
-.footer p {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #6a0dad; /* mor */
-}
 
-.footer-links a {
-  color: #6a0dad; /* mor */
-  text-decoration: none;
-  margin: 0 8px;
-  font-weight: 500;
-}
 
-.footer-links a:hover {
-  text-decoration: underline;
-}
 .magaza-links {
   text-align: center;
   margin: 40px 0;
@@ -208,4 +187,31 @@ footer {
 
 .magaza-links a:hover {
   opacity: 0.85;
+}
+.magaza-links {
+  text-align: center;
+  padding: 30px 0;
+  background: #ffeef6;
+}
+
+.magaza-links h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.magaza-links a {
+  display: inline-block;
+  margin: 5px 15px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff7eb3, #8e44ad);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.magaza-links a:hover {
+  transform: scale(1.05);
 }
