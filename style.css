@@ -23,13 +23,15 @@ body.dark {
 }
 body.dark .navbar {
   background: #2a2a2a;
-}
-.logo {
+}.logo {
   display: flex;
   align-items: center;
-}.logo img {
-  height: 10px;  /* Küçük */
+}
+
+.logo img {
+  height: 10px;   /* Çok küçük */
   margin-right: 5px;
+}
 }
 }
 .navbar nav a {
