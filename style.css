@@ -28,8 +28,8 @@ body.dark .navbar {
   display: flex;
   align-items: center;
 }.logo img {
-  height: 25px;  /* Küçük */
-  margin-right: 8px;
+  height: 10px;  /* Küçük */
+  margin-right: 5px;
 }
 }
 .navbar nav a {
