@@ -184,3 +184,28 @@ footer {
 .footer-links a:hover {
   text-decoration: underline;
 }
+.magaza-links {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.magaza-links h2 {
+  margin-bottom: 15px;
+  color: #6a0dad;
+}
+
+.magaza-links a {
+  display: inline-block;
+  margin: 8px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #ff7eb3, #6a0dad);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.magaza-links a:hover {
+  opacity: 0.85;
+}
