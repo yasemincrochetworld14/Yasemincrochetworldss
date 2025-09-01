@@ -1,259 +1,46 @@
-/* Genel */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  transition: background 0.3s, color 0.3s;
-}
-
-h1, h2, h3 {
-  margin: 0 0 10px;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #c084fc;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.navbar .logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.navigasyon ul {
-  display: flex;
-  gap: 15px;
-}
-
-.navigasyon ul li a, 
-.navigasyon ul li button {
-  color: #fff;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
+/* Hamburger */
 .hamburger {
   display: none;
+  background: none;
+  border: none;
   font-size: 24px;
   cursor: pointer;
+  color: #333;
 }
 
-/* Mobil Menü */
+/* Mobilde menü gizli */
 @media (max-width: 768px) {
   .navigasyon {
     display: none;
+    flex-direction: column;
+    background: #ffdee9;
     position: absolute;
     top: 60px;
     right: 0;
-    background: #c084fc;
     width: 200px;
     padding: 20px;
-    border-radius: 0 0 0 10px;
   }
   .navigasyon.active {
-    display: block;
-  }
-  .navigasyon ul {
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
   }
   .hamburger {
     display: block;
   }
 }
 
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 50px 20px;
-  background: linear-gradient(135deg, #e9d5ff, #c084fc);
-  color: #333;
-}
-
-.hero h1 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #9333ea;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  transition: 0.3s;
-  cursor: pointer;
-  border: none;
-}
-
-.btn:hover {
-  background: #a855f7;
-}
-
-/* Ürünler */
-.products {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.product-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-.product-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-}
-
-.product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.product-card h3 {
-  margin: 10px 0;
-}
-
-.product-card span {
-  font-weight: bold;
-  color: #9333ea;
-}
-
-.add-to-cart {
-  margin-top: 10px;
-  background: #c084fc;
-  color: #fff;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.add-to-cart:hover {
-  background: #a855f7;
-}
-
-/* Grid responsive */
-@media (min-width: 600px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .product-list {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
 /* Sepet */
 .cart {
   position: fixed;
-  top: 0;
   right: -400px;
+  top: 0;
   width: 300px;
   height: 100%;
-  background: #fff;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  background: white;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.3);
   transition: right 0.3s ease;
-  z-index: 2000;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  z-index: 2000;
 }
-
 .cart.active {
   right: 0;
-}
-
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#cart-items {
-  flex-grow: 1;
-  margin: 20px 0;
-}
-
-.satin-al {
-  width: 100%;
-  padding: 10px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #c084fc;
-  color: #fff;
-}
-
-/* Dark Mode */
-body.dark-mode {
-  background: #222;
-  color: #eee;
-}
-
-body.dark-mode .navbar {
-  background: #111;
-}
-
-body.dark-mode .hero {
-  background: linear-gradient(135deg, #333, #111);
-  color: #eee;
-}
-
-body.dark-mode .product-card {
-  background: #333;
-  color: #eee;
-}
-
-body.dark-mode footer {
-  background: #111;
 }
