@@ -125,3 +125,39 @@ footer {
   text-align: center;
   padding: 15px;
 }
+/* ---- BURAYA KADAR VAR OLAN KODLARIN ---- */
+
+
+/* Menü dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content li a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-content li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hover ile açılma */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
