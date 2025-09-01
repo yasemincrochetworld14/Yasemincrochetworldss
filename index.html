@@ -142,22 +142,26 @@
   .mağaza bağlantıları a:hover {
     background: #d8b4fe;
     transform: scale(1.05);
-  }<script>
-  const darkModeToggle = document.getElementById("darkModeToggle");
-  const body = document.body;
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const body = document.body;
 
-  // Sayfa yüklenince localStorage’dan kontrol et
-  if (localStorage.getItem("dark-mode") === "enabled") {
-    body.classList.add("dark-mode");
-  }
+    // Sayfa yüklenince localStorage’dan kontrol et
+    if (localStorage.getItem("dark-mode") === "enabled") {
+      body.classList.add("dark-mode");
+    }
 
-  darkModeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
 
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("dark-mode", "enabled");
-    } else {
-      localStorage.setItem("dark-mode", "disabled");
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("dark-mode", "enabled");
+        } else {
+          localStorage.setItem("dark-mode", "disabled");
+        }
+      });
     }
   });
 </script>
