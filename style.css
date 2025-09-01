@@ -17,7 +17,7 @@ body.dark {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
