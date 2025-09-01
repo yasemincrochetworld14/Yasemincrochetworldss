@@ -28,8 +28,9 @@ body.dark .navbar {
   align-items: center;
 }
 
-.logo img {
-  height: 10px;   /* Çok küçük */
+.logo {
+  height: 25px;   /* küçük logo */
+  width: auto;
   margin-right: 5px;
 }
 }
