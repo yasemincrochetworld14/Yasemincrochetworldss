@@ -90,4 +90,59 @@
   <a href="https://link.dolap.com/agwnr7" target="_blank">Dolap</a>
   <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
   <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
-</div>
+</div> </bölüm>
+
+<!-- Animasyonlu efektler -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+  // Hero başlık animasyonu
+  gsap.from(".kahraman h1", {duration: 1, y: -50, opacity: 0, ease: "power2.out"});
+  gsap.from(".kahraman p", {duration: 1, y: 50, opacity: 0, delay: 0.3});
+  gsap.from(".kahraman .btn", {duration: 1, scale: 0, delay: 0.6, ease: "back.out(1.7)"});
+
+  // Ürün kartları kayarak gelsin
+  gsap.from(".ürün kartı", {
+    scrollTrigger: ".ürünler",
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.3
+  });
+
+  // Footer animasyonu
+  gsap.from("alt bilgi p", {
+    scrollTrigger: "alt bilgi",
+    y: 50,
+    opacity: 0,
+    duration: 1
+  });
+</script>
+
+<!-- Sayfa daha canlı görünmesi için ufak CSS -->
+<style>
+  .mağaza bağlantıları {
+    text-align: center;
+    margin: 40px 0;
+  }
+  .mağaza bağlantıları h2 {
+    color: purple;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  .mağaza bağlantıları a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: #e9d5ff;
+    color: #4b0082;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+  .mağaza bağlantıları a:hover {
+    background: #d8b4fe;
+    transform: scale(1.05);
+  }
+</style>
+</body>
+  </html>
