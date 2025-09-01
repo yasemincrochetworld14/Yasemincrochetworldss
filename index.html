@@ -11,11 +11,11 @@
 <body>
   <!-- Header -->
   <header class="navbar">
-    <div class="logo-container">
+    <header>
       <img src="logo.png" alt="Yasemin Crochet World" class="logo">
       <h1>Yasemin Crochet World</h1>
-    </div>
-    <nav class="navigasyon" id="navMenu">
+    </header>
+    <nav class="navigasyon">
       <ul>
         <li><a href="#">Ana Sayfa</a></li>
         <li><a href="#urunler">Ürünler</a></li>
@@ -24,10 +24,7 @@
         <li><a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a></li>
       </ul>
       <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
-      <button id="cartToggle"><i class="fas fa-shopping-cart"></i></button>
     </nav>
-    <!-- Hamburger -->
-    <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
   </header>
 
   <!-- Hero -->
@@ -48,31 +45,24 @@
         <h3>Örgü Battaniye</h3>
         <p>Sıcak tutan el işi battaniye</p>
         <span>₺300,00</span>
-        <button class="btn add-to-cart" data-product="Örgü Battaniye">Sepete Ekle</button>
+        <a href="https://www.shopier.com/yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
       </div>
       <div class="product-card">
         <img src="images/kedi-yatagi.jpg" alt="Örgü Kedi Yatağı">
         <h3>Örgü Kedi Yatağı</h3>
         <p>Minik dostlarınız için rahat yatak</p>
         <span>₺250,00</span>
-        <button class="btn add-to-cart" data-product="Örgü Kedi Yatağı">Sepete Ekle</button>
+        <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
       </div>
       <div class="product-card">
         <img src="images/bebek-battaniye.jpg" alt="Örgü Bebek Battaniyesi">
         <h3>Örgü Bebek Battaniyesi</h3>
         <p>Bebekler için yumuşacık battaniye</p>
         <span>₺200,00</span>
-        <button class="btn add-to-cart" data-product="Örgü Bebek Battaniyesi">Sepete Ekle</button>
+        <a href="https://link.dolap.com/agwnr7" target="_blank" class="btn">Sepete Ekle</a>
       </div>
     </div>
   </section>
-
-  <!-- Sepet -->
-  <div id="cart" class="cart">
-    <h2>Sepetim</h2>
-    <ul id="cartItems"></ul>
-    <button id="closeCart" class="btn">Kapat</button>
-  </div>
 
   <!-- Hakkımızda -->
   <section id="hakkimizda" class="about">
@@ -101,5 +91,25 @@
     <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
     <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
   </div>
+
+  <!-- Dark Mode Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn  = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      // Kayıtlı durumu uygula
+      if (localStorage.getItem("dark-mode") === "on") {
+        body.classList.add("dark-mode");
+      }
+
+      if (btn) {
+        btn.addEventListener("click", function () {
+          body.classList.toggle("dark-mode");
+          localStorage.setItem("dark-mode", body.classList.contains("dark-mode") ? "on" : "off");
+        });
+      }
+    });
+  </script>
 </body>
 </html>
