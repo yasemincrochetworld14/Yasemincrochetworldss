@@ -59,4 +59,14 @@ header .icons a {
   margin-bottom: 20px;
 }
 .hero .btn {
-  background: linear-gradient(45deg,
+  background: linear-gradient(45deg, #e1306c, #d6b9f6);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.hero .btn:hover {
+  opacity: 0.9;
+}
