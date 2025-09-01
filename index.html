@@ -11,161 +11,104 @@
 <body>
   <!-- Navbar -->
   <header class="navbar">
-    <div class="logo-container">
-      <img src="logo.png" alt="Yasemin Crochet World" class="logo">
+    <div class="logo-area">
+      <img src="images/logo.png" alt="Yasemin Crochet World" class="logo">
       <h1>Yasemin Crochet World</h1>
     </div>
-
-    <!-- Hamburger buton -->
-    <button class="hamburger" id="hamburger">☰</button>
-
-    <!-- Menü -->
-    <nav class="navigasyon" id="menu">
-      <ul>
+    <nav>
+      <ul id="menu">
         <li><a href="#">Ana Sayfa</a></li>
         <li><a href="#urunler">Ürünler</a></li>
         <li><a href="#hakkimizda">Hakkımızda</a></li>
         <li><a href="#iletisim">İletişim</a></li>
-        <li><a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a></li>
       </ul>
     </nav>
-
-    <!-- Butonlar -->
-    <div class="header-buttons">
+    <div class="icons">
       <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
-      <button id="cartToggle">
-        <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
-      </button>
+      <button id="cartToggle"><i class="fas fa-shopping-cart"></i><span id="cartCount">0</span></button>
+      <button id="hamburger"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero">
-    <h1 class="fade-in">El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
-    <p class="fade-in-delay">Örgü dünyasına hoş geldiniz!  
-       Sıcacık battaniyeler, şirin kedi yatakları ve bebekler için özel örgü battaniyelerle evinize sevgi katın.  
-    </p>
-    <a href="#urunler" class="btn fade-in-btn">Alışverişe Başla</a>
+  <section class="hero fade-in">
+    <h2>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h2>
+    <p>Sıcacık battaniyeler, şirin kedi yatakları ve bebekler için özel örgü battaniyelerle evinize sevgi katın.</p>
+    <a href="#urunler" class="btn">Alışverişe Başla</a>
   </section>
 
   <!-- Ürünler -->
-  <section id="urunler" class="products">
+  <section id="urunler" class="products fade-in">
     <h2>Ürünler</h2>
     <div class="product-list">
-      <!-- 10 ürün -->
+      <!-- 10 ürün kutusu -->
       <div class="product-card">
         <img src="images/urun1.jpg" alt="Ürün 1">
         <h3>Örgü Battaniye</h3>
-        <p>Sıcak tutan el işi battaniye</p>
+        <p>Sıcacık battaniye</p>
         <span>₺300,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
+        <button class="btn add-to-cart">Sepete Ekle</button>
       </div>
       <div class="product-card">
         <img src="images/urun2.jpg" alt="Ürün 2">
         <h3>Örgü Bebek Battaniyesi</h3>
-        <p>Yumuşacık bebekler için</p>
+        <p>Yumuşacık bebek battaniyesi</p>
         <span>₺200,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
+        <button class="btn add-to-cart">Sepete Ekle</button>
       </div>
       <div class="product-card">
         <img src="images/urun3.jpg" alt="Ürün 3">
         <h3>Örgü Kedi Yatağı</h3>
-        <p>Dostlarınız için rahatlık</p>
+        <p>Minik dostlar için</p>
         <span>₺250,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
+        <button class="btn add-to-cart">Sepete Ekle</button>
       </div>
-      <div class="product-card">
-        <img src="images/urun4.jpg" alt="Ürün 4">
-        <h3>Örgü Çanta</h3>
-        <p>Şık ve dayanıklı çanta</p>
-        <span>₺180,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun5.jpg" alt="Ürün 5">
-        <h3>Örgü Yastık</h3>
-        <p>Ev dekorasyonu için ideal</p>
-        <span>₺120,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun6.jpg" alt="Ürün 6">
-        <h3>Örgü Bere</h3>
-        <p>Kış için sıcacık</p>
-        <span>₺80,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun7.jpg" alt="Ürün 7">
-        <h3>Örgü Atkı</h3>
-        <p>Soğuk günler için</p>
-        <span>₺90,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun8.jpg" alt="Ürün 8">
-        <h3>Örgü Oyuncak</h3>
-        <p>El işi sevimli oyuncak</p>
-        <span>₺150,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun9.jpg" alt="Ürün 9">
-        <h3>Örgü Şal</h3>
-        <p>Her kombine uyumlu</p>
-        <span>₺160,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
-      <div class="product-card">
-        <img src="images/urun10.jpg" alt="Ürün 10">
-        <h3>Örgü El Çantası</h3>
-        <p>Özel tasarım</p>
-        <span>₺220,00</span>
-        <button class="add-to-cart">Sepete Ekle</button>
-      </div>
+      <!-- 7 tane daha -->
+      <div class="product-card"><img src="images/urun4.jpg" alt="Ürün 4"><h3>Ürün 4</h3><p>Açıklama</p><span>₺150,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun5.jpg" alt="Ürün 5"><h3>Ürün 5</h3><p>Açıklama</p><span>₺180,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun6.jpg" alt="Ürün 6"><h3>Ürün 6</h3><p>Açıklama</p><span>₺220,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun7.jpg" alt="Ürün 7"><h3>Ürün 7</h3><p>Açıklama</p><span>₺270,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun8.jpg" alt="Ürün 8"><h3>Ürün 8</h3><p>Açıklama</p><span>₺190,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun9.jpg" alt="Ürün 9"><h3>Ürün 9</h3><p>Açıklama</p><span>₺210,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
+      <div class="product-card"><img src="images/urun10.jpg" alt="Ürün 10"><h3>Ürün 10</h3><p>Açıklama</p><span>₺230,00</span><button class="btn add-to-cart">Sepete Ekle</button></div>
     </div>
   </section>
 
   <!-- Hakkımızda -->
-  <section id="hakkimizda" class="about">
+  <section id="hakkimizda" class="about fade-in">
     <h2>Hakkımızda</h2>
-    <p>Yasemin Crochet World, el emeği ve sevgiyle örülmüş ürünleri sizlere sunar.  
-       Her ürünümüzde samimiyet ve özen vardır.  
-    </p>
+    <p>Yasemin Crochet World, el emeği ve sevgiyle örülmüş ürünleri sizlere sunar. Her ürünümüzde samimiyet ve özen vardır.</p>
   </section>
 
   <!-- İletişim -->
-  <section id="iletisim" class="contact">
+  <section id="iletisim" class="contact fade-in">
     <h2>İletişim</h2>
-    <p>Bizimle iletişime geçmek için sosyal medya hesaplarımızı ziyaret edebilirsiniz:</p>
-    <a href="https://www.instagram.com/yasemincrochetworld" class="btn" target="_blank">Instagram</a>
+    <p>Bizimle iletişime geçmek için mağazalarımıza göz atın:</p>
+    <div class="magaza-links">
+      <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank">Gardrops</a>
+      <a href="https://link.dolap.com/agwnr7" target="_blank">Dolap</a>
+      <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
+      <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
+    </div>
   </section>
 
-  <!-- Mağaza Linkleri -->
-  <div class="magaza-links">
-    <h2>Mağazalarımız</h2>
-    <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank">Gardrops</a>
-    <a href="https://link.dolap.com/agwnr7" target="_blank">Dolap</a>
-    <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
-    <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
-  </div>
-
-  <!-- Sepet Paneli -->
-  <div class="cart-panel" id="cartPanel">
-    <h2>Sepetiniz</h2>
-    <ul id="cartItems"></ul>
-    <p class="cart-total">Toplam: <span id="cartTotal">₺0</span></p>
-    <button id="checkoutBtn">Satın Al</button>
-  </div>
-
-  <footer>
-    <div class="footer-icons">
-      <a href="https://www.instagram.com/yasemincrochetworld" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank"><i class="fas fa-store"></i></a>
-      <a href="https://link.dolap.com/agwnr7" target="_blank"><i class="fas fa-shopping-bag"></i></a>
-      <a href="https://www.shopier.com/yasemincrochetworld" target="_blank"><i class="fas fa-credit-card"></i></a>
+  <!-- Sepet Overlay -->
+  <div id="cartOverlay" class="cart-overlay">
+    <div id="cartPanel" class="cart-panel">
+      <button id="closeCart" class="close-cart">✖</button>
+      <h2>Sepetim</h2>
+      <ul id="cartItems"></ul>
+      <p class="cart-total">Toplam: <span id="cartTotal">₺0.00</span></p>
+      <button id="checkoutBtn">Satın Al</button>
     </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
     <p>© 2024 Yasemin Crochet World | Tüm Hakları Saklıdır.</p>
   </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>
