@@ -124,11 +124,11 @@ function updateCart(){
   });
 }
 
-// Satın alma butonu
+// Satın alma butonu → Shopier yönlendirme
 checkoutBtn.addEventListener('click', () => {
-  if (!cart.length) { alert('Sepetiniz boş!'); return; }
-  alert('Satın alma işlemi (demo).');
-  cart = [];
-  updateCart();
-  closeCart();
+  if (!cart.length) { 
+    alert('Sepetiniz boş!'); 
+    return; 
+  }
+  window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
 });
