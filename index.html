@@ -5,62 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yasemin Crochet World</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <img src="logo.png" alt="Yasemin Tığ İşi Dünyası Logosu" class="logo">
+    <div class="logo">
+      <img src="logo.png" alt="Yasemin Crochet World Logo">
+    </div>
     <nav>
-      <a href="#home">Ana Sayfa</a>
-      <a href="#products">Ürünler</a>
-      <a href="#about">Hakkımızda</a>
-      <a href="#contact">İletişim</a>
-    <img src="logo.png" alt="Logo" width="150">
+      <a href="#">Ana Sayfa</a>
+      <a href="#">Ürünler</a>
+      <a href="#">Hakkımızda</a>
+      <a href="#">İletişim</a>
+    </nav>
+    <div class="icons">
+      <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+    </div>
   </header>
 
-  <section id="home" class="hero">
-    <h1>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
-    <p>Örgü dünyasına hoş geldiniz! Kendi zevkinize uygun el yapımı ürünleri keşfedin.</p>
-    <a href="#products" class="btn">Alışverişe Başla</a>
-  </section>
-
-  <section id="products" class="products">
-    <h2>Ürünler</h2>
-    <div class="product-list">
-      <div class="product">
-        <h3>Crochet Blanket</h3>
-        <a href="https://link.dolap.com/d0z9fh" target="_blank">Ürüne Git</a>
-      </div>
-      <div class="product">
-        <h3>Crochet Baby Blanket</h3>
-        <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Ürüne Git</a>
-      </div>
-      <div class="product">
-        <h3>Crochet Cat Beds</h3>
-        <a href="https://www.instagram.com/yasemincrochetworld?igsh=czM2dDEzejI3ZzBy" target="_blank">Ürüne Git</a>
-      </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
+      <p>
+        Yasemincrochetworld ailesine hoş geldiniz!  
+        El emeği, göz nuru örgü tasarımlarımızla evinize sıcaklık katıyoruz.  
+        Her bir ürün sevgiyle örülmüş, size özel…
+      </p>
+      <a href="#urunler" class="btn">Alışverişe Başla</a>
+    </div>
+    <div class="hero-img">
+      <img src="logo.png" alt="Hero Image">
     </div>
   </section>
 
-  <section id="about" class="about">
-    <h2>Hakkımızda</h2>
-    <p>Yasemin Crochet World, el emeği örgülerin sevgiyle hayat bulduğu bir markadır. 
-    dekoratif yastıklara, battaniyelerden aksesuarlarına kadar birçok ürünü özenle sizlere sunuyoruz.</p>
-  </section>
-
-  <section id="contact" class="contact">
-    <h2>İletişim</h2>
-    <ul>
-      <li><a href="https://www.instagram.com/yasemincrochetworld?igsh=czM2dDEzejI3ZzBy" target="_blank">Instagram</a></li>
-      <li><a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a></li>
-      <li><a href="https://link.dolap.com/d0z9fh" target="_blank">Dolap</a></li>
-      <li><a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank">Gardrops</a></li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>© 2025 Yasemin Crochet World | Tüm hakları saklıdır.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- Ürünler -->
+  <section id="urunler" class="products">
+    <h2>Ürünler</h2>
+    <div class="product-list">
+      <div class="product">
+        <img src="orgu-battaniye.jpg" alt="Örgü Battaniye">
+        <h3>Örgü Battaniye</h3>
+        <p>Sıcak ve yumuşak el yapımı örgü battaniye</p>
+        <span>₺250,00</span>
+        <button class="btn">Sepete Ekle</button>
+      </div>
+      <div class="product">
+        <img src="orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı">
+        <h3>Örgü Kedi Yatağı</h3>
+        <p>Minik dostlarınız için konforlu örgü yatak</p>
+        <span>₺180,00</span>
+        <button class="btn">Sepete Ekle</button>
+      </div>
+      <div class="product">
+        <img src="orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyes

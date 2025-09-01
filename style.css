@@ -1,107 +1,62 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
+/* Genel Ayarlar */
 body {
-  background: linear-gradient(to bottom, #f9e0f0, #e6d1f2);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #f9d4f0, #d6b9f6);
   color: #333;
-  text-align: center;
+  transition: all 0.3s ease;
 }
 
+/* Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px 50px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
-header .logo {
-  height: 60px;
+header .logo img {
+  height: 50px;
 }
-
-nav a {
+header nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: #444;
+  color: #333;
   font-weight: bold;
 }
-
-.hero {
-  padding: 50px 20px;
+header .icons {
+  display: flex;
+  align-items: center;
+}
+header .icons a {
+  color: #e1306c;
+  font-size: 22px;
+  margin-right: 15px;
+}
+#darkModeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
 }
 
-.hero h1 {
-  font-size: 2rem;
+/* Hero */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+.hero-text {
+  max-width: 50%;
+}
+.hero-text h1 {
+  font-size: 32px;
   margin-bottom: 15px;
 }
-
-.hero p {
-  font-size: 1.1rem;
+.hero-text p {
   margin-bottom: 20px;
 }
-
-.btn {
-  background: linear-gradient(90deg, #d63384, #9c27b0);
-  color: white;
-  padding: 12px 25px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.products {
-  padding: 40px 20px;
-}
-
-.product-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.product {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 200px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.product h3 {
-  margin-bottom: 10px;
-}
-
-.about, .contact {
-  padding: 40px 20px;
-  background: #fff;
-  margin: 20px;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.contact ul {
-  list-style: none;
-}
-
-.contact li {
-  margin: 10px 0;
-}
-
-.contact a {
-  text-decoration: none;
-  color: #d63384;
-  font-weight: bold;
-}
-
-footer {
-  background: #9c27b0;
-  color: white;
-  padding: 15px;
-  margin-top: 20px;
-}
+.hero .btn {
+  background: linear-gradient(45deg,
