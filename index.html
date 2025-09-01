@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Navbar -->
   <header class="navbar">
-    <header>
+    <div class="logo-title">
       <img src="logo.png" alt="Yasemin Crochet World" class="logo">
       <h1>Yasemin Crochet World</h1>
-    </header>
+    </div>
     <nav class="navigasyon">
       <ul>
         <li><a href="#">Ana Sayfa</a></li>
@@ -24,6 +24,7 @@
         <li><a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a></li>
       </ul>
       <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+      <button id="cartToggle"><i class="fas fa-shopping-cart"></i></button>
     </nav>
   </header>
 
@@ -38,35 +39,85 @@
 
   <!-- Ürünler -->
   <section id="urunler" class="products">
-    <h2>Ürünler</h2>
+    <h2>Ürün Kataloğu</h2>
     <div class="product-list">
+      <!-- 10 ürün -->
       <div class="product-card">
-        <img src="images/battaniye.jpg" alt="Örgü Battaniye">
-        <h3>Örgü Battaniye</h3>
-        <p>Sıcak tutan el işi battaniye</p>
-        <span>₺300,00</span>
-        <a href="https://www.shopier.com/yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
+        <img src="images/urun1.jpg" alt="Ürün 1">
+        <h3>Ürün 1</h3>
+        <p>Kısa açıklama</p>
+        <span>₺100</span>
+        <button class="add-to-cart">Sepete Ekle</button>
       </div>
       <div class="product-card">
-        <img src="images/kedi-yatagi.jpg" alt="Örgü Kedi Yatağı">
-        <h3>Örgü Kedi Yatağı</h3>
-        <p>Minik dostlarınız için rahat yatak</p>
-        <span>₺250,00</span>
-        <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
+        <img src="images/urun2.jpg" alt="Ürün 2">
+        <h3>Ürün 2</h3>
+        <p>Kısa açıklama</p>
+        <span>₺150</span>
+        <button class="add-to-cart">Sepete Ekle</button>
       </div>
       <div class="product-card">
-        <img src="images/bebek-battaniye.jpg" alt="Örgü Bebek Battaniyesi">
-        <h3>Örgü Bebek Battaniyesi</h3>
-        <p>Bebekler için yumuşacık battaniye</p>
-        <span>₺200,00</span>
-        <a href="https://link.dolap.com/agwnr7" target="_blank" class="btn">Sepete Ekle</a>
+        <img src="images/urun3.jpg" alt="Ürün 3">
+        <h3>Ürün 3</h3>
+        <p>Kısa açıklama</p>
+        <span>₺200</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun4.jpg" alt="Ürün 4">
+        <h3>Ürün 4</h3>
+        <p>Kısa açıklama</p>
+        <span>₺250</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun5.jpg" alt="Ürün 5">
+        <h3>Ürün 5</h3>
+        <p>Kısa açıklama</p>
+        <span>₺300</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun6.jpg" alt="Ürün 6">
+        <h3>Ürün 6</h3>
+        <p>Kısa açıklama</p>
+        <span>₺350</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun7.jpg" alt="Ürün 7">
+        <h3>Ürün 7</h3>
+        <p>Kısa açıklama</p>
+        <span>₺400</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun8.jpg" alt="Ürün 8">
+        <h3>Ürün 8</h3>
+        <p>Kısa açıklama</p>
+        <span>₺450</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun9.jpg" alt="Ürün 9">
+        <h3>Ürün 9</h3>
+        <p>Kısa açıklama</p>
+        <span>₺500</span>
+        <button class="add-to-cart">Sepete Ekle</button>
+      </div>
+      <div class="product-card">
+        <img src="images/urun10.jpg" alt="Ürün 10">
+        <h3>Ürün 10</h3>
+        <p>Kısa açıklama</p>
+        <span>₺550</span>
+        <button class="add-to-cart">Sepete Ekle</button>
       </div>
     </div>
   </section>
 
   <!-- Hakkımızda -->
   <section id="hakkimizda" class="about">
-    <h2>Hakkımızda</h2>
+    <h2><i class="fas fa-heart"></i> Hakkımızda</h2>
     <p>Yasemin Crochet World, el emeği ve sevgiyle örülmüş ürünleri sizlere sunar.  
        Her ürünümüzde samimiyet ve özen vardır.  
     </p>
@@ -74,14 +125,10 @@
 
   <!-- İletişim -->
   <section id="iletisim" class="contact">
-    <h2>İletişim</h2>
+    <h2><i class="fas fa-envelope"></i> İletişim</h2>
     <p>Bizimle iletişime geçmek için Instagram hesabımızı ziyaret edebilirsiniz:</p>
     <a href="https://www.instagram.com/yasemincrochetworld" class="btn" target="_blank">Instagram</a>
   </section>
-
-  <footer>
-    <p>© 2024 Yasemin Crochet World | Tüm Hakları Saklıdır.</p>
-  </footer> 
 
   <!-- Mağaza Linkleri -->
   <div class="magaza-links">
@@ -92,24 +139,19 @@
     <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
   </div>
 
-  <!-- Dark Mode Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const btn  = document.getElementById("darkModeToggle");
-      const body = document.body;
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 Yasemin Crochet World | Tüm Hakları Saklıdır.</p>
+  </footer> 
 
-      // Kayıtlı durumu uygula
-      if (localStorage.getItem("dark-mode") === "on") {
-        body.classList.add("dark-mode");
-      }
-
-      if (btn) {
-        btn.addEventListener("click", function () {
-          body.classList.toggle("dark-mode");
-          localStorage.setItem("dark-mode", body.classList.contains("dark-mode") ? "on" : "off");
-        });
-      }
-    });
-  </script>
+  <!-- Sepet Paneli -->
+  <div id="cartPanel" class="cart-panel">
+    <h2>Sepetim</h2>
+    <ul id="cartItems"></ul>
+    <div class="cart-total">
+      Toplam: <span id="cartTotal">₺0</span>
+    </div>
+    <button id="checkoutBtn">Satın Al</button>
+  </div>
 </body>
 </html>
