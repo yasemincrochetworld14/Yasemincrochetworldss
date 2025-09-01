@@ -29,9 +29,9 @@ body.dark .navbar {
 }
 
 .logo {
-  height: 25px;   /* küçük logo */
+  height: 55px;   /* küçük logo */
   width: auto;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 }
 }
