@@ -250,3 +250,36 @@ body.dark-mode .product-card {
 body.dark-mode footer {
   background: #333;
 }
+/* Hamburger Menü */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobilde görünür */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navigasyon {
+    display: none;
+    width: 100%;
+    text-align: center;
+    background: #9a67ea;
+    padding: 15px 0;
+  }
+
+  .navigasyon.active {
+    display: block;
+  }
+
+  .navigasyon ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+    }
