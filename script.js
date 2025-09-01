@@ -1,7 +1,8 @@
-// Dark Mode Toggle
+// DARK MODE
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
 
+// LocalStorage'dan kontrol et
 if (localStorage.getItem("dark-mode") === "enabled") {
   body.classList.add("dark-mode");
 }
@@ -16,11 +17,20 @@ darkModeToggle.addEventListener("click", () => {
   }
 });
 
-// Sepet sistemi
+// HAMBURGER MENÜ
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("menu");
+
+hamburger.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
+
+// SEPET SİSTEMİ
 const cartToggle = document.getElementById("cartToggle");
 const cartPanel = document.getElementById("cartPanel");
-const cartItemsList = document.getElementById("cartItems");
+const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
+const cartCount = document.getElementById("cartCount");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
 let cart = [];
@@ -30,34 +40,32 @@ cartToggle.addEventListener("click", () => {
   cartPanel.classList.toggle("active");
 });
 
-// Sepete ekle
-document.querySelectorAll(".add-to-cart").forEach((btn, index) => {
-  btn.addEventListener("click", () => {
-    const productCard = btn.closest(".product-card");
-    const name = productCard.querySelector("h3").innerText;
-    const price = parseFloat(
-      productCard.querySelector("span").innerText.replace("₺", "")
+// "Sepete Ekle" butonlarını yakala
+const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+addToCartButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    const productCard = button.parentElement;
+    const productName = productCard.querySelector("h3").innerText;
+    const productPrice = parseFloat(
+      productCard.querySelector("span").innerText.replace("₺", "").replace(",", ".")
     );
 
-    addToCart({ name, price, quantity: 1 });
+    const existingItem = cart.find(item => item.name === productName);
+
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      cart.push({ name: productName, price: productPrice, quantity: 1 });
+    }
+
+    updateCart();
   });
 });
 
-// Sepete ürün ekleme
-function addToCart(product) {
-  const existing = cart.find((item) => item.name === product.name);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push(product);
-  }
-  renderCart();
-}
-
-// Sepeti görüntüleme
-function renderCart() {
-  cartItemsList.innerHTML = "";
+// Sepeti güncelle
+function updateCart() {
+  cartItems.innerHTML = "";
   let total = 0;
 
   cart.forEach((item, index) => {
@@ -65,49 +73,52 @@ function renderCart() {
 
     const li = document.createElement("li");
     li.innerHTML = `
-      <span>${item.name} (${item.quantity} adet)</span>
-      <div>
-        <button onclick="decreaseQuantity(${index})">-</button>
-        <button onclick="increaseQuantity(${index})">+</button>
-        <button onclick="removeFromCart(${index})">Sil</button>
-      </div>
+      ${item.name} - ₺${item.price.toFixed(2)} x ${item.quantity}
+      <button class="decrease" data-index="${index}">-</button>
+      <button class="increase" data-index="${index}">+</button>
+      <button class="remove" data-index="${index}">x</button>
     `;
-    cartItemsList.appendChild(li);
+    cartItems.appendChild(li);
   });
 
-  cartTotal.innerText = "₺" + total;
+  cartTotal.innerText = `₺${total.toFixed(2)}`;
+  cartCount.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Butonlara event ekle
+  document.querySelectorAll(".increase").forEach(btn => {
+    btn.addEventListener("click", () => {
+      cart[btn.dataset.index].quantity++;
+      updateCart();
+    });
+  });
+
+  document.querySelectorAll(".decrease").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (cart[btn.dataset.index].quantity > 1) {
+        cart[btn.dataset.index].quantity--;
+      } else {
+        cart.splice(btn.dataset.index, 1);
+      }
+      updateCart();
+    });
+  });
+
+  document.querySelectorAll(".remove").forEach(btn => {
+    btn.addEventListener("click", () => {
+      cart.splice(btn.dataset.index, 1);
+      updateCart();
+    });
+  });
 }
 
-// Sepetten silme
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
-}
-
-// Adet azalt
-function decreaseQuantity(index) {
-  if (cart[index].quantity > 1) {
-    cart[index].quantity--;
-  } else {
-    cart.splice(index, 1);
-  }
-  renderCart();
-}
-
-// Adet artır
-function increaseQuantity(index) {
-  cart[index].quantity++;
-  renderCart();
-}
-
-// Satın al
+// Satın al butonu
 checkoutBtn.addEventListener("click", () => {
-  window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
-});
-// Hamburger Menü Aç/Kapat
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("menu");
-
-hamburger.addEventListener("click", () => {
-  menu.classList.toggle("active");
+  if (cart.length === 0) {
+    alert("Sepetiniz boş!");
+  } else {
+    alert("Satın alma işlemi başlatılıyor...");
+    cart = [];
+    updateCart();
+    cartPanel.classList.remove("active");
+  }
 });
