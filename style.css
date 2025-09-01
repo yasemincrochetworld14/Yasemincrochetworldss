@@ -2,14 +2,24 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #fff;
+  background-color: #f9f9f9;
   color: #333;
   transition: background 0.3s, color 0.3s;
 }
 
-body.dark-mode {
-  background: #121212;
-  color: #f1f1f1;
+h1, h2, h3 {
+  margin: 0 0 10px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* Navbar */
@@ -17,65 +27,100 @@ body.dark-mode {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #c197d2;
   padding: 10px 20px;
+  background: #c084fc;
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.logo-container {
+.navbar .logo-container {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .logo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
 }
 
 .navigasyon ul {
   display: flex;
   gap: 15px;
-  list-style: none;
 }
 
-.navigasyon a {
-  text-decoration: none;
+.navigasyon ul li a, 
+.navigasyon ul li button {
   color: #fff;
   font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .hamburger {
   display: none;
   font-size: 24px;
   cursor: pointer;
-  color: white;
+}
+
+/* Mobil Menü */
+@media (max-width: 768px) {
+  .navigasyon {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #c084fc;
+    width: 200px;
+    padding: 20px;
+    border-radius: 0 0 0 10px;
+  }
+  .navigasyon.active {
+    display: block;
+  }
+  .navigasyon ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hamburger {
+    display: block;
+  }
 }
 
 /* Hero */
 .hero {
   text-align: center;
   padding: 50px 20px;
-  background: #f7e9fb;
+  background: linear-gradient(135deg, #e9d5ff, #c084fc);
+  color: #333;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
 }
 
 .btn {
-  display: inline-block;
-  margin-top: 10px;
+  background: #9333ea;
+  color: #fff;
   padding: 10px 20px;
-  background: #c197d2;
-  color: white;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
+  border-radius: 8px;
   transition: 0.3s;
+  cursor: pointer;
+  border: none;
 }
 
 .btn:hover {
-  background: #a76bb5;
+  background: #a855f7;
 }
 
 /* Ürünler */
@@ -91,9 +136,10 @@ body.dark-mode {
 }
 
 .product-card {
-  border: 1px solid #ddd;
+  background: #fff;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s;
 }
 
@@ -103,7 +149,44 @@ body.dark-mode {
 
 .product-card img {
   width: 100%;
+  height: auto;
   border-radius: 10px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+}
+
+.product-card span {
+  font-weight: bold;
+  color: #9333ea;
+}
+
+.add-to-cart {
+  margin-top: 10px;
+  background: #c084fc;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-to-cart:hover {
+  background: #a855f7;
+}
+
+/* Grid responsive */
+@media (min-width: 600px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 /* Sepet */
@@ -113,14 +196,17 @@ body.dark-mode {
   right: -400px;
   width: 300px;
   height: 100%;
-  background: white;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-  padding: 20px;
-  transition: right 0.3s;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
   z-index: 2000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.cart.open {
+.cart.active {
   right: 0;
 }
 
@@ -130,37 +216,44 @@ body.dark-mode {
   align-items: center;
 }
 
-/* Responsive */
-@media (min-width: 600px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+#cart-items {
+  flex-grow: 1;
+  margin: 20px 0;
 }
 
-@media (min-width: 992px) {
-  .product-list {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .hamburger {
-    display: none;
-  }
+.satin-al {
+  width: 100%;
+  padding: 10px;
 }
 
-@media (max-width: 768px) {
-  .navigasyon {
-    display: none;
-    flex-direction: column;
-    background: #c197d2;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 200px;
-    padding: 20px;
-  }
-  .navigasyon.active {
-    display: flex;
-  }
-  .hamburger {
-    display: block;
-  }
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #c084fc;
+  color: #fff;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #222;
+  color: #eee;
+}
+
+body.dark-mode .navbar {
+  background: #111;
+}
+
+body.dark-mode .hero {
+  background: linear-gradient(135deg, #333, #111);
+  color: #eee;
+}
+
+body.dark-mode .product-card {
+  background: #333;
+  color: #eee;
+}
+
+body.dark-mode footer {
+  background: #111;
 }
