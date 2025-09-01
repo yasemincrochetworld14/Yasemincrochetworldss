@@ -5,84 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yasemin Crochet World</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Scroll Fade-in Animasyonu */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <img src="images/logo.png" alt="Logo" class="logo">
-      <ul class="menu">
-        <li><a href="#urunler">Ürünler</a></li>
-        <li><a href="#iletisim">İletişim</a></li>
-      </ul>
-    </nav>
+  <!-- Header -->
+  <header class="navbar">
+    <header>
+  <img src="logo.png" alt="Yasemin Crochet World" class="logo">
+  <h1>Yasemin Crochet World</h1>
+    </header>
+    <nav class="navigasyon">
+  <ul>
+    <li><a href="#">Ana Sayfa</a></li>
+    <li><a href="#urunler">Ürünler</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+    <li><a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a></li>
+
+      <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+    </div>
   </header>
 
-  <main>
-    <section id="urunler">
-      <h2>Ürünler</h2>
-      <div class="urunler-container">
-        <div class="urun-karti fade-in">
-          <img src="images/urun1.png" alt="Ürün 1">
-          <h3>Örgü Battaniye</h3>
-        </div>
-        <div class="urun-karti fade-in">
-          <img src="images/urun2.png" alt="Ürün 2">
-          <h3>Örgü Kedi Yatağı</h3>
-        </div>
-        <div class="urun-karti fade-in">
-          <img src="images/urun3.png" alt="Ürün 3">
-          <h3>Örgü Bebek Battaniyesi</h3>
-        </div>
-      </div>
-    </section>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
+    <p>Örgü dünyasına hoş geldiniz!  
+       Sıcacık battaniyeler, şirin kedi yatakları ve bebekler için özel örgü battaniyelerle evinize sevgi katın.  
+    </p>
+    <a href="#urunler" class="btn">Alışverişe Başla</a>
+  </section>
 
-    <section id="iletisim">
-      <h2>İletişim</h2>
-      <p>Benimle iletişime geçmek için mağaza linklerime göz atabilirsin:</p>
-      <div class="sosyal-linkler">
-        <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
-        <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank">Gardrops</a>
-        <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
-        <a href="https://link.dolap.com/agwnr7" target="_blank">Dolap</a>
+  <!-- Ürünler -->
+  <section id="urunler" class="products">
+    <h2>Ürünler</h2>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="images/battaniye.jpg" alt="Örgü Battaniye">
+        <h3>Örgü Battaniye</h3>
+        <p>Sıcak tutan el işi battaniye</p>
+        <span>₺300,00</span>
+        <a href="https://www.shopier.com/yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
       </div>
-    </section>
-  </main>
+      <div class="product-card">
+        <img src="images/kedi-yatagi.jpg" alt="Örgü Kedi Yatağı">
+        <h3>Örgü Kedi Yatağı</h3>
+        <p>Minik dostlarınız için rahat yatak</p>
+        <span>₺250,00</span>
+        <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank" class="btn">Sepete Ekle</a>
+      </div>
+      <div class="product-card">
+        <img src="images/bebek-battaniye.jpg" alt="Örgü Bebek Battaniyesi">
+        <h3>Örgü Bebek Battaniyesi</h3>
+        <p>Bebekler için yumuşacık battaniye</p>
+        <span>₺200,00</span>
+        <a href="https://link.dolap.com/agwnr7" target="_blank" class="btn">Sepete Ekle</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hakkımızda -->
+  <section id="hakkimizda" class="about">
+    <h2>Hakkımızda</h2>
+    <p>Yasemin Crochet World, el emeği ve sevgiyle örülmüş ürünleri sizlere sunar.  
+       Her ürünümüzde samimiyet ve özen vardır.  
+    </p>
+  </section>
+
+  <!-- İletişim -->
+  <section id="iletisim" class="contact">
+    <h2>İletişim</h2>
+    <p>Bizimle iletişime geçmek için Instagram hesabımızı ziyaret edebilirsiniz:</p>
+    <a href="https://www.instagram.com/yasemincrochetworld" class="btn" target="_blank">Instagram</a>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Yasemin Crochet World</p>
-  </footer>
+    <p>© 2024 Yasemin Crochet World | Tüm Hakları Saklıdır.</p>
+  </footer> </section>
 
-  <script>
-    const faders = document.querySelectorAll('.fade-in');
-
-    const appearOptions = {
-      threshold: 0.2
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
-    });
-  </script>
-</body>
-</html>
+<!-- Mağaza Linkleri -->
+<div class="magaza-links">
+  <h2>Mağazalarımız</h2>
+  <a href="https://www.gardrops.com/Yasemincrochetworld" target="_blank">Gardrops</a>
+  <a href="https://link.dolap.com/agwnr7" target="_blank">Dolap</a>
+  <a href="https://www.shopier.com/yasemincrochetworld" target="_blank">Shopier</a>
+  <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">Instagram</a>
+</div>
