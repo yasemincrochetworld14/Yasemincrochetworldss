@@ -1,229 +1,310 @@
-/* =======================
-   GENEL
-======================= */
-body {
-  font-family: "Poppins", sans-serif;
+/* style.css */
+
+/* Genel Ayarlar */
+* {
   margin: 0;
   padding: 0;
-  background: var(--bg, #fff);
-  color: var(--text, #333);
+  box-sizing: border-box;
 }
 
-a {
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  transition: background 0.3s, color 0.3s;
+}
+
+:root {
+  --bg: #ffffff;
+  --text: #333333;
+  --primary: #e67e22;
+  --secondary: #f8f8f8;
+  --accent: #ffb84d;
+  --card-bg: #fff;
+  --shadow: rgba(0,0,0,0.1);
+}
+
+body.dark {
+  --bg: #1e1e1e;
+  --text: #f1f1f1;
+  --secondary: #2a2a2a;
+  --card-bg: #2c2c2c;
+  --shadow: rgba(0,0,0,0.5);
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--secondary);
+  box-shadow: 0 2px 5px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: inherit;
-  transition: color 0.2s ease;
-}
-a:hover {
-  color: #e67e22;
+  color: var(--text);
 }
 
-button {
-  cursor: pointer;
-  border: none;
+.brand-logo {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: var(--primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn {
   background: none;
-  transition: all 0.2s ease;
-}
-button:hover {
-  transform: scale(1.05);
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1.2rem;
+  transition: transform 0.2s;
 }
 
-/* =======================
-   HOVER & GÖLGELER
-======================= */
+.icon-btn:hover {
+  transform: scale(1.1);
+  color: var(--primary);
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
 .btn {
   padding: 0.6rem 1.2rem;
-  border-radius: 10px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-.btn.primary {
-  background: #e67e22;
-  color: #fff;
-}
-.btn.primary:hover {
-  background: #cf711f;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-.btn.ghost {
-  border: 1px solid #ccc;
-  color: #333;
-}
-.btn.ghost:hover {
-  background: #f5f5f5;
-  border-color: #999;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* =======================
-   ÜRÜN KARTLARI
-======================= */
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #cf711f;
+  transform: translateY(-2px);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn.ghost:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Ürün Kategorileri */
+.products {
+  padding: 2rem;
+  background: var(--secondary);
+}
+
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 15px;
+  background: var(--card-bg);
+  border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px var(--shadow);
+  transition: transform 0.2s, box-shadow 0.3s;
   position: relative;
 }
+
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 12px var(--shadow);
 }
+
 .product-card img {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 0.8rem;
-}
-
-/* Favori (Kalp) Butonu */
-.fav-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #fff;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
-}
-.fav-btn[aria-pressed="true"] {
-  background: #e74c3c;
-  color: #fff;
-}
-.fav-btn:hover {
-  transform: scale(1.1);
-}
-
-/* =======================
-   LAZY LOAD (BLUR)
-======================= */
-.lazy {
-  filter: blur(12px);
+  object-fit: cover;
+  filter: blur(4px);
   transition: filter 0.4s ease;
 }
-.lazy.loaded {
+
+.product-card img[data-loaded="true"] {
   filter: blur(0);
 }
 
-/* =======================
-   FİLTRE & ARAMA
-======================= */
-.filters {
-  margin-bottom: 1.5rem;
+.product-card h3 {
+  margin-bottom: 0.5rem;
 }
-.search {
+
+.price-line {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0.5rem 0.8rem;
-  margin-bottom: 1rem;
+  margin-top: 0.8rem;
 }
-.search input {
+
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--secondary);
   border: none;
-  outline: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 6px;
+  color: var(--text);
+  transition: color 0.3s, background 0.3s;
+}
+
+.fav-btn.active {
+  color: red;
+}
+
+.fav-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Sepet */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  max-width: 100%;
+  height: 100%;
+  background: var(--card-bg);
+  box-shadow: -3px 0 6px var(--shadow);
+  transition: right 0.3s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-panel.active {
+  right: 0;
+}
+
+.cart-header, .cart-footer {
+  padding: 1rem;
+  border-bottom: 1px solid var(--shadow);
+}
+
+.cart-items {
   flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 1rem;
 }
 
-.filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-}
-.filter label {
-  font-size: 0.85rem;
-  margin-bottom: 0.2rem;
-  display: block;
-}
-.price-range {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.price-range input {
-  width: 70px;
-  padding: 0.3rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
-/* =======================
-   SEPET BOŞ İLLÜSTRASYON
-======================= */
 .cart-empty {
   text-align: center;
   padding: 2rem;
-  color: #666;
-}
-.cart-empty .empty-illust {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  opacity: 0.7;
 }
 
-/* =======================
-   GÖRSELLİ TOAST
-======================= */
+/* Toast */
 .toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.3s ease;
-  pointer-events: none;
-  z-index: 9999;
-}
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-.toast img {
-  width: 40px;
-  height: 40px;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
   border-radius: 8px;
-  object-fit: cover;
-}
-.toast-text strong {
-  display: block;
-  font-size: 0.9rem;
-}
-.toast-text span {
-  font-size: 0.8rem;
-  color: #777;
+  box-shadow: 0 3px 6px var(--shadow);
+  display: none;
 }
 
-/* =======================
-   MOBİL DÜZENLEMELER
-======================= */
+.toast.show {
+  display: block;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Arama & Filtre */
+.search-filter {
+  margin: 1rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.search-filter input, .search-filter select {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
   }
 
   .cart-panel {
     width: 100%;
-    max-width: none;
-    height: 100%;
-    top: 0;
-    right: 0;
   }
-  }
+}
