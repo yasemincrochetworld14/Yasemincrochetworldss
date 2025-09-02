@@ -28,14 +28,31 @@
     </nav>
 
     <div class="header-actions">
-      <button class="icon-btn" id="darkToggle" aria-label="Dark Mode">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
-      </button>
-      <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
+  <!-- 🔍 Arama Çubuğu -->
+  <input type="text" id="searchInput" placeholder="Ürün ara..." class="search-bar" />
+
+  <!-- 🌙 Dark Mode -->
+  <button class="icon-btn" id="darkToggle" aria-label="Dark Mode">
+    <i class="fa-solid fa-moon"></i>
+  </button>
+
+  <!-- ❤️ Favoriler -->
+  <button class="icon-btn" id="favToggle" aria-label="Favoriler">
+    <i class="fa-solid fa-heart"></i>
+    <span class="badge" id="favCount">0</span>
+  </button>
+
+  <!-- 🛒 Sepet -->
+  <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span class="badge" id="cartCount">0</span>
+  </button>
+
+  <!-- 🍔 Hamburger -->
+  <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+    </div>
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
