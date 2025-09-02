@@ -50,10 +50,6 @@
       </button>
     </div>
     <ul id="cartItems" class="cart-items"></ul>
-    <div id="emptyCart" class="empty-cart">
-      <img src="images/empty-cart.png" alt="Boş sepet" />
-      <p>Sepetiniz boş</p>
-    </div>
     <div class="cart-footer">
       <div class="total-line">
         <span>Toplam</span>
@@ -64,7 +60,7 @@
   </aside>
   <div id="overlay" class="overlay"></div>
 
-  <!-- Toast (Sepete eklendi bildirimi) -->
+  <!-- Toast -->
   <div id="toast" class="toast"></div>
 
   <!-- Hero -->
@@ -116,30 +112,10 @@
   <!-- Ürün Kategorileri -->
   <section id="kategoriler" class="products">
     <h2>Kategoriler</h2>
-
-    <!-- Arama ve Filtre -->
-    <div class="filters">
-      <input type="text" id="searchInput" placeholder="Ürün ara..." />
-      <select id="categoryFilter">
-        <option value="all">Tümü</option>
-        <option value="battaniye">Battaniyeler</option>
-        <option value="yelek">Yelekler</option>
-        <option value="oyun">Oyun Alanı</option>
-        <option value="bot">Botlar</option>
-        <option value="kirlent">Kırlent</option>
-        <option value="yastik">Yastık</option>
-        <option value="kedi">Kedi Yatakları</option>
-      </select>
-      <input type="number" id="minPrice" placeholder="Min ₺" />
-      <input type="number" id="maxPrice" placeholder="Max ₺" />
-      <button id="filterBtn" class="btn">Filtrele</button>
-    </div>
-
     <div class="product-grid">
 
-      <article class="product-card" data-category="battaniye" data-price="300">
-        <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="300">
+        <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
         <h3>Örgü Battaniye</h3>
         <p>Sıcak ve şık battaniye.</p>
         <div class="price-line">
@@ -148,9 +124,8 @@
         </div>
       </article>
 
-      <article class="product-card" data-category="battaniye" data-price="200">
-        <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="200">
+        <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
         <h3>Örgü Bebek Battaniyesi</h3>
         <p>Bebekler için sıcacık battaniye.</p>
         <div class="price-line">
@@ -159,20 +134,18 @@
         </div>
       </article>
 
-      <article class="product-card" data-category="yelek" data-price="180">
-        <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="180">
+        <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
         <h3>Örgü Bebek Yeleği</h3>
-        <p>Sevimli ve yumuşacık yelek. 0-4 yaş beden seçenekleri bulunur.</p>
+        <p>0-4 yaş için sevimli örgü bebek yelekleri.</p>
         <div class="price-line">
           <span class="price">₺180,00</span>
           <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-category="bot" data-price="150">
-        <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="150">
+        <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
         <h3>Örgü Botlar</h3>
         <p>Kış aylarında sıcacık tutar.</p>
         <div class="price-line">
@@ -181,9 +154,8 @@
         </div>
       </article>
 
-      <article class="product-card" data-category="kirlent" data-price="120">
-        <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="120">
+        <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
         <h3>Örgü Kırlent</h3>
         <p>Renkli ve dekoratif kırlent.</p>
         <div class="price-line">
@@ -192,9 +164,8 @@
         </div>
       </article>
 
-      <article class="product-card" data-category="yastik" data-price="100">
-        <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="100">
+        <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
         <h3>Örgü Yastık</h3>
         <p>Konforlu ve şık tasarım.</p>
         <div class="price-line">
@@ -203,9 +174,8 @@
         </div>
       </article>
 
-      <article class="product-card" data-category="kedi" data-price="250">
-        <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy" class="lazy-img">
-        <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+      <article class="product-card" data-price="250">
+        <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
         <h3>Örgü Kedi Yatağı</h3>
         <p>Minik dostlara özel konfor.</p>
         <div class="price-line">
@@ -237,4 +207,4 @@
     <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
   </footer>
 </body>
-  </html>
+            </html>
