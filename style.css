@@ -178,3 +178,15 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 /* ========== Footer ========== */
 .site-footer { padding:24px 20px; text-align:center; color:var(--muted); }
 .store.etsy:hover { color:#f1641e; }
+/* Ürün görselleri için boyut ve stil */
+.product-card img {
+  width: 100%;
+  height: 250px;        /* Görsel yüksekliği sabitlenir */
+  object-fit: cover;    /* Görsel kırpılarak orantılı görünür */
+  border-radius: 10px;  /* Köşeler yuvarlanır */
+  transition: transform 0.3s ease; /* Hover efekti için */
+}
+
+.product-card img:hover {
+  transform: scale(1.05); /* Üzerine gelince hafif büyütme efekti */
+}
