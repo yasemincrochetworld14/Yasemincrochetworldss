@@ -1,70 +1,167 @@
-// script.js
+// Yıl bilgisini footer'a yaz
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Hamburger menü
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+if (hamburger && menu){
+  hamburger.addEventListener('click', () => menu.classList.toggle('active'));
+}
 
 // Dark mode toggle
-const darkToggle = document.getElementById("darkToggle");
-darkToggle?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+const darkToggle = document.getElementById('darkToggle');
+const body = document.body;
+
+if (localStorage.getItem('dark') === '1') {
+  body.classList.add('dark');
+  darkToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+}
+
+darkToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  if (body.classList.contains('dark')) {
+    localStorage.setItem('dark', '1');
+    darkToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  } else {
+    localStorage.setItem('dark', '0');
+    darkToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+  }
 });
 
-// Hamburger menu
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("menu");
-hamburger?.addEventListener("click", () => {
-  menu.classList.toggle("open");
-});
+// Sepet paneli
+const cartToggle = document.getElementById('cartToggle');
+const cartClose = document.getElementById('cartClose');
+const cartPanel = document.getElementById('cartPanel');
+const overlay = document.getElementById('overlay');
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const cartCount = document.getElementById('cartCount');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const toast = document.getElementById('toast');
 
-// Yıl güncelle
-document.getElementById("year").textContent = new Date().getFullYear();
+const openCart = () => { 
+  cartPanel.classList.add('active'); 
+  overlay.classList.add('active'); 
+  cartPanel.setAttribute('aria-hidden','false'); 
+};
+const closeCart = () => { 
+  cartPanel.classList.remove('active'); 
+  overlay.classList.remove('active'); 
+  cartPanel.setAttribute('aria-hidden','true'); 
+};
 
-// Ürün kartları -> yeni sekme açma
-document.querySelectorAll(".product-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const productData = {
-      id: card.dataset.id,
-      name: card.dataset.name,
-      price: card.dataset.price,
-      desc: card.dataset.desc,
-      returns: card.dataset.returns,
-      size: card.dataset.size,
-      images: card.dataset.images.split(",")
-    };
+cartToggle.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
 
-    // Yeni sekmede ürün detay sayfası aç
-    const detailWindow = window.open("", "_blank");
-    detailWindow.document.write(`
-      <!DOCTYPE html>
-      <html lang="tr">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${productData.name} - Yasemin Crochet World</title>
-        <link rel="stylesheet" href="style.css" />
-      </head>
-      <body class="product-detail-page">
-        <header class="detail-header">
-          <h1>${productData.name}</h1>
-          <a href="index.html" class="btn">← Ana Sayfa</a>
-        </header>
+// Sepet verileri
+let cart = [];
 
-        <section class="product-detail">
-          <div class="image-gallery">
-            ${productData.images.map(img => `<img src="${img}" alt="${productData.name}" loading="lazy">`).join("")}
-          </div>
-          <div class="detail-info">
-            <h2>${productData.name}</h2>
-            <p class="price">₺${productData.price},00</p>
-            <p>${productData.desc}</p>
-            <p><strong>Beden / Ölçü:</strong> ${productData.size}</p>
-            <p><strong>İade Koşulları:</strong> ${productData.returns}</p>
-          </div>
-        </section>
+// Toast bildirimi
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 2500);
+}
 
-        <footer class="site-footer">
-          <p>© ${new Date().getFullYear()} Yasemin Crochet World</p>
-        </footer>
-      </body>
-      </html>
-    `);
-    detailWindow.document.close();
+// Badge animasyonu
+function animateBadge(){
+  cartCount.style.transform = "scale(1.3)";
+  setTimeout(()=> cartCount.style.transform="scale(1)", 200);
+}
+
+// Ürünleri sepete ekle
+document.querySelectorAll('.product-card').forEach(card => {
+  const btn = card.querySelector('.add-to-cart');
+  btn.addEventListener('click', () => {
+    const name = card.querySelector('h3').textContent.trim();
+    const price = parseFloat(card.dataset.price);
+    const existing = cart.find(i => i.name === name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+    updateCart();
+    showToast("Sepete eklendi ✅");
+    animateBadge();
   });
+});
+
+// Sepeti güncelle
+function updateCart(){
+  cartItems.innerHTML = '';
+  let total = 0;
+
+  cart.forEach((item, idx) => {
+    total += item.price * item.qty;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${item.name}</span>
+      <div class="qty">
+        <button data-i="${idx}" data-act="dec">-</button>
+        <strong>${item.qty}</strong>
+        <button data-i="${idx}" data-act="inc">+</button>
+      </div>
+      <strong>₺${(item.price * item.qty).toFixed(2)}</strong>
+      <button data-i="${idx}" data-act="rm" title="Kaldır">x</button>
+    `;
+    cartItems.appendChild(li);
+  });
+
+  cartTotal.textContent = `₺${total.toFixed(2)}`;
+  cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
+
+  // Buton aksiyonları
+  cartItems.querySelectorAll('button').forEach(btn => {
+    const i = +btn.dataset.i;
+    const act = btn.dataset.act;
+    btn.addEventListener('click', () => {
+      if (act === 'inc') cart[i].qty += 1;
+      if (act === 'dec') cart[i].qty = Math.max(0, cart[i].qty - 1);
+      if (act === 'rm') cart.splice(i,1);
+      cart = cart.filter(it => it.qty > 0);
+      updateCart();
+    });
+  });
+}
+
+// Satın alma butonu → Shopier yönlendirme
+checkoutBtn.addEventListener('click', () => {
+  if (!cart.length) { 
+    alert('Sepetiniz boş!'); 
+    return; 
+  }
+  window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
+});
+ // Mevcut script kodların burada kalıyor...
+
+/* ============================= */
+/* Ürün Detay Sayfası - Galeri   */
+/* ============================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".product-detail .gallery");
+  if (gallery) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    gallery.addEventListener("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX - gallery.offsetLeft;
+      scrollLeft = gallery.scrollLeft;
+    });
+    gallery.addEventListener("mouseleave", () => {
+      isDown = false;
+    });
+    gallery.addEventListener("mouseup", () => {
+      isDown = false;
+    });
+    gallery.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - gallery.offsetLeft;
+      const walk = (x - startX) * 2;
+      gallery.scrollLeft = scrollLeft - walk;
+    });
+  }
 });
