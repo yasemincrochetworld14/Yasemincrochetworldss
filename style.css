@@ -305,3 +305,35 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
     transform: scale(1);
   }
 }
+/* Favori butonu */
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, color 0.3s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  color: var(--brand);
+}
+
+.product-card {
+  position: relative; /* kalp butonunu konumlamak için */
+}
+
+.favorite-btn.active i {
+  color: var(--brand-2);
+  font-weight: bold;
+}
+
+/* Favoriler paneli */
+#favPanel {
+  z-index: 65;
+}
