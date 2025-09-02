@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yasemin Crochet World</title>
+
+  <!-- Mevcut dosyaların -->
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+
+  <!-- Font & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,7 +53,16 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
+
+    <!-- Sepet boşsa gösterilecek alan -->
+    <div id="cartEmpty" class="cart-empty" hidden>
+      <div class="empty-illust" aria-hidden="true">🛍️</div>
+      <p>Sepetiniz boş. Hadi güzel bir şeyler ekleyelim!</p>
+      <a href="#kategoriler" class="btn ghost">Kategorilere Git</a>
+    </div>
+
     <ul id="cartItems" class="cart-items"></ul>
+
     <div class="cart-footer">
       <div class="total-line">
         <span>Toplam</span>
@@ -60,8 +73,14 @@
   </aside>
   <div id="overlay" class="overlay"></div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
+  <!-- Görselli Toast -->
+  <div id="toast" class="toast">
+    <img id="toastImg" alt="" />
+    <div class="toast-text">
+      <strong id="toastTitle"></strong>
+      <span id="toastDesc"></span>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section id="hero" class="hero">
@@ -69,7 +88,7 @@
       <h1>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
       <p>Evine sıcaklık katacak, tamamen el işi ve sevgiyle örülmüş tasarımlar. Hemen keşfet!</p>
       <div class="hero-actions">
-        <a href="#kategoriler" class="btn primary">Alışverişe Başla</a>
+        <a href="#kategoriler" class="btn primary" id="shop-btn">Alışverişe Başla</a>
         <a href="#magazalar" class="btn ghost">Mağazalarım</a>
       </div>
     </div>
@@ -109,78 +128,138 @@
     </div>
   </section>
 
-  <!-- Ürün Kategorileri -->
+  <!-- Kategoriler + Arama & Filtre -->
   <section id="kategoriler" class="products">
     <h2>Kategoriler</h2>
-    <div class="product-grid">
 
-      <article class="product-card" data-price="300">
-        <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
+    <!-- Arama & Filtre Alanı -->
+    <div class="filters">
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="searchInput" placeholder="Ürün ara (ör. battaniye, yelek)..." />
+      </div>
+
+      <div class="filter-row">
+        <div class="filter">
+          <label for="categoryFilter">Kategori</label>
+          <select id="categoryFilter">
+            <option value="">Tümü</option>
+            <option value="battaniye">Battaniye</option>
+            <option value="bebek-battaniyesi">Bebek Battaniyesi</option>
+            <option value="bebek-yelegi">Bebek Yeleği</option>
+            <option value="botlar">Botlar</option>
+            <option value="kirlent">Kırlent</option>
+            <option value="yastik">Yastık</option>
+            <option value="kedi-yatagi">Kedi Yatağı</option>
+          </select>
+        </div>
+
+        <div class="filter">
+          <label>Fiyat (₺)</label>
+          <div class="price-range">
+            <input type="number" id="priceMin" placeholder="Min" min="0" step="10" />
+            <span>-</span>
+            <input type="number" id="priceMax" placeholder="Max" min="0" step="10" />
+          </div>
+        </div>
+
+        <button class="btn ghost" id="clearFilters" type="button">
+          <i class="fa-solid fa-rotate-right"></i> Temizle
+        </button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- Ürün Kartı → data-* ile kategori, fiyat -->
+      <article class="product-card" data-category="battaniye" data-price="300">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
         <h3>Örgü Battaniye</h3>
         <p>Sıcak ve şık battaniye.</p>
         <div class="price-line">
           <span class="price">₺300,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-battaniye.jpg" data-name="Örgü Battaniye" data-price="300">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="200">
-        <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
+      <article class="product-card" data-category="bebek-battaniyesi" data-price="200">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
         <h3>Örgü Bebek Battaniyesi</h3>
         <p>Bebekler için sıcacık battaniye.</p>
         <div class="price-line">
           <span class="price">₺200,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-bebek-battaniyesi.jpg" data-name="Örgü Bebek Battaniyesi" data-price="200">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="180">
-        <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
+      <article class="product-card" data-category="bebek-yelegi" data-price="180">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
         <h3>Örgü Bebek Yeleği</h3>
-        <p>0-4 yaş için sevimli örgü bebek yelekleri.</p>
+        <p>Sevimli ve yumuşacık yelek.</p>
         <div class="price-line">
           <span class="price">₺180,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-bebek-yelegi.jpg" data-name="Örgü Bebek Yeleği" data-price="180">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="150">
-        <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
+      <article class="product-card" data-category="botlar" data-price="150">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
         <h3>Örgü Botlar</h3>
         <p>Kış aylarında sıcacık tutar.</p>
         <div class="price-line">
           <span class="price">₺150,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-botlar.jpg" data-name="Örgü Botlar" data-price="150">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="120">
-        <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
+      <article class="product-card" data-category="kirlent" data-price="120">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
         <h3>Örgü Kırlent</h3>
         <p>Renkli ve dekoratif kırlent.</p>
         <div class="price-line">
           <span class="price">₺120,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-kirlent.jpg" data-name="Örgü Kırlent" data-price="120">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="100">
-        <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
+      <article class="product-card" data-category="yastik" data-price="100">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
         <h3>Örgü Yastık</h3>
         <p>Konforlu ve şık tasarım.</p>
         <div class="price-line">
           <span class="price">₺100,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-yastik.jpg" data-name="Örgü Yastık" data-price="100">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="250">
-        <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
+      <article class="product-card" data-category="kedi-yatagi" data-price="250">
+        <button class="fav-btn" aria-label="Favorilere ekle" aria-pressed="false">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <img class="lazy blur" src="images/placeholder.jpg" data-src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
         <h3>Örgü Kedi Yatağı</h3>
         <p>Minik dostlara özel konfor.</p>
         <div class="price-line">
           <span class="price">₺250,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
+          <button class="btn add-to-cart" data-img="images/orgu-kedi-yatagi.jpg" data-name="Örgü Kedi Yatağı" data-price="250">Sepete Ekle</button>
         </div>
       </article>
 
@@ -207,4 +286,4 @@
     <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
   </footer>
 </body>
-            </html>
+          </html>
