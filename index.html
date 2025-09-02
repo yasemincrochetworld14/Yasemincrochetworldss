@@ -31,37 +31,11 @@
       <button class="icon-btn" id="darkToggle" aria-label="Dark Mode">
         <i class="fa-solid fa-moon"></i>
       </button>
-      <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
-      </button>
       <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
   </header>
-
-  <!-- Slide Cart Panel -->
-  <aside id="cartPanel" class="cart-panel" aria-hidden="true">
-    <div class="cart-header">
-      <h3>Sepetim</h3>
-      <button class="icon-btn" id="cartClose" aria-label="Sepeti Kapat">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <ul id="cartItems" class="cart-items"></ul>
-    <div class="cart-footer">
-      <div class="total-line">
-        <span>Toplam</span>
-        <strong id="cartTotal">₺0,00</strong>
-      </div>
-      <button class="btn primary" id="checkoutBtn">Satın Al</button>
-    </div>
-  </aside>
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
 
   <!-- Hero -->
   <section id="hero" class="hero">
@@ -114,7 +88,14 @@
     <h2>Kategoriler</h2>
     <div class="product-grid">
 
-      <article class="product-card" data-id="battaniye" data-price="300">
+      <article class="product-card" 
+        data-id="orgu-battaniye" 
+        data-name="Örgü Battaniye"
+        data-price="300"
+        data-desc="Sıcak ve şık battaniye. El emeğiyle örülmüştür."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="Tek boyut"
+        data-images="images/orgu-battaniye1.jpg,images/orgu-battaniye2.jpg,images/orgu-battaniye3.jpg">
         <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
         <h3>Örgü Battaniye</h3>
         <p>Sıcak ve şık battaniye.</p>
@@ -123,7 +104,14 @@
         </div>
       </article>
 
-      <article class="product-card" data-id="bebek-battaniyesi" data-price="200">
+      <article class="product-card" 
+        data-id="orgu-bebek-battaniyesi" 
+        data-name="Örgü Bebek Battaniyesi"
+        data-price="200"
+        data-desc="Bebekler için sıcacık battaniye."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="80x100 cm"
+        data-images="images/orgu-bebek-battaniyesi1.jpg,images/orgu-bebek-battaniyesi2.jpg">
         <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
         <h3>Örgü Bebek Battaniyesi</h3>
         <p>Bebekler için sıcacık battaniye.</p>
@@ -132,16 +120,30 @@
         </div>
       </article>
 
-      <article class="product-card" data-id="bebek-yelegi" data-price="180">
+      <article class="product-card" 
+        data-id="orgu-bebek-yelegi"
+        data-name="Örgü Bebek Yeleği"
+        data-price="180"
+        data-desc="0-4 yaş arası her beden tablosu bulunur. Sevimli ve yumuşacık yelek."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="0-4 yaş beden tablosu mevcut"
+        data-images="images/orgu-bebek-yelegi1.jpg,images/orgu-bebek-yelegi2.jpg">
         <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
         <h3>Örgü Bebek Yeleği</h3>
-        <p>0-4 yaş arası tüm beden seçenekleri mevcuttur.</p>
+        <p>0-4 yaş arası beden tablosu bulunur.</p>
         <div class="price-line">
           <span class="price">₺180,00</span>
         </div>
       </article>
 
-      <article class="product-card" data-id="botlar" data-price="150">
+      <article class="product-card" 
+        data-id="orgu-botlar"
+        data-name="Örgü Botlar"
+        data-price="150"
+        data-desc="Kış aylarında sıcacık tutar."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="0-12 ay"
+        data-images="images/orgu-botlar1.jpg,images/orgu-botlar2.jpg">
         <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
         <h3>Örgü Botlar</h3>
         <p>Kış aylarında sıcacık tutar.</p>
@@ -150,7 +152,14 @@
         </div>
       </article>
 
-      <article class="product-card" data-id="kirlent" data-price="120">
+      <article class="product-card" 
+        data-id="orgu-kirlent"
+        data-name="Örgü Kırlent"
+        data-price="120"
+        data-desc="Renkli ve dekoratif kırlent."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="40x40 cm"
+        data-images="images/orgu-kirlent1.jpg,images/orgu-kirlent2.jpg">
         <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
         <h3>Örgü Kırlent</h3>
         <p>Renkli ve dekoratif kırlent.</p>
@@ -159,7 +168,14 @@
         </div>
       </article>
 
-      <article class="product-card" data-id="yastik" data-price="100">
+      <article class="product-card" 
+        data-id="orgu-yastik"
+        data-name="Örgü Yastık"
+        data-price="100"
+        data-desc="Konforlu ve şık tasarım."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="45x45 cm"
+        data-images="images/orgu-yastik1.jpg,images/orgu-yastik2.jpg">
         <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
         <h3>Örgü Yastık</h3>
         <p>Konforlu ve şık tasarım.</p>
@@ -168,7 +184,14 @@
         </div>
       </article>
 
-      <article class="product-card" data-id="kedi-yatagi" data-price="250">
+      <article class="product-card" 
+        data-id="orgu-kedi-yatagi"
+        data-name="Örgü Kedi Yatağı"
+        data-price="250"
+        data-desc="Minik dostlara özel konfor."
+        data-returns="14 gün içinde iade mümkündür."
+        data-size="50x50 cm"
+        data-images="images/orgu-kedi-yatagi1.jpg,images/orgu-kedi-yatagi2.jpg">
         <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
         <h3>Örgü Kedi Yatağı</h3>
         <p>Minik dostlara özel konfor.</p>
@@ -179,27 +202,6 @@
 
     </div>
   </section>
-
-  <!-- Modal (ürün detay) -->
-  <div id="productModal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <span class="close" id="modalClose">&times;</span>
-      <div class="modal-slider">
-        <button class="prev">&#10094;</button>
-        <div class="slides" id="modalSlides"></div>
-        <button class="next">&#10095;</button>
-      </div>
-      <div class="modal-info">
-        <h3 id="modalTitle"></h3>
-        <p id="modalDesc"></p>
-        <p><strong>Fiyat:</strong> <span id="modalPrice"></span></p>
-        <h4>Ölçüler</h4>
-        <p id="modalSizes">Tüm beden seçenekleri mevcuttur.</p>
-        <h4>İade Koşulları</h4>
-        <p>Ürün teslim alındıktan sonra 14 gün içinde iade edilebilir.</p>
-      </div>
-    </div>
-  </div>
 
   <!-- Hakkımızda -->
   <section id="hakkimizda" class="about">
@@ -221,4 +223,4 @@
     <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
   </footer>
 </body>
-    </html>
+  </html>
