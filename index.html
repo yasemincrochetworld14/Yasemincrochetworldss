@@ -114,78 +114,92 @@
     <h2>Kategoriler</h2>
     <div class="product-grid">
 
-      <article class="product-card" data-price="300">
+      <article class="product-card" data-id="battaniye" data-price="300">
         <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
         <h3>Örgü Battaniye</h3>
         <p>Sıcak ve şık battaniye.</p>
         <div class="price-line">
           <span class="price">₺300,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="200">
+      <article class="product-card" data-id="bebek-battaniyesi" data-price="200">
         <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
         <h3>Örgü Bebek Battaniyesi</h3>
         <p>Bebekler için sıcacık battaniye.</p>
         <div class="price-line">
           <span class="price">₺200,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="180">
+      <article class="product-card" data-id="bebek-yelegi" data-price="180">
         <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
         <h3>Örgü Bebek Yeleği</h3>
-        <p>0-4 yaş için sevimli örgü bebek yelekleri.</p>
+        <p>0-4 yaş arası tüm beden seçenekleri mevcuttur.</p>
         <div class="price-line">
           <span class="price">₺180,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="150">
+      <article class="product-card" data-id="botlar" data-price="150">
         <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
         <h3>Örgü Botlar</h3>
         <p>Kış aylarında sıcacık tutar.</p>
         <div class="price-line">
           <span class="price">₺150,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="120">
+      <article class="product-card" data-id="kirlent" data-price="120">
         <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
         <h3>Örgü Kırlent</h3>
         <p>Renkli ve dekoratif kırlent.</p>
         <div class="price-line">
           <span class="price">₺120,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="100">
+      <article class="product-card" data-id="yastik" data-price="100">
         <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
         <h3>Örgü Yastık</h3>
         <p>Konforlu ve şık tasarım.</p>
         <div class="price-line">
           <span class="price">₺100,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
-      <article class="product-card" data-price="250">
+      <article class="product-card" data-id="kedi-yatagi" data-price="250">
         <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
         <h3>Örgü Kedi Yatağı</h3>
         <p>Minik dostlara özel konfor.</p>
         <div class="price-line">
           <span class="price">₺250,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
         </div>
       </article>
 
     </div>
   </section>
+
+  <!-- Modal (ürün detay) -->
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close" id="modalClose">&times;</span>
+      <div class="modal-slider">
+        <button class="prev">&#10094;</button>
+        <div class="slides" id="modalSlides"></div>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="modal-info">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+        <p><strong>Fiyat:</strong> <span id="modalPrice"></span></p>
+        <h4>Ölçüler</h4>
+        <p id="modalSizes">Tüm beden seçenekleri mevcuttur.</p>
+        <h4>İade Koşulları</h4>
+        <p>Ürün teslim alındıktan sonra 14 gün içinde iade edilebilir.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Hakkımızda -->
   <section id="hakkimizda" class="about">
@@ -207,4 +221,4 @@
     <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
   </footer>
 </body>
-            </html>
+    </html>
