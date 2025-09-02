@@ -1,145 +1,134 @@
-// script.js
+// Yıl bilgisini footer'a yaz
+document.getElementById('year').textContent = new Date().getFullYear();
 
-// Dark Mode Toggle
-const darkToggle = document.getElementById("darkToggle");
-darkToggle?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-});
+// Hamburger menü
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+if (hamburger && menu){
+  hamburger.addEventListener('click', () => menu.classList.toggle('active'));
+}
 
-// Hamburger Menü
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("menu");
-hamburger?.addEventListener("click", () => {
-  menu.classList.toggle("active");
-});
+// Dark mode toggle
+const darkToggle = document.getElementById('darkToggle');
+const body = document.body;
 
-// Sepet Panel
-const cartToggle = document.getElementById("cartToggle");
-const cartPanel = document.getElementById("cartPanel");
-const cartClose = document.getElementById("cartClose");
-const overlay = document.getElementById("overlay");
+if (localStorage.getItem('dark') === '1') {
+  body.classList.add('dark');
+  darkToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+}
 
-cartToggle?.addEventListener("click", () => {
-  cartPanel.classList.add("active");
-  overlay.classList.add("active");
-});
-
-cartClose?.addEventListener("click", () => {
-  cartPanel.classList.remove("active");
-  overlay.classList.remove("active");
-});
-
-overlay?.addEventListener("click", () => {
-  cartPanel.classList.remove("active");
-  overlay.classList.remove("active");
-});
-
-// Sepet İşlemleri
-let cart = [];
-const cartItems = document.getElementById("cartItems");
-const cartCount = document.getElementById("cartCount");
-const cartTotal = document.getElementById("cartTotal");
-const toast = document.getElementById("toast");
-
-function updateCart() {
-  cartItems.innerHTML = "";
-  if (cart.length === 0) {
-    cartItems.innerHTML = `<div class="cart-empty">
-      <i class="fa-solid fa-box-open" style="font-size:2rem; opacity:0.6;"></i>
-      <p>Sepetiniz boş</p>
-    </div>`;
-    cartCount.textContent = 0;
-    cartTotal.textContent = "₺0,00";
-    return;
+darkToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  if (body.classList.contains('dark')) {
+    localStorage.setItem('dark', '1');
+    darkToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  } else {
+    localStorage.setItem('dark', '0');
+    darkToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
   }
+});
+
+// Sepet paneli
+const cartToggle = document.getElementById('cartToggle');
+const cartClose = document.getElementById('cartClose');
+const cartPanel = document.getElementById('cartPanel');
+const overlay = document.getElementById('overlay');
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const cartCount = document.getElementById('cartCount');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const toast = document.getElementById('toast');
+
+const openCart = () => { 
+  cartPanel.classList.add('active'); 
+  overlay.classList.add('active'); 
+  cartPanel.setAttribute('aria-hidden','false'); 
+};
+const closeCart = () => { 
+  cartPanel.classList.remove('active'); 
+  overlay.classList.remove('active'); 
+  cartPanel.setAttribute('aria-hidden','true'); 
+};
+
+cartToggle.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
+
+// Sepet verileri
+let cart = [];
+
+// Toast bildirimi
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 2500);
+}
+
+// Badge animasyonu
+function animateBadge(){
+  cartCount.style.transform = "scale(1.3)";
+  setTimeout(()=> cartCount.style.transform="scale(1)", 200);
+}
+
+// Ürünleri sepete ekle
+document.querySelectorAll('.product-card').forEach(card => {
+  const btn = card.querySelector('.add-to-cart');
+  btn.addEventListener('click', () => {
+    const name = card.querySelector('h3').textContent.trim();
+    const price = parseFloat(card.dataset.price);
+    const existing = cart.find(i => i.name === name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+    updateCart();
+    showToast("Sepete eklendi ✅");
+    animateBadge();
+  });
+});
+
+// Sepeti güncelle
+function updateCart(){
+  cartItems.innerHTML = '';
   let total = 0;
-  cart.forEach((item, i) => {
-    total += item.price;
-    const li = document.createElement("li");
+
+  cart.forEach((item, idx) => {
+    total += item.price * item.qty;
+
+    const li = document.createElement('li');
     li.innerHTML = `
-      <div style="display:flex; align-items:center; gap:10px;">
-        <img src="${item.img}" alt="${item.name}" style="width:50px; border-radius:6px;">
-        <div>
-          <p>${item.name}</p>
-          <small>₺${item.price.toFixed(2)}</small>
-        </div>
+      <span>${item.name}</span>
+      <div class="qty">
+        <button data-i="${idx}" data-act="dec">-</button>
+        <strong>${item.qty}</strong>
+        <button data-i="${idx}" data-act="inc">+</button>
       </div>
-      <button class="remove" data-index="${i}"><i class="fa-solid fa-trash"></i></button>
+      <strong>₺${(item.price * item.qty).toFixed(2)}</strong>
+      <button data-i="${idx}" data-act="rm" title="Kaldır">x</button>
     `;
     cartItems.appendChild(li);
   });
-  cartCount.textContent = cart.length;
-  cartTotal.textContent = `₺${total.toFixed(2)}`;
 
-  // Sepetten sil
-  document.querySelectorAll(".remove").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      const idx = e.currentTarget.dataset.index;
-      cart.splice(idx, 1);
+  cartTotal.textContent = `₺${total.toFixed(2)}`;
+  cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
+
+  // Buton aksiyonları
+  cartItems.querySelectorAll('button').forEach(btn => {
+    const i = +btn.dataset.i;
+    const act = btn.dataset.act;
+    btn.addEventListener('click', () => {
+      if (act === 'inc') cart[i].qty += 1;
+      if (act === 'dec') cart[i].qty = Math.max(0, cart[i].qty - 1);
+      if (act === 'rm') cart.splice(i,1);
+      cart = cart.filter(it => it.qty > 0);
       updateCart();
     });
   });
 }
 
-function showToast(product) {
-  toast.innerHTML = `
-    <div style="display:flex; align-items:center; gap:10px;">
-      <img src="${product.img}" style="width:40px; border-radius:6px;">
-      <span>${product.name} sepete eklendi ✅</span>
-    </div>
-  `;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 3000);
-}
-
-// Sepete Ekle
-document.querySelectorAll(".add-to-cart").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const card = e.target.closest(".product-card");
-    const name = card.querySelector("h3").textContent;
-    const price = parseFloat(card.dataset.price);
-    const img = card.querySelector("img").src;
-
-    const product = { name, price, img };
-    cart.push(product);
-    updateCart();
-    showToast(product);
-  });
+// Satın alma butonu → Shopier yönlendirme
+checkoutBtn.addEventListener('click', () => {
+  if (!cart.length) { 
+    alert('Sepetiniz boş!'); 
+    return; 
+  }
+  window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
 });
-
-// Favorilere Ekle
-document.querySelectorAll(".fav-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    btn.classList.toggle("active");
-  });
-});
-
-// Lazy Loading Blur
-document.querySelectorAll(".product-card img").forEach((img) => {
-  img.addEventListener("load", () => {
-    img.setAttribute("data-loaded", "true");
-  });
-});
-
-// Arama ve Filtreleme
-const searchInput = document.getElementById("searchInput");
-const filterSelect = document.getElementById("filterSelect");
-
-function filterProducts() {
-  const query = searchInput?.value.toLowerCase() || "";
-  const filter = filterSelect?.value || "all";
-
-  document.querySelectorAll(".product-card").forEach((card) => {
-    const name = card.querySelector("h3").textContent.toLowerCase();
-    const price = parseFloat(card.dataset.price);
-
-    let match = name.includes(query);
-    if (filter === "low" && price > 150) match = false;
-    if (filter === "high" && price <= 150) match = false;
-
-    card.style.display = match ? "block" : "none";
-  });
-}
-
-searchInput?.addEventListener("input", filterProducts);
-filterSelect?.addEventListener("change", filterProducts);
