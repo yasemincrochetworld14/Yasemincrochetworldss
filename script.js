@@ -132,3 +132,73 @@ checkoutBtn.addEventListener('click', () => {
   }
   window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
 });
+// ⭐ Puanlama (Rating)
+document.querySelectorAll('.rating').forEach(rating => {
+  const stars = rating.querySelectorAll('i');
+  const productId = rating.dataset.id;
+  let saved = localStorage.getItem('rating-' + productId);
+
+  if (saved) {
+    for (let i = 0; i < saved; i++) stars[i].classList.add('active');
+  }
+
+  stars.forEach((star, idx) => {
+    star.addEventListener('click', () => {
+      stars.forEach(s => s.classList.remove('active'));
+      for (let i = 0; i <= idx; i++) stars[i].classList.add('active');
+      localStorage.setItem('rating-' + productId, idx + 1);
+    });
+  });
+});
+
+// 💬 Yorumlar
+document.querySelectorAll('.comments').forEach(section => {
+  const btn = section.querySelector('.comment-toggle');
+  const box = section.querySelector('.comment-box');
+  const textarea = section.querySelector('textarea');
+  const sendBtn = section.querySelector('.send-comment');
+  const list = section.querySelector('.comment-list');
+  const productId = section.dataset.id;
+
+  // Önceki yorumları yükle
+  let savedComments = JSON.parse(localStorage.getItem('comments-' + productId) || '[]');
+  savedComments.forEach(c => {
+    const li = createCommentElement(c, savedComments, productId);
+    list.appendChild(li);
+  });
+
+  // Yorum kutusunu aç/kapat
+  btn.addEventListener('click', () => box.classList.toggle('hidden'));
+
+  // Yorum gönder
+  sendBtn.addEventListener('click', () => {
+    if (textarea.value.trim()) {
+      const li = createCommentElement(textarea.value.trim(), savedComments, productId);
+      list.appendChild(li);
+
+      savedComments.push(textarea.value.trim());
+      localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
+
+      textarea.value = '';
+      box.classList.add('hidden');
+    }
+  });
+});
+
+// Yorum elemanı oluşturma + silme butonu
+function createCommentElement(text, savedComments, productId) {
+  const li = document.createElement('li');
+  li.textContent = text;
+
+  const delBtn = document.createElement('button');
+  delBtn.textContent = "x";
+  delBtn.classList.add("delete-comment");
+  delBtn.addEventListener('click', () => {
+    li.remove();
+    savedComments = savedComments.filter(c => c !== text);
+    localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
+  });
+
+  li.appendChild(delBtn);
+  return li;
+}
