@@ -1,210 +1,307 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yasemin Crochet World</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <a class="brand" href="https://www.instagram.com/yasemincrochetworld" target="_blank" rel="noopener" title="Mağazama git">
-      <img src="logo.png" alt="Yasemin Crochet World" class="brand-logo" />
-      <span class="brand-name">Yasemin Crochet World</span>
-    </a>
+/* ========== Temel ========== */
+:root {
+  --bg: #faf7ff;
+  --card: rgba(255,255,255,0.7);
+  --text: #2b2b2b;
+  --muted: #6b6b6b;
+  --brand: #a855f7;
+  --brand-2: #ec4899;
+  --shadow: 0 10px 30px rgba(17, 12, 46, 0.12);
+}
 
-    <nav class="main-nav" id="menu">
-      <a href="#hero">Ana Sayfa</a>
-      <a href="#kategoriler">Kategoriler</a>
-      <a href="#magazalar">Mağazalar</a>
-      <a href="#hakkimizda">Hakkımızda</a>
-      <a href="#iletisim">İletişim</a>
-    </nav>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: linear-gradient(120deg, #fdf2f8, #f5f3ff);
+  background-attachment: fixed;
+  transition: background .4s ease, color .4s ease;
+}
 
-    <div class="header-actions">
-      <button class="icon-btn" id="darkToggle" aria-label="Dark Mode">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
-      </button>
-      <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </header>
+/* DARK MODE */
+body.dark {
+  --bg: #111827;
+  --card: #1f2937;
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  background: #111827;
+}
 
-  <!-- Slide Cart Panel -->
-  <aside id="cartPanel" class="cart-panel" aria-hidden="true">
-    <div class="cart-header">
-      <h3>Sepetim</h3>
-      <button class="icon-btn" id="cartClose" aria-label="Sepeti Kapat">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <ul id="cartItems" class="cart-items"></ul>
-    <div class="cart-footer">
-      <div class="total-line">
-        <span>Toplam</span>
-        <strong id="cartTotal">₺0,00</strong>
-      </div>
-      <button class="btn primary" id="checkoutBtn">Satın Al</button>
-    </div>
-  </aside>
-  <div id="overlay" class="overlay"></div>
+/* ========== Animasyonlar ========== */
+.fade-in { animation: fadeIn 1s ease both; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(15px);} to {opacity:1; transform:translateY(0);} }
 
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
+/* ========== Header ========== */
+.site-header {
+  position: sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 20px; gap:16px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+  transition: background .3s;
+}
+body.dark .site-header { background: rgba(31,41,55,0.9); }
 
-  <!-- Hero -->
-  <section id="hero" class="hero">
-    <div class="hero-content fade-in">
-      <h1>El emeğiyle tasarlanmış, sevgiyle örülmüş ürünler</h1>
-      <p>Evine sıcaklık katacak, tamamen el işi ve sevgiyle örülmüş tasarımlar. Hemen keşfet!</p>
-      <div class="hero-actions">
-        <a href="#kategoriler" class="btn primary">Alışverişe Başla</a>
-        <a href="#magazalar" class="btn ghost">Mağazalarım</a>
-      </div>
-    </div>
-    <div class="hero-art fade-in">
-      <img src="logo.png" alt="Yasemin Crochet World Logo" loading="lazy" />
-    </div>
-  </section>
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+.brand-logo { width:40px; height:40px; object-fit:contain; }
+.brand-name { font-weight:700; }
 
-  <!-- Mağaza İkonları -->
-  <section id="magazalar" class="stores">
-    <h2>Mağazalarım</h2>
-    <div class="store-grid">
-      <a class="store instagram" href="https://www.instagram.com/yasemincrochetworld" target="_blank" rel="noopener">
-        <i class="fa-brands fa-instagram"></i>
-        <span>Instagram</span>
-      </a>
-      <a class="store shopier" href="https://www.shopier.com/yasemincrochetworld" target="_blank" rel="noopener">
-        <i class="fa-solid fa-store"></i>
-        <span>Shopier</span>
-      </a>
-      <a class="store gardrops" href="https://www.gardrops.com/Yasemincrochetworld" target="_blank" rel="noopener">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span>Gardrops</span>
-      </a>
-      <a class="store dolap" href="https://link.dolap.com/uytd9" target="_blank" rel="noopener">
-        <i class="fa-solid fa-shirt"></i>
-        <span>Dolap</span>
-      </a>
-      <a class="store letgo" href="https://www.letgo.com/profil/48613238" target="_blank" rel="noopener">
-        <i class="fa-solid fa-tags"></i>
-        <span>Letgo</span>
-      </a>
-      <a class="store etsy" href="#" target="_blank" rel="noopener">
-        <i class="fa-brands fa-etsy"></i>
-        <span>Etsy</span>
-      </a>
-    </div>
-  </section>
+.main-nav { display:flex; gap:18px; }
+.main-nav a { color:var(--muted); text-decoration:none; font-weight:500; }
+.main-nav a:hover { color:var(--text); }
 
-  <!-- Ürün Kategorileri -->
-  <section id="kategoriler" class="products">
-    <h2>Kategoriler</h2>
-    <div class="product-grid">
+.header-actions { display:flex; align-items:center; gap:10px; }
+.icon-btn {
+  border:none; background:#fff; padding:10px 12px; border-radius:14px; cursor:pointer;
+  box-shadow: var(--shadow); position:relative; transition:.3s;
+}
+body.dark .icon-btn { background:#374151; color:#f3f4f6; }
+.icon-btn:hover { transform:scale(1.08); }
+.icon-btn .badge {
+  position:absolute; transform:translate(10px,-10px);
+  background: linear-gradient(45deg, var(--brand), var(--brand-2));
+  color:#fff; border-radius:999px; padding:2px 6px; font-size:12px; font-weight:700;
+}
+.hide-desktop { display:none; }
 
-      <article class="product-card" data-price="300">
-        <img src="images/orgu-battaniye.jpg" alt="Örgü Battaniye" loading="lazy">
-        <h3>Örgü Battaniye</h3>
-        <p>Sıcak ve şık battaniye.</p>
-        <div class="price-line">
-          <span class="price">₺300,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+@media (max-width: 900px){
+  .main-nav {
+    position:fixed; inset:64px 12px auto 12px; display:none; flex-direction:column;
+    background:var(--card); padding:16px; border-radius:16px; box-shadow: var(--shadow);
+  }
+  .main-nav.active { display:flex; }
+  .hide-desktop { display:inline-flex; }
+}
 
-      <article class="product-card" data-price="200">
-        <img src="images/orgu-bebek-battaniyesi.jpg" alt="Örgü Bebek Battaniyesi" loading="lazy">
-        <h3>Örgü Bebek Battaniyesi</h3>
-        <p>Bebekler için sıcacık battaniye.</p>
-        <div class="price-line">
-          <span class="price">₺200,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+/* ========== Hero ========== */
+.hero {
+  display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; padding:56px 20px; align-items:center;
+}
+.hero-content h1 { font-size:clamp(26px, 5cqi, 46px); margin-bottom:10px; }
+.hero-content p { color:var(--muted); margin-bottom:20px; }
+.hero-actions { display:flex; gap:12px; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 16px; border-radius:14px; border:1px solid #eaeaea;
+  cursor:pointer; text-decoration:none; font-weight:600;
+  background:#fff; color:var(--text); box-shadow: var(--shadow);
+  transition: all .3s ease;
+}
+.btn.primary {
+  background: linear-gradient(45deg, var(--brand), var(--brand-2));
+  color:#fff; border:none;
+}
+.btn:hover { transform:translateY(-3px); }
+.hero-art img { width:100%; max-width:320px; margin-inline:auto; display:block;
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,0.15)); }
 
-      <article class="product-card" data-price="180">
-        <img src="images/orgu-bebek-yelegi.jpg" alt="Örgü Bebek Yeleği" loading="lazy">
-        <h3>Örgü Bebek Yeleği</h3>
-        <p>0-4 yaş için sevimli örgü bebek yelekleri.</p>
-        <div class="price-line">
-          <span class="price">₺180,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+@media (max-width: 900px){
+  .hero { grid-template-columns: 1fr; text-align:center; }
+  .hero-actions { justify-content:center; }
+}
 
-      <article class="product-card" data-price="150">
-        <img src="images/orgu-botlar.jpg" alt="Örgü Botlar" loading="lazy">
-        <h3>Örgü Botlar</h3>
-        <p>Kış aylarında sıcacık tutar.</p>
-        <div class="price-line">
-          <span class="price">₺150,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+/* ========== Stores ========== */
+.stores { padding:36px 20px; }
+.stores h2 { margin-bottom:16px; }
+.store-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:14px; }
+.store {
+  background:var(--card); border:1px solid rgba(0,0,0,0.06);
+  padding:16px; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:10px;
+  text-decoration:none; color:var(--text); font-weight:600; box-shadow: var(--shadow);
+  transition:.3s;
+}
+.store i { font-size:20px; }
+.store:hover { transform: translateY(-3px); background:#fff; }
+body.dark .store:hover { background:#374151; }
 
-      <article class="product-card" data-price="120">
-        <img src="images/orgu-kirlent.jpg" alt="Örgü Kırlent" loading="lazy">
-        <h3>Örgü Kırlent</h3>
-        <p>Renkli ve dekoratif kırlent.</p>
-        <div class="price-line">
-          <span class="price">₺120,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+/* Mağaza renkleri hover */
+.store.instagram:hover { color:#e1306c; }
+.store.shopier:hover { color:#3b82f6; }
+.store.gardrops:hover { color:#9333ea; }
+.store.dolap:hover { color:#10b981; }
+.store.letgo:hover { color:#ef4444; }
 
-      <article class="product-card" data-price="100">
-        <img src="images/orgu-yastik.jpg" alt="Örgü Yastık" loading="lazy">
-        <h3>Örgü Yastık</h3>
-        <p>Konforlu ve şık tasarım.</p>
-        <div class="price-line">
-          <span class="price">₺100,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+/* ========== Products ========== */
+.products { padding:36px 20px; }
+.products h2 { margin-bottom:14px; }
+.product-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; }
+.product-card {
+  display:flex; flex-direction:column; gap:10px;
+  background:var(--card); border:1px solid rgba(0,0,0,0.06);
+  border-radius:18px; padding:14px; box-shadow: var(--shadow);
+  transition: transform .3s, box-shadow .3s;
+}
+.product-card:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 12px 24px rgba(0,0,0,.15); }
+.product-card img { width:100%; aspect-ratio: 1 / 1; object-fit:cover; border-radius:12px; }
+.product-card h3 { font-size:16px; }
+.product-card p { color:var(--muted); font-size:14px; }
+.price-line { display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+.price { font-weight:700; }
+.add-to-cart { white-space:nowrap; }
 
-      <article class="product-card" data-price="250">
-        <img src="images/orgu-kedi-yatagi.jpg" alt="Örgü Kedi Yatağı" loading="lazy">
-        <h3>Örgü Kedi Yatağı</h3>
-        <p>Minik dostlara özel konfor.</p>
-        <div class="price-line">
-          <span class="price">₺250,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-        </div>
-      </article>
+/* ========== Cart Panel ========== */
+.cart-panel {
+  position: fixed; top:0; right:-420px; width: 360px; max-width: 90vw; height:100dvh; z-index:60;
+  background:var(--card); box-shadow: -10px 0 30px rgba(0,0,0,.12);
+  display:flex; flex-direction:column; transition: right .3s ease;
+  opacity:0;
+}
+.cart-panel.active { right:0; opacity:1; }
+.cart-header { display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid #eee; }
+.cart-items { list-style:none; padding:0 16px; margin:0; flex:1; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+.cart-items li { display:flex; align-items:center; justify-content:space-between; gap:10px; border:1px solid #eee; padding:10px; border-radius:12px; }
+.cart-items .qty { display:inline-flex; align-items:center; gap:6px; }
+.cart-items button { border:none; background:#f6f6f6; padding:6px 10px; border-radius:10px; cursor:pointer; }
+body.dark .cart-items button { background:#374151; color:#f3f4f6; }
+.cart-footer { padding:16px; border-top:1px solid #eee; display:flex; flex-direction:column; gap:10px; }
+.total-line { display:flex; justify-content:space-between; font-size:18px; margin-bottom:6px; }
+.overlay {
+  position:fixed; inset:0; background: rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:.25s; z-index:55;
+}
+.overlay.active { opacity:1; pointer-events:auto; }
 
-    </div>
-  </section>
+/* ========== Toast Bildirim ========== */
+.toast {
+  position:fixed; bottom:20px; right:-300px;
+  background: linear-gradient(45deg,var(--brand),var(--brand-2));
+  color:#fff; padding:12px 18px; border-radius:12px; box-shadow: var(--shadow);
+  font-weight:600; z-index:100; transition: right .4s ease;
+}
+.toast.show { right:20px; }
 
-  <!-- Hakkımızda -->
-  <section id="hakkimizda" class="about">
-    <div class="container">
-      <h2>Hakkımızda</h2>
-      <p>Yasemin Crochet World: El emeği örgü dünyasına hoş geldiniz! Tüm ürünler sevgiyle örülür.</p>
-    </div>
-  </section>
+/* ========== Bölümler ========== */
+.about, .contact { padding:36px 20px; }
+.container { max-width:1000px; margin:0 auto; }
 
-  <!-- İletişim -->
-  <section id="iletisim" class="contact">
-    <div class="container">
-      <h2>İletişim</h2>
-      <p>Bize Instagram üzerinden ulaşabilirsiniz: <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">@yasemincrochetworld</a></p>
-    </div>
-  </section>
+/* ========== Footer ========== */
+.site-footer { padding:24px 20px; text-align:center; color:var(--muted); }
+.store.etsy:hover { color:#f1641e; }
+/* Ürün görselleri için boyut ve stil */
+.product-card img {
+  width: 100%;
+  height: 250px;        /* Görsel yüksekliği sabitlenir */
+  object-fit: cover;    /* Görsel kırpılarak orantılı görünür */
+  border-radius: 10px;  /* Köşeler yuvarlanır */
+  transition: transform 0.3s ease; /* Hover efekti için */
+}
 
-  <footer class="site-footer">
-    <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
-  </footer>
-</body>
-            </html>
+.product-card img:hover {
+  transform: scale(1.05); /* Üzerine gelince hafif büyütme efekti */
+} /* ======================
+   Ürün Modalı
+====================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background: #fff;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 700px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  margin: 5px 0;
+}
+
+.modal-content strong {
+  display: block;
+  margin: 8px 0;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #333;
+  transition: 0.2s;
+}
+.close-btn:hover {
+  color: #ff4444;
+}
+
+/* ======================
+   Slider
+====================== */
+.slider {
+  position: relative;
+  max-width: 100%;
+  margin: 15px 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.slider img {
+  display: none;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.slider img.active {
+  display: block;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  user-select: none;
+  transform: translateY(-50%);
+  transition: background 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* Animasyon */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
