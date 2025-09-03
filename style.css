@@ -304,4 +304,42 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
     opacity: 1;
     transform: scale(1);
   }
+} /* Puanlama (Rating) */
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+.rating i {
+  color: #ccc;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+.rating i.active {
+  color: gold;
+}
+
+/* Yorumlar */
+.comments { margin-top: 10px; }
+.comment-box.hidden { display: none; }
+.comment-box textarea {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 6px;
+}
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+}
+.comment-list li {
+  background: #f9f9f9;
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
