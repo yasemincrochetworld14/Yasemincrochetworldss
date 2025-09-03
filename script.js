@@ -1,4 +1,4 @@
-  // Yıl bilgisini footer'a yaz
+// Yıl bilgisini footer'a yaz
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // Hamburger menü
@@ -131,73 +131,4 @@ checkoutBtn.addEventListener('click', () => {
     return; 
   }
   window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
-});
-// ========== Puanlama (Rating) ==========
-document.querySelectorAll('.rating').forEach(rating => {
-  const stars = rating.querySelectorAll('i');
-  const productId = rating.dataset.id;
-  let saved = localStorage.getItem('rating-' + productId);
-  if (saved) {
-    for (let i = 0; i < saved; i++) stars[i].classList.add('active');
-  }
-  stars.forEach((star, idx) => {
-    star.addEventListener('click', () => {
-      stars.forEach(s => s.classList.remove('active'));
-      for (let i = 0; i <= idx; i++) stars[i].classList.add('active');
-      localStorage.setItem('rating-' + productId, idx + 1);
-    });
-  });
-});
-
-// ========== Yorumlar ==========
-document.querySelectorAll('.comments').forEach(section => {
-  const btn = section.querySelector('.comment-toggle');
-  const box = section.querySelector('.comment-box');
-  const textarea = section.querySelector('textarea');
-  const sendBtn = section.querySelector('.send-comment');
-  const list = section.querySelector('.comment-list');
-  const productId = section.dataset.id;
-
-  // Kayıtlı yorumları yükle
-  let savedComments = JSON.parse(localStorage.getItem('comments-' + productId) || '[]');
-  savedComments.forEach(c => {
-    const li = document.createElement('li');
-    li.textContent = c;
-    list.appendChild(li);
-  });
-
-  btn.addEventListener('click', () => box.classList.toggle('hidden'));
-sendBtn.addEventListener('click', () => {
-  if (textarea.value.trim()) {
-    const li = document.createElement('li');
-    li.textContent = textarea.value.trim();
-
-    // Silme butonu ekle
-    const delBtn = document.createElement('button');
-    delBtn.textContent = "×";
-    delBtn.classList.add("delete-comment");
-    li.appendChild(delBtn);
-
-    list.appendChild(li);
-
-    savedComments.push(textarea.value.trim());
-    localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
-
-    textarea.value = '';
-    box.classList.add('hidden');
-
-    // Silme işlemi (BUNU if bloğunun İÇİNDE bırakıyoruz)
-    delBtn.addEventListener('click', () => {
-      li.remove();
-      savedComments = savedComments.filter(c => c !== li.textContent.replace("×","").trim());
-      localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
-    });
-  }
-});
-
-    
-});
-});
-    }
-  });
 });
