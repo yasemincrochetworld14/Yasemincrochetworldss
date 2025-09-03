@@ -167,18 +167,37 @@ document.querySelectorAll('.comments').forEach(section => {
   });
 
   btn.addEventListener('click', () => box.classList.toggle('hidden'));
+sendBtn.addEventListener('click', () => {
+  if (textarea.value.trim()) {
+    const li = document.createElement('li');
+    li.textContent = textarea.value.trim();
 
-  sendBtn.addEventListener('click', () => {
-    if (textarea.value.trim()) {
-      const li = document.createElement('li');
-      li.textContent = textarea.value.trim();
-      list.appendChild(li);
+    // Silme butonu ekle
+    const delBtn = document.createElement('button');
+    delBtn.textContent = "×";
+    delBtn.classList.add("delete-comment");
+    li.appendChild(delBtn);
 
-      savedComments.push(textarea.value.trim());
+    list.appendChild(li);
+
+    savedComments.push(textarea.value.trim());
+    localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
+
+    textarea.value = '';
+    box.classList.add('hidden');
+
+    // Silme işlemi (BUNU if bloğunun İÇİNDE bırakıyoruz)
+    delBtn.addEventListener('click', () => {
+      li.remove();
+      savedComments = savedComments.filter(c => c !== li.textContent.replace("×","").trim());
       localStorage.setItem('comments-' + productId, JSON.stringify(savedComments));
+    });
+  }
+});
 
-      textarea.value = '';
-      box.classList.add('hidden');
+    
+});
+});
     }
   });
 });
