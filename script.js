@@ -132,3 +132,38 @@ checkoutBtn.addEventListener('click', () => {
   }
   window.open("https://www.shopier.com/yasemincrochetworld", "_blank");
 });
+// ========== Slider ==========
+document.addEventListener("DOMContentLoaded", function () {
+  const sliders = document.querySelectorAll(".slider");
+
+  sliders.forEach(slider => {
+    let images = slider.querySelectorAll("img");
+    let currentIndex = 0;
+
+    const showImage = (index) => {
+      images.forEach(img => img.classList.remove("active"));
+      images[index].classList.add("active");
+    };
+
+    const prevBtn = slider.querySelector(".prev");
+    const nextBtn = slider.querySelector(".next");
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      });
+    }
+
+    // Otomatik geçiş (opsiyonel)
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }, 4000);
+  });
+});
