@@ -292,22 +292,3 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 .modal-slider .next { right: 10px; }
 
 /* ✅ Masaüstü için buton hizalama düzeltmesi */
-@media (min-width: 768px) {
-  .price-line {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* fiyat sola, butonlar sağa */
-    gap: 10px;
-  }
-
-  .price-line .price {
-    margin-right: auto; /* fiyat sola yapışsın */
-  }
-
-  .price-line .btn {
-    margin-left: 10px;
-    min-width: 140px;
-    text-align: center;
-  }
-}
-
