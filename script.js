@@ -244,39 +244,25 @@ favOverlay.addEventListener("click", () => {
   favPanel.classList.remove("active");
   favOverlay.classList.remove("active");
 });
-
 // Ürünleri favorilere ekleme
 document.querySelectorAll(".product-card").forEach(card => {
-  const favBtn = document.createElement("button");
-  favBtn.className = "fav-btn";
-  favBtn.innerHTML = "❤";
-
-  card.querySelector(".price-line").appendChild(favBtn);
+  const favBtn = card.querySelector(".fav-btn"); // artık mevcut butonu alıyoruz
+  if (!favBtn) return;
 
   favBtn.addEventListener("click", () => {
     const title = card.querySelector("h3").innerText;
 
     if (favorites.includes(title)) {
-      // Favoriden çıkar
       favorites = favorites.filter(item => item !== title);
       favBtn.classList.remove("active");
+      favBtn.innerHTML = "🤍"; // boş kalp
     } else {
-      // Favoriye ekle
       favorites.push(title);
       favBtn.classList.add("active");
+      favBtn.innerHTML = "❤️"; // dolu kalp
     }
 
     updateFavorites();
   });
 });
 
-// Favoriler listesini güncelle
-function updateFavorites() {
-  favList.innerHTML = "";
-  favorites.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    favList.appendChild(li);
-  });
-  favCount.textContent = favorites.length;
-}
