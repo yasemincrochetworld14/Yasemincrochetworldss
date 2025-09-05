@@ -390,3 +390,25 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
     font-size: 12px;
   }
   }
+/* Masaüstü için Detayları Gör butonu hizalama */
+.price-line {
+  display: flex;
+  flex-wrap: wrap; /* Taşma olursa alt satıra iner */
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Fiyat ve butonlar için düzenleme */
+.price-line .price {
+  flex: 1 1 auto;
+}
+
+.price-line .btn,
+.price-line .btn-details {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
