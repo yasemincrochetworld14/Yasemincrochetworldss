@@ -284,3 +284,62 @@ function closeFavorites() {
 
 closeFav.addEventListener("click", closeFavorites);
 favOverlay.addEventListener("click", closeFavorites);
+// ================= FAVORİLER =================
+const favToggle = document.getElementById("favToggle");
+const favoritesPanel = document.querySelector(".favorites-panel");
+const favOverlay = document.querySelector(".fav-overlay");
+const closeFav = document.querySelector(".close-fav");
+const favCount = document.querySelector(".fav-count");
+const favoritesList = document.querySelector(".favorites-list");
+
+let favorites = [];
+
+// Panel aç/kapat
+favToggle.addEventListener("click", () => {
+  favoritesPanel.classList.add("active");
+  favOverlay.classList.add("active");
+});
+
+closeFav.addEventListener("click", () => {
+  favoritesPanel.classList.remove("active");
+  favOverlay.classList.remove("active");
+});
+
+favOverlay.addEventListener("click", () => {
+  favoritesPanel.classList.remove("active");
+  favOverlay.classList.remove("active");
+});
+
+// Ürünlere kalp butonu ekleme
+document.querySelectorAll(".product-card").forEach(card => {
+  const favBtn = document.createElement("button");
+  favBtn.classList.add("fav-btn");
+  favBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+
+  const priceLine = card.querySelector(".price-line");
+  if (priceLine) {
+    priceLine.appendChild(favBtn);
+  }
+
+  favBtn.addEventListener("click", () => {
+    const productName = card.querySelector("h3").innerText;
+
+    if (!favorites.includes(productName)) {
+      favorites.push(productName);
+
+      const li = document.createElement("li");
+      li.textContent = productName;
+      favoritesList.appendChild(li);
+
+      favBtn.classList.add("active");
+    } else {
+      favorites = favorites.filter(item => item !== productName);
+      [...favoritesList.children].forEach(li => {
+        if (li.textContent === productName) li.remove();
+      });
+      favBtn.classList.remove("active");
+    }
+
+    favCount.textContent = favorites.length;
+  });
+});
