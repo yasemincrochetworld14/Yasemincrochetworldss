@@ -265,4 +265,12 @@ document.querySelectorAll(".product-card").forEach(card => {
     updateFavorites();
   });
 });
-
+function updateFavorites() {
+  favList.innerHTML = ""; // önce listeyi sıfırla
+  favorites.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    favList.appendChild(li);
+  });
+  favCount.textContent = favorites.length; // favori sayısını güncelle
+}
