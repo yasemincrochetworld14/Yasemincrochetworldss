@@ -310,3 +310,20 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
     text-align: center;
   }
 }
+@media (min-width: 992px) {
+  .price-line {
+    display: grid !important;
+    grid-template-columns: auto 1fr 1fr; /* fiyat + 2 buton */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .price-line .price {
+    justify-self: start;
+  }
+
+  .price-line .btn {
+    justify-self: end;
+    min-width: 140px;
+  }
+  }
