@@ -167,3 +167,65 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
   });
 });
+// ========== Ürün Detay Modal ==========
+const modal = document.getElementById("productModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalPrice = document.getElementById("modalPrice");
+const slidesContainer = modal.querySelector(".slides");
+const modalPrev = modal.querySelector(".prev");
+const modalNext = modal.querySelector(".next");
+const closeBtn = modal.querySelector(".close-btn");
+
+let modalImages = [];
+let currentSlide = 0;
+
+// Her ürün için "Detayları Gör" butonuna olay bağla
+document.querySelectorAll(".product-card").forEach(card => {
+  const detailsBtn = card.querySelector(".details-btn");
+  if (!detailsBtn) return;
+
+  detailsBtn.addEventListener("click", () => {
+    // Başlık, açıklama, fiyat
+    modalTitle.textContent = card.querySelector("h3").textContent.trim();
+    modalDesc.textContent  = card.querySelector("p").textContent.trim();
+    modalPrice.textContent = card.querySelector(".price").textContent.trim();
+
+    // Modal slider görselleri
+    slidesContainer.innerHTML = "";
+    modalImages = card.querySelectorAll(".slider img");
+    modalImages.forEach((img, i) => {
+      const clone = img.cloneNode();
+      clone.classList.toggle("active", i === 0);
+      slidesContainer.appendChild(clone);
+    });
+
+    currentSlide = 0;
+    modal.classList.add("active");
+  });
+});
+
+// Modal kapatma
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+}
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) modal.classList.remove("active");
+});
+
+// Modal slider kontrol
+function showSlide(n) {
+  const imgs = slidesContainer.querySelectorAll("img");
+  imgs.forEach(img => img.classList.remove("active"));
+  imgs[n].classList.add("active");
+}
+modalPrev.addEventListener("click", () => {
+  if (!modalImages.length) return;
+  currentSlide = (currentSlide - 1 + modalImages.length) % modalImages.length;
+  showSlide(currentSlide);
+});
+modalNext.addEventListener("click", () => {
+  if (!modalImages.length) return;
+  currentSlide = (currentSlide + 1) % modalImages.length;
+  showSlide(currentSlide);
+});
