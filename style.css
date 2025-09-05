@@ -290,10 +290,3 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 }
 .modal-slider .prev { left: 10px; }
 .modal-slider .next { right: 10px; }
-
-/* ✅ Masaüstü için buton hizalama düzeltmesi */
-.details-btn {
-  font-size: 13px;       /* yazıyı küçült */
-  padding: 8px 12px;     /* iç boşlukları küçült */
-  min-width: 110px;      /* sabit minimum genişlik */
-}
