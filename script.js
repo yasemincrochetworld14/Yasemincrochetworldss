@@ -167,11 +167,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
   });
 });
-// ========== Modal Aç/Kapa ==========
+// ================== Modal Aç/Kapat ==================
 document.querySelectorAll(".btn-details").forEach(button => {
   button.addEventListener("click", () => {
     const modalId = button.getAttribute("data-modal");
-    document.getElementById(modalId).style.display = "block";
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = "flex";
   });
 });
 
@@ -181,36 +182,35 @@ document.querySelectorAll(".modal .close").forEach(closeBtn => {
   });
 });
 
-// Dışına tıklayınca kapatma
-window.addEventListener("click", (e) => {
+window.addEventListener("click", e => {
   if (e.target.classList.contains("modal")) {
     e.target.style.display = "none";
   }
 });
 
-// ========== Modal Slider ==========
+// ================== Modal Slider ==================
 document.querySelectorAll(".modal").forEach(modal => {
   const slides = modal.querySelectorAll(".modal-slider img");
-  let currentSlide = 0;
+  let index = 0;
 
-  const prevBtn = modal.querySelector(".modal-prev");
-  const nextBtn = modal.querySelector(".modal-next");
+  const showSlide = (i) => {
+    slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+  };
 
-  if (slides.length > 0) {
-    slides[0].classList.add("active");
+  const prev = modal.querySelector(".modal-prev");
+  const next = modal.querySelector(".modal-next");
 
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener("click", () => {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        slides[currentSlide].classList.add("active");
-      });
+  if (prev && next) {
+    prev.addEventListener("click", () => {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    });
 
-      nextBtn.addEventListener("click", () => {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add("active");
-      });
-    }
+    next.addEventListener("click", () => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    });
   }
+
+  showSlide(index);
 });
