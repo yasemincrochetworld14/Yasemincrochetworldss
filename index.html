@@ -131,7 +131,8 @@
   <p>Sıcak ve şık battaniye.</p>
   <div class="price-line">
     <span class="price">₺300,00</span>
-    <button class="btn add-to-cart">Sepete Ekle</button>
+    <button class="btn add-to-cart">Sepete Ekle</button> 
+    <button class="btn details-btn">Detayları Gör</button>
   </div>
       </article>
 
@@ -288,6 +289,20 @@
 
   <footer class="site-footer">
     <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
-  </footer>
+  </footer> 
+  <!-- Ürün Detay Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" aria-label="Kapat">&times;</span>
+    <div class="modal-slider">
+      <span class="prev">&#10094;</span>
+      <div class="slides"></div>
+      <span class="next">&#10095;</span>
+    </div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <p class="modal-price"><strong id="modalPrice"></strong></p>
+  </div>
+</div>
 </body>
             </html>
