@@ -319,3 +319,18 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 }
 .modal-slider .prev { left: 10px; }
 .modal-slider .next { right: 10px; }
+@media (min-width: 768px) {
+  .price-line {
+    display: flex;
+    align-items: center;
+  }
+
+  .price-line .price {
+    margin-right: auto; /* fiyat sola sabit */
+  }
+
+  .price-line .btn {
+    margin-left: 10px; /* butonlar arasında boşluk */
+    min-width: 140px;  /* masaüstünde buton genişliği sabit */
+  }
+}
