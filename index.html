@@ -34,11 +34,6 @@
       <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
         <i class="fa-solid fa-bag-shopping"></i>
         <span class="badge" id="cartCount">0</span>
-      </button> 
-      <!-- Favoriler Toggle (sadece ikon) -->
-<button class="icon-btn" id="favToggle" aria-label="Favoriler">
-  <i class="fa-solid fa-heart"></i>
-</button>
       </button>
       <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
         <i class="fa-solid fa-bars"></i>
@@ -64,7 +59,17 @@
     </div>
   </aside>
   <div id="overlay" class="overlay"></div>
-
+<!-- Favoriler Paneli -->
+<div class="favorites-panel">
+  <div class="favorites-header">
+    <h3>Favorilerim</h3>
+    <span class="close-fav">&times;</span>
+  </div>
+  <ul class="favorites-list"></ul>
+</div>
+<div class="fav-overlay"></div>
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
 
   <!-- Hero -->
   <section id="hero" class="hero">
@@ -336,4 +341,4 @@
   </div>
 </div>
 </body>
-  </html>
+        </html>
