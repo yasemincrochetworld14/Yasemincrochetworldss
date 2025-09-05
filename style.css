@@ -292,6 +292,14 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 .modal-slider .next { right: 10px; }
 
 /* ✅ Masaüstü için buton hizalama düzeltmesi */
+/* Detayları Gör butonunu küçültme */
+.details-btn {
+  font-size: 13px;       /* yazıyı küçült */
+  padding: 8px 12px;     /* iç boşlukları küçült */
+  min-width: 110px;      /* sabit minimum genişlik */
+}
+
+/* Masaüstünde hizalama düzeltme */
 @media (min-width: 992px) {
   .price-line {
     display: flex !important;
@@ -305,9 +313,7 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   .price-line .add-to-cart,
   .price-line .details-btn {
     display: inline-flex !important;
-    margin-left: 10px !important;
-    min-width: 140px !important;
     justify-content: center;
-    text-align: center;
+    margin-left: 10px;
   }
 }
