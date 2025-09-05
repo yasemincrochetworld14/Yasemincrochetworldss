@@ -229,3 +229,58 @@ modalNext.addEventListener("click", () => {
   currentSlide = (currentSlide + 1) % modalImages.length;
   showSlide(currentSlide);
 });
+/* ===== Favoriler ===== */
+const favButtons = document.querySelectorAll(".fav-btn");
+const favoritesPanel = document.querySelector(".favorites-panel");
+const favoritesList = document.querySelector(".favorites-list");
+const favOverlay = document.querySelector(".fav-overlay");
+const closeFav = document.querySelector(".close-fav");
+
+let favorites = [];
+
+// Kalp butonuna tıklayınca çalışır
+favButtons.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const productCard = e.target.closest(".product-card");
+    const productName = productCard.querySelector("h3").textContent;
+
+    // Favoriye ekleme / çıkarma
+    if (!favorites.includes(productName)) {
+      favorites.push(productName);
+      btn.classList.add("active");
+      btn.textContent = "❤️";
+    } else {
+      favorites = favorites.filter(item => item !== productName);
+      btn.classList.remove("active");
+      btn.textContent = "🤍";
+    }
+
+    renderFavorites();
+    openFavorites();
+  });
+});
+
+// Favoriler listesini ekrana bas
+function renderFavorites() {
+  favoritesList.innerHTML = "";
+  favorites.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    favoritesList.appendChild(li);
+  });
+}
+
+// Panel aç
+function openFavorites() {
+  favoritesPanel.classList.add("active");
+  favOverlay.classList.add("active");
+}
+
+// Panel kapat
+function closeFavorites() {
+  favoritesPanel.classList.remove("active");
+  favOverlay.classList.remove("active");
+}
+
+closeFav.addEventListener("click", closeFavorites);
+favOverlay.addEventListener("click", closeFavorites);
