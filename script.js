@@ -167,50 +167,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
   });
 });
-// ================== Modal Aç/Kapat ==================
-document.querySelectorAll(".btn-details").forEach(button => {
-  button.addEventListener("click", () => {
-    const modalId = button.getAttribute("data-modal");
-    const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = "flex";
-  });
-});
-
-document.querySelectorAll(".modal .close").forEach(closeBtn => {
-  closeBtn.addEventListener("click", () => {
-    closeBtn.closest(".modal").style.display = "none";
-  });
-});
-
-window.addEventListener("click", e => {
-  if (e.target.classList.contains("modal")) {
-    e.target.style.display = "none";
-  }
-});
-
-// ================== Modal Slider ==================
-document.querySelectorAll(".modal").forEach(modal => {
-  const slides = modal.querySelectorAll(".modal-slider img");
-  let index = 0;
-
-  const showSlide = (i) => {
-    slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
-  };
-
-  const prev = modal.querySelector(".modal-prev");
-  const next = modal.querySelector(".modal-next");
-
-  if (prev && next) {
-    prev.addEventListener("click", () => {
-      index = (index - 1 + slides.length) % slides.length;
-      showSlide(index);
+// ========== Modal Aç/Kapat + Modal Slider ==========
+document.addEventListener("DOMContentLoaded", function () {
+  // Modal açma
+  document.querySelectorAll(".btn-details").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.dataset.modal;
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = "block";
+        modal.setAttribute("aria-hidden", "false");
+      }
     });
+  });
 
-    next.addEventListener("click", () => {
-      index = (index + 1) % slides.length;
-      showSlide(index);
+  // Modal kapama
+  document.querySelectorAll(".modal .close").forEach(closeBtn => {
+    closeBtn.addEventListener("click", () => {
+      closeBtn.closest(".modal").style.display = "none";
     });
-  }
+  });
 
-  showSlide(index);
+  // Modal dışında tıklayınca kapatma
+  window.addEventListener("click", (e) => {
+    document.querySelectorAll(".modal").forEach(modal => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+
+  // Modal içi slider
+  document.querySelectorAll(".modal").forEach(modal => {
+    let images = modal.querySelectorAll(".modal-slider img");
+    let currentIndex = 0;
+
+    const showImage = (index) => {
+      images.forEach(img => img.classList.remove("active"));
+      images[index].classList.add("active");
+    };
+
+    const prevBtn = modal.querySelector(".modal-prev");
+    const nextBtn = modal.querySelector(".modal-next");
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      });
+    }
+  });
 });
