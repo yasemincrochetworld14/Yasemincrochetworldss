@@ -12,44 +12,35 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
-  <a class="brand" href="https://www.instagram.com/yasemincrochetworld" target="_blank" rel="noopener" title="Mağazam">
-    <img src="logo.png" alt="Yasemin Crochet World Logo" class="brand-logo" />
-    <span class="brand-name">Yasemin Crochet World</span>
-  </a>
+    <a class="brand" href="https://www.instagram.com/yasemincrochetworld" target="_blank" rel="noopener" title="Mağazama git">
+      <img src="logo.png" alt="Yasemin Crochet World" class="brand-logo" />
+      <span class="brand-name">Yasemin Crochet World</span>
+    </a>
 
-  <nav class="main-nav" id="menu">
-    <a href="#hero">Ana Sayfa</a>
-    <a href="#kategoriler">Kategoriler</a>
-    <a href="#magazalar">Mağazalar</a>
-    <a href="#hakkimizda">Hakkımızda</a>
-    <a href="#iletisim">İletişim</a>
-  </nav>
+    <nav class="main-nav" id="menu">
+      <a href="#hero">Ana Sayfa</a>
+      <a href="#kategoriler">Kategoriler</a>
+      <a href="#magazalar">Mağazalar</a>
+      <a href="#hakkimizda">Hakkımızda</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
 
-  <div class="header-actions">
-    <!-- Dark Mode Toggle -->
-    <button class="icon-btn" id="darkModeToggle" aria-label="Dark Mode">
-      <i class="fa-solid fa-moon"></i>
-    </button>
-
-    <!-- Cart Toggle -->
-    <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç">
-      <i class="fa-solid fa-bag-shopping"></i>
-      <span class="cart-count">0</span>
-    </button>
-
-    <!-- Favoriler Toggle -->
-    <button class="icon-btn fav-toggle" id="favToggle" aria-label="Favorileri Aç">
-      <i class="fa-solid fa-heart"></i>
-      <span class="fav-count">0</span>
-    </button>
-
-    <!-- Menu Toggle -->
-    <button class="icon-btn hide-desktop" id="menuToggle" aria-label="Menüyü Aç">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="darkToggle" aria-label="Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button class="icon-btn" id="cartToggle" aria-label="Sepeti Aç/Kapat">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="icon-btn hide-desktop" id="hamburger" aria-label="Menüyü Aç/Kapat">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
   </header>
+
   <!-- Slide Cart Panel -->
   <aside id="cartPanel" class="cart-panel" aria-hidden="true">
     <div class="cart-header">
@@ -350,4 +341,4 @@
   </div>
 </div>
 </body>
-        </html>
+  </html>
