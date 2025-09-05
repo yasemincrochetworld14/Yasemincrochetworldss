@@ -114,26 +114,50 @@
     <h2>Kategoriler</h2>
     <div class="product-grid">
       <article class="product-card" data-price="300">
-  <!-- Slider başlangıç -->
+  <!-- Slider -->
   <div class="slider">
     <img src="images/battaniye1.jpg" alt="Battaniye 1" class="active">
     <img src="images/battaniye2.jpg" alt="Battaniye 2">
     <img src="images/battaniye3.jpg" alt="Battaniye 3">
     <img src="images/battaniye4.jpg" alt="Battaniye 4">
     <img src="images/battaniye5.jpg" alt="Battaniye 5">
-
-    <span class="prev">&#10094;</span>
-    <span class="next">&#10095;</span>
+    <span class="prev">❮</span>
+    <span class="next">❯</span>
   </div>
-  <!-- Slider bitiş -->
 
   <h3>Örgü Battaniye</h3>
   <p>Sıcak ve şık battaniye.</p>
+
   <div class="price-line">
     <span class="price">₺300,00</span>
     <button class="btn add-to-cart">Sepete Ekle</button>
+    <button class="btn-details" data-modal="modal-battaniye">Detayları Gör</button>
   </div>
-      </article>
+</article>
+
+<!-- Modal -->
+<div id="modal-battaniye" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Örgü Battaniye</h2>
+
+    <!-- Modal içi slider -->
+    <div class="modal-slider">
+      <img src="images/battaniye1.jpg" alt="Battaniye 1" class="active">
+      <img src="images/battaniye2.jpg" alt="Battaniye 2">
+      <img src="images/battaniye3.jpg" alt="Battaniye 3">
+    </div>
+    <span class="modal-prev">❮</span>
+    <span class="modal-next">❯</span>
+
+    <p>Bu battaniye %100 pamuktan üretilmiştir, yumuşak ve sıcaktır.</p>
+    <ul>
+      <li>Ölçü: 150x200 cm</li>
+      <li>Renk: Krem / Gri</li>
+      <li>Malzeme: %100 Pamuk</li>
+    </ul>
+  </div>
+</div>
 
       
 <article class="product-card" data-price="200">
