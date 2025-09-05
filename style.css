@@ -342,3 +342,51 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+/* ================== Detayları Gör Butonu Düzeltme ================== */
+
+/* price-line hizalama */
+.price-line {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+/* Sepete Ekle ve Detayları Gör butonları */
+.price-line > .btn,
+.price-line > .btn-details {
+  flex: 0 0 auto;
+  margin-left: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Detayları Gör butonu görünümü */
+.price-line > .btn-details {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.price-line > .btn-details:hover {
+  background: linear-gradient(135deg, #ff6f61, #fbc2eb);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Küçük ekran uyumu */
+@media (max-width: 520px) {
+  .price-line { gap: 8px; }
+  .price-line > .btn,
+  .price-line > .btn-details {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  }
