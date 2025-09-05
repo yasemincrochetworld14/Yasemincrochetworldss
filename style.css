@@ -290,3 +290,29 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 }
 .modal-slider .prev { left: 10px; }
 .modal-slider .next { right: 10px; }
+/* ================= Ürün Kartı - Fiyat ve Butonlar ================= */
+.price-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;              /* fiyat ve butonlar arasında boşluk */
+  flex-wrap: wrap;       /* mobilde satır kaydırabilsin */
+}
+
+.price-line .price {
+  flex: 0 0 auto;
+  font-weight: 600;
+}
+
+/* Sepete Ekle butonu satırda büyüyebilir */
+.price-line .add-to-cart {
+  flex: 1 1 auto;
+}
+
+/* Detayları Gör sabit küçük boyutta kalsın */
+.price-line .details-btn {
+  flex: 0 0 auto;
+  width: auto !important;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 6px 12px;
+}
