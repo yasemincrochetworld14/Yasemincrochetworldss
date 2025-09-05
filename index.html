@@ -95,24 +95,25 @@
     </div>
   </section>  <!-- Ürün Kategorileri -->  <section id="kategoriler" class="products">
     <h2>Kategoriler</h2>
-    <div class="product-grid">
-      <!-- Örgü Battaniye -->
-      <article class="product-card" data-price="300">
-        <div class="slider">
-          <img src="images/battaniye1.jpg" alt="Battaniye 1" class="active">
-          <img src="images/battaniye2.jpg" alt="Battaniye 2">
-          <img src="images/battaniye3.jpg" alt="Battaniye 3">
-          <span class="prev">❮</span>
-          <span class="next">❯</span>
-        </div>
-        <h3>Örgü Battaniye</h3>
-        <p>Sıcak ve şık battaniye.</p>
-        <div class="price-line">
-          <span class="price">₺300,00</span>
-          <button class="btn add-to-cart">Sepete Ekle</button>
-          <button class="btn-details" data-modal="modal-battaniye">Detayları Gör</button>
-        </div>
-      </article><!-- Modal: Battaniye -->
+    <div class="product-grid"><!-- Örgü Battaniye -->
+  <article class="product-card" data-price="300">
+    <div class="slider">
+      <img src="images/battaniye1.jpg" alt="Battaniye 1" class="active">
+      <img src="images/battaniye2.jpg" alt="Battaniye 2">
+      <img src="images/battaniye3.jpg" alt="Battaniye 3">
+      <span class="prev">❮</span>
+      <span class="next">❯</span>
+    </div>
+    <h3>Örgü Battaniye</h3>
+    <p>Sıcak ve şık battaniye.</p>
+    <div class="price-line">
+      <span class="price">₺300,00</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn-details" data-modal="modal-battaniye">Detayları Gör</button>
+    </div>
+  </article>
+
+  <!-- Modal: Battaniye -->
   <div id="modal-battaniye" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -172,23 +173,136 @@
     </div>
   </div>
 
-  <!-- Diğer ürünler aynı mantıkla: Yelek, Bot, Kırlent, Yastık, Kedi Yatağı -->
-  <!-- Burada da her ürünün altına buton ve hemen sonrasına modal eklenmiş olacak -->
-
-</div>
-
-  </section>  <!-- Hakkımızda -->  <section id="hakkimizda" class="about">
-    <div class="container">
-      <h2>Hakkımızda</h2>
-      <p>Yasemin Crochet World: El emeği örgü dünyasına hoş geldiniz! Tüm ürünler sevgiyle örülür.</p>
+  <!-- Örgü Bebek Yeleği -->
+  <article class="product-card" data-price="180">
+    <div class="slider">
+      <img src="images/bebek-yelek1.jpg" class="active">
+      <img src="images/bebek-yelek2.jpg">
+      <img src="images/bebek-yelek3.jpg">
+      <span class="prev">❮</span>
+      <span class="next">❯</span>
     </div>
-  </section>  <!-- İletişim -->  <section id="iletisim" class="contact">
-    <div class="container">
-      <h2>İletişim</h2>
-      <p>Bize Instagram üzerinden ulaşabilirsiniz: <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">@yasemincrochetworld</a></p>
+    <h3>Örgü Bebek Yeleği</h3>
+    <p>0-4 yaş için sevimli örgü bebek yelekleri.</p>
+    <div class="price-line">
+      <span class="price">₺180,00</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn-details" data-modal="modal-bebek-yelek">Detayları Gör</button>
     </div>
-  </section>  <footer class="site-footer">
-    <p>© <span id="year"></span> Yasemin Crochet World • Tüm Hakları Saklıdır.</p>
-  </footer>
-</body>
-  </html>
+  </article>
+
+  <!-- Modal: Bebek Yeleği -->
+  <div id="modal-bebek-yelek" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Örgü Bebek Yeleği</h2>
+      <div class="modal-slider">
+        <img src="images/bebek-yelek1.jpg" class="active">
+        <img src="images/bebek-yelek2.jpg">
+        <img src="images/bebek-yelek3.jpg">
+      </div>
+      <span class="modal-prev">❮</span>
+      <span class="modal-next">❯</span>
+      <p>Yumuşak ipten yapılmış, miniklerin rahatça kullanabileceği örgü yelekler.</p>
+      <ul>
+        <li>Yaş: 0-4</li>
+        <li>Renk: Karışık</li>
+        <li>Malzeme: Anti-alerjik iplik</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Örgü Bot -->
+  <article class="product-card" data-price="150">
+    <div class="slider">
+      <img src="images/bot1.jpg" class="active">
+      <img src="images/bot2.jpg">
+      <img src="images/bot3.jpg">
+      <span class="prev">❮</span>
+      <span class="next">❯</span>
+    </div>
+    <h3>Örgü Botlar</h3>
+    <p>Kış aylarında sıcacık tutar.</p>
+    <div class="price-line">
+      <span class="price">₺150,00</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn-details" data-modal="modal-bot">Detayları Gör</button>
+    </div>
+  </article>
+
+  <!-- Modal: Bot -->
+  <div id="modal-bot" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Örgü Botlar</h2>
+      <div class="modal-slider">
+        <img src="images/bot1.jpg" class="active">
+        <img src="images/bot2.jpg">
+        <img src="images/bot3.jpg">
+      </div>
+      <span class="modal-prev">❮</span>
+      <span class="modal-next">❯</span>
+      <p>Soğuk havalarda ayakları sıcak tutan el yapımı örgü botlar.</p>
+      <ul>
+        <li>Beden: Standart</li>
+        <li>Renk: Çeşitli</li>
+        <li>Malzeme: Pamuk + Yün</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Örgü Kırlent -->
+  <article class="product-card" data-price="120">
+    <div class="slider">
+      <img src="images/kirlent1.jpg" class="active">
+      <img src="images/kirlent2.jpg">
+      <img src="images/kirlent3.jpg">
+      <span class="prev">❮</span>
+      <span class="next">❯</span>
+    </div>
+    <h3>Örgü Kırlent</h3>
+    <p>Renkli ve dekoratif kırlent.</p>
+    <div class="price-line">
+      <span class="price">₺120,00</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn-details" data-modal="modal-kirlent">Detayları Gör</button>
+    </div>
+  </article>
+
+  <!-- Modal: Kırlent -->
+  <div id="modal-kirlent" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Örgü Kırlent</h2>
+      <div class="modal-slider">
+        <img src="images/kirlent1.jpg" class="active">
+        <img src="images/kirlent2.jpg">
+        <img src="images/kirlent3.jpg">
+      </div>
+      <span class="modal-prev">❮</span>
+      <span class="modal-next">❯</span>
+      <p>Ev dekorasyonunuzu renklendirecek el emeği kırlentler.</p>
+      <ul>
+        <li>Ölçü: 40x40 cm</li>
+        <li>Renk: Çeşitli</li>
+        <li>Malzeme: Pamuk</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Örgü Yastık -->
+  <article class="product-card" data-price="100">
+    <div class="slider">
+      <img src="images/yastik1.jpg" class="active">
+      <img src="images/yastik2.jpg">
+      <img src="images/yastik3.jpg">
+      <span class="prev">❮</span>
+      <span class="next">❯</span>
+    </div>
+    <h3>Örgü Yastık</h3>
+    <p>Şık ve konforlu yastık tasarımı.</p>
+    <div class="price-line">
+      <span class="price">₺100,00</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn-details" data-modal="modal-yastik">Det
+
