@@ -224,32 +224,35 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 .slider img.active {
   display: block;
 }
-.prev, .next {
+
+.prev,
+.next {
+  cursor: pointer;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
   font-size: 18px;
-  width: 20px;
-  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  z-index: 10;
+  user-select: none;
+  transform: translateY(-50%);
+  transition: background 0.3s;
 }
 
-.prev:hover, .next:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: scale(1.1);
+.prev:hover,
+.next:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
-.prev { left: 12px; }
-.next { right: 12px; }
+.prev {
+  left: 10px;
+}
 
+.next {
+  right: 10px;
+}
 
 /* Animasyon */
 @keyframes fadeIn {
@@ -262,7 +265,7 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
     transform: scale(1);
   }
 }
-/* Modal genel */
+/* ================== Modal Tasarımı ================== */
 .modal {
   display: none;
   position: fixed;
@@ -271,23 +274,41 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
 }
 
-/* Modal kutusu */
 .modal-content {
   background: #fff;
-  margin: 6% auto;
+  border-radius: 14px;
   padding: 20px;
-  border-radius: 12px;
-  max-width: 420px;
+  max-width: 480px;
+  width: 90%;
   position: relative;
   animation: zoomIn 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
-/* Modal kapatma */
+.modal-content h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.modal-content p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.modal-content ul {
+  margin: 10px 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
 .close {
   position: absolute;
   top: 10px;
@@ -297,32 +318,36 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   color: #666;
 }
 
-.close:hover { color: #000; }
+.close:hover {
+  color: #000;
+}
 
 /* Modal slider */
 .modal-slider {
   position: relative;
-  max-width: 100%;
-  margin: 10px 0;
+  margin: 12px 0;
 }
 
 .modal-slider img {
-  width: 100%;
   display: none;
-  border-radius: 8px;
+  width: 100%;
+  border-radius: 10px;
 }
 
-.modal-slider img.active { display: block; }
+.modal-slider img.active {
+  display: block;
+}
 
-.modal-prev, .modal-next {
+.modal-prev,
+.modal-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(0,0,0,0.5);
   color: #fff;
-  font-size: 20px;
-  width: 30px;
-  height: 30px;
+  font-size: 18px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -330,85 +355,16 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   cursor: pointer;
 }
 
-.modal-prev { left: 5px; }
-.modal-next { right: 5px; }
+.modal-prev { left: 8px; }
+.modal-next { right: 8px; }
 
-.modal-prev:hover, .modal-next:hover {
+.modal-prev:hover,
+.modal-next:hover {
   background: rgba(0,0,0,0.8);
 }
 
 /* Animasyon */
 @keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
+  from { transform: scale(0.85); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
-}
-/* ================== Detayları Gör Butonu Düzeltme ================== */
-
-/* price-line hizalama */
-.price-line {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: nowrap;
-}
-
-/* Sepete Ekle ve Detayları Gör butonları */
-.price-line > .btn,
-.price-line > .btn-details {
-  flex: 0 0 auto;
-  margin-left: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-/* Detayları Gör butonu görünümü */
-.price-line > .btn-details {
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-
-.price-line > .btn-details:hover {
-  background: linear-gradient(135deg, #ff6f61, #fbc2eb);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Küçük ekran uyumu */
-@media (max-width: 520px) {
-  .price-line { gap: 8px; }
-  .price-line > .btn,
-  .price-line > .btn-details {
-    padding: 6px 8px;
-    font-size: 12px;
-  }
-  }
-/* Masaüstü için Detayları Gör butonu hizalama */
-.price-line {
-  display: flex;
-  flex-wrap: wrap; /* Taşma olursa alt satıra iner */
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Fiyat ve butonlar için düzenleme */
-.price-line .price {
-  flex: 1 1 auto;
-}
-
-.price-line .btn,
-.price-line .btn-details {
-  flex: 0 0 auto;
-  white-space: nowrap;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 14px;
 }
