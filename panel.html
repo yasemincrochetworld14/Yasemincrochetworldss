@@ -5,14 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
-    .card { background: #fff; padding: 20px; border-radius: 12px; max-width: 500px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    h2 { text-align: center; }
-    input, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; }
-    button { background: #6c63ff; color: #fff; border: none; cursor: pointer; }
-    button:hover { background: #5848c2; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      background: #faf7ff; 
+      padding: 20px; 
+      color: #333;
+    }
+    .card { 
+      background: #fff; 
+      padding: 25px; 
+      border-radius: 16px; 
+      max-width: 600px; 
+      margin: auto; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    }
+    h2, h3 { 
+      text-align: center; 
+      color: #6c63ff;
+    }
+    input, button { 
+      width: 100%; 
+      padding: 12px; 
+      margin: 8px 0; 
+      border-radius: 10px; 
+      border: 1px solid #ddd; 
+      font-size: 15px;
+    }
+    input:focus { outline: 2px solid #c4b5fd; }
+    button { 
+      background: #a78bfa; 
+      color: #fff; 
+      border: none; 
+      cursor: pointer; 
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    button:hover { background: #7c3aed; }
     .hidden { display: none; }
-    .product { border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 8px; }
+    .product { 
+      border: 1px solid #e5e7eb; 
+      padding: 15px; 
+      margin: 12px 0; 
+      border-radius: 12px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      background: #f9f9ff;
+    }
+    .product img { 
+      width: 70px; 
+      height: 70px; 
+      object-fit: cover; 
+      border-radius: 10px; 
+      border: 1px solid #ddd; 
+    }
+    .product-info { flex: 1; margin-left: 15px; }
+    .btns { display: flex; gap: 8px; }
+    .delete-btn { background: #ef4444; }
+    .delete-btn:hover { background: #dc2626; }
+    .edit-btn { background: #f59e0b; }
+    .edit-btn:hover { background: #d97706; }
   </style>
 </head>
 <body>
@@ -30,11 +82,11 @@
     <h2>Ürün Yönetimi</h2>
     <button onclick="logout()">Çıkış Yap</button>
     <hr>
-    <h3>Yeni Ürün Ekle</h3>
+    <h3 id="formTitle">Yeni Ürün Ekle</h3>
     <input type="text" id="pName" placeholder="Ürün Adı">
     <input type="number" id="pPrice" placeholder="Fiyat">
     <input type="text" id="pImage" placeholder="Resim URL">
-    <button onclick="addProduct()">Ekle</button>
+    <button id="saveBtn" onclick="addProduct()">Ekle</button>
     <hr>
     <h3>Mevcut Ürünler</h3>
     <div id="productList"></div>
@@ -45,17 +97,17 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
       from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } 
       from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
-  authDomain: "yasemincrochetworld.firebaseapp.com",
-  projectId: "yasemincrochetworld",
-  storageBucket: "yasemincrochetworld.appspot.com",
-  messagingSenderId: "875729953548",
-  appId: "1:875729953548:web:7189d80814a81c27475f29"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
+      authDomain: "yasemincrochetworld.firebaseapp.com",
+      projectId: "yasemincrochetworld",
+      storageBucket: "yasemincrochetworld.appspot.com",
+      messagingSenderId: "875729953548",
+      appId: "1:875729953548:web:7189d80814a81c27475f29"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -64,6 +116,11 @@ const firebaseConfig = {
     const loginDiv = document.getElementById("loginDiv");
     const panelDiv = document.getElementById("panelDiv");
     const productList = document.getElementById("productList");
+    const formTitle = document.getElementById("formTitle");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let editMode = false;
+    let editId = null;
 
     async function login() {
       const email = document.getElementById("email").value;
@@ -91,17 +148,45 @@ const firebaseConfig = {
     });
 
     async function addProduct() {
-      const name = document.getElementById("pName").value;
-      const price = document.getElementById("pPrice").value;
-      const image = document.getElementById("pImage").value;
+      const name = document.getElementById("pName").value.trim();
+      const price = document.getElementById("pPrice").value.trim();
+      const image = document.getElementById("pImage").value.trim();
 
       if (!name || !price || !image) {
         alert("Lütfen tüm alanları doldurun!");
         return;
       }
 
-      await addDoc(collection(db, "products"), { name, price, image });
-      loadProducts();
+      try {
+        if (editMode && editId) {
+          // Güncelleme
+          await updateDoc(doc(db, "products", editId), {
+            name, 
+            price: parseFloat(price), 
+            image
+          });
+          editMode = false;
+          editId = null;
+          saveBtn.innerText = "Ekle";
+          formTitle.innerText = "Yeni Ürün Ekle";
+        } else {
+          // Yeni ekleme
+          await addDoc(collection(db, "products"), { 
+            name, 
+            price: parseFloat(price), 
+            image 
+          });
+        }
+
+        // Formu temizle
+        document.getElementById("pName").value = "";
+        document.getElementById("pPrice").value = "";
+        document.getElementById("pImage").value = "";
+        loadProducts();
+
+      } catch (e) {
+        alert("Hata: " + e.message);
+      }
     }
 
     async function loadProducts() {
@@ -112,18 +197,36 @@ const firebaseConfig = {
         const div = document.createElement("div");
         div.className = "product";
         div.innerHTML = `
-          <strong>${data.name}</strong><br>
-          Fiyat: ${data.price} ₺<br>
-          <img src="${data.image}" alt="" width="100"><br>
-          <button onclick="deleteProduct('${docSnap.id}')">Sil</button>
+          <img src="${data.image}" alt="${data.name}">
+          <div class="product-info">
+            <strong>${data.name}</strong><br>
+            <span>${data.price} ₺</span>
+          </div>
+          <div class="btns">
+            <button class="edit-btn" onclick="editProduct('${docSnap.id}', '${data.name}', '${data.price}', '${data.image}')">Düzenle</button>
+            <button class="delete-btn" onclick="deleteProduct('${docSnap.id}')">Sil</button>
+          </div>
         `;
         productList.appendChild(div);
       });
     }
 
     async function deleteProduct(id) {
-      await deleteDoc(doc(db, "products", id));
-      loadProducts();
+      if (confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
+        await deleteDoc(doc(db, "products", id));
+        loadProducts();
+      }
+    }
+
+    function editProduct(id, name, price, image) {
+      document.getElementById("pName").value = name;
+      document.getElementById("pPrice").value = price;
+      document.getElementById("pImage").value = image;
+
+      editMode = true;
+      editId = id;
+      saveBtn.innerText = "Güncelle";
+      formTitle.innerText = "Ürün Düzenle";
     }
 
     // Fonksiyonları global yap
@@ -131,6 +234,7 @@ const firebaseConfig = {
     window.logout = logout;
     window.addProduct = addProduct;
     window.deleteProduct = deleteProduct;
+    window.editProduct = editProduct;
   </script>
 </body>
 </html>
