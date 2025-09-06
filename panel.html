@@ -42,18 +42,28 @@
 
   <!-- Firebase -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
+    from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+    from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
-    const firebaseConfig = {
-  apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
-  authDomain: "yasemincrochetworlds.firebaseapp.com",
-  projectId: "yasemincrochetworlds",
-  storageBucket: "yasemincrochetworlds.appspot.com",
-  messagingSenderId: "875729953548",
-  appId: "1:875729953548:web:7189d80814a81c27475f29"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
+    authDomain: "yasemincrochetworlds.firebaseapp.com",
+    projectId: "yasemincrochetworlds",
+    storageBucket: "yasemincrochetworlds.appspot.com",
+    messagingSenderId: "875729953548",
+    appId: "1:875729953548:web:7189d80814a81c27475f29"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ... senin login, logout, ürün ekleme/silme kodların burada devam edecek ...
+  </script>
+    
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
