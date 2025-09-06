@@ -275,3 +275,45 @@ function updateFavorites() {
   favCount.textContent = favorites.length; // favori sayısını güncelle
 }
 
+// İletişim Formu + Başarı/Hata Mesajı (fade-out ile)
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Buraya kendi Service ID ve Template ID’ni yaz
+    emailjs.sendForm("service_p9lhd2g", "template_9s3t91e", this)
+      .then(() => {
+        formMessage.textContent = "Mesajınız başarıyla gönderildi ✅";
+        formMessage.className = "form-message success";
+
+        contactForm.reset();
+
+        // 2.5 sn sonra fade-out başlasın
+        setTimeout(() => {
+          formMessage.classList.add("fade-out");
+        }, 2500);
+
+        // 3.3 sn sonra tamamen gizlensin
+        setTimeout(() => {
+          formMessage.className = "form-message";
+          formMessage.textContent = "";
+        }, 3300);
+      })
+      .catch(() => {
+        formMessage.textContent = "Mesaj gönderilirken hata oluştu ❌";
+        formMessage.className = "form-message error";
+
+        setTimeout(() => {
+          formMessage.classList.add("fade-out");
+        }, 2500);
+
+        setTimeout(() => {
+          formMessage.className = "form-message";
+          formMessage.textContent = "";
+        }, 3300);
+      });
+  });
+}
