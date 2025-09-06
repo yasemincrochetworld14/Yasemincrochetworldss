@@ -319,9 +319,32 @@
 Amacım, sizlere hem estetik hem de kaliteli el işi ürünler ulaştırmak ve el emeğinin değerini her geçen gün daha fazla insana hissettirmek. 🌸
 
 Siz de bu serüvenin bir parçası olun ve el emeğinin sıcaklığını evinize taşıyın
-.</p>
-    </div>
-  </section>
+.</p> 
+    </div> 
+  <!-- Yorumlar -->
+<section id="yorumlar" class="reviews">
+  <div class="container">
+    <h2>💬 Müşteri Yorumları</h2>
+
+    <!-- Yorum Kartları (Firestore'dan gelecek) -->
+    <div id="reviewList" class="review-slider"></div>
+
+    <!-- Yorum Bırak Formu -->
+    <form id="reviewForm" class="review-form">
+      <h3>✨ Yorum Bırak</h3>
+      <div class="form-group">
+        <input type="text" id="reviewName" placeholder="Adınız" required>
+      </div>
+      <div class="form-group">
+        <textarea id="reviewMessage" rows="3" placeholder="Yorumunuz" required></textarea>
+      </div>
+      <button type="submit" class="btn primary">Gönder</button>
+    </form>
+
+    <!-- Başarı/Hata Mesajı -->
+    <div id="reviewMessageBox" class="form-message"></div>
+  </div>
+</section>
 
   <!-- İletişim -->
   <section id="iletisim" class="contact">
