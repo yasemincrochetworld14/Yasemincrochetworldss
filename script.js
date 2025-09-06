@@ -403,3 +403,12 @@ if (reviewForm && window.db) {
       });
     });
 }
+const cartCount = document.querySelector(".cart-count");
+if (cartCount && cartCount.innerText === "0") {
+  cartCount.style.display = "none";
+}
+
+const favCount = document.querySelector(".fav-count");
+if (favCount && favCount.innerText === "0") {
+  favCount.style.display = "none";
+}
