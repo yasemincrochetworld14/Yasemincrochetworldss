@@ -317,3 +317,89 @@ if (contactForm) {
       });
   });
 }
+// ---- Yorumlar: Kaydet & Listele ----
+const reviewList = document.getElementById("reviewList");
+const reviewForm = document.getElementById("reviewForm");
+const reviewMessageBox = document.getElementById("reviewMessageBox");
+
+// Basit HTML kaçış (XSS'e karşı güvenlik)
+const escapeHTML = (s) =>
+  s.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+// Basit hız limiti (aynı cihazdan art arda göndermeyi yavaşlatma)
+const RATE_LIMIT_MS = 10000; // 10 saniye
+
+if (reviewForm && window.db) {
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nameEl = document.getElementById("reviewName");
+    const msgEl  = document.getElementById("reviewMessage");
+    const name = nameEl.value.trim();
+    const message = msgEl.value.trim();
+
+    // Basit doğrulama
+    if (name.length < 2 || message.length < 5) {
+      reviewMessageBox.textContent = "Lütfen adınızı ve yorumunuzu biraz daha detaylandırın.";
+      reviewMessageBox.className = "form-message error";
+      setTimeout(() => reviewMessageBox.classList.add("fade-out"), 2500);
+      setTimeout(() => { reviewMessageBox.className = "form-message"; reviewMessageBox.textContent = ""; }, 3300);
+      return;
+    }
+
+    // Rate limit kontrolü
+    const last = Number(localStorage.getItem("lastReviewTime") || "0");
+    if (Date.now() - last < RATE_LIMIT_MS) {
+      reviewMessageBox.textContent = "Çok hızlı gidiyorsunuz, lütfen birkaç saniye bekleyin 😊";
+      reviewMessageBox.className = "form-message error";
+      setTimeout(() => reviewMessageBox.classList.add("fade-out"), 2500);
+      setTimeout(() => { reviewMessageBox.className = "form-message"; reviewMessageBox.textContent = ""; }, 3300);
+      return;
+    }
+
+    // Butonu devre dışı bırak
+    const btn = reviewForm.querySelector("button[type='submit']");
+    btn.disabled = true;
+
+    try {
+      await window.db.collection("reviews").add({
+        name: name,
+        message: message,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      localStorage.setItem("lastReviewTime", String(Date.now()));
+      reviewForm.reset();
+
+      reviewMessageBox.textContent = "Yorumunuz başarıyla kaydedildi ✅";
+      reviewMessageBox.className = "form-message success";
+      setTimeout(() => reviewMessageBox.classList.add("fade-out"), 2500);
+      setTimeout(() => { reviewMessageBox.className = "form-message"; reviewMessageBox.textContent = ""; }, 3300);
+
+    } catch (err) {
+      reviewMessageBox.textContent = "Yorum kaydedilirken hata oluştu ❌";
+      reviewMessageBox.className = "form-message error";
+      setTimeout(() => reviewMessageBox.classList.add("fade-out"), 2500);
+      setTimeout(() => { reviewMessageBox.className = "form-message"; reviewMessageBox.textContent = ""; }, 3300);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // Yorumları canlı listele (en yeni üstte)
+  window.db.collection("reviews")
+    .orderBy("createdAt", "desc")
+    .limit(50)
+    .onSnapshot((snapshot) => {
+      reviewList.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const r = doc.data();
+        const card = document.createElement("div");
+        card.className = "review-card fade-in";
+        const safeName = escapeHTML(r.name || "Misafir");
+        const safeMsg  = escapeHTML(r.message || "");
+        card.innerHTML = `<p>“${safeMsg}”</p><span>- ${safeName}</span>`;
+        reviewList.appendChild(card);
+      });
+    });
+}
