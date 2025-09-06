@@ -735,3 +735,37 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
 .contact-form button:hover {
   opacity: 0.9;
 }
+/* === Dark Mode Renkleri === */
+body.dark {
+  background: #0f172a; /* koyu lacivert tonu */
+  color: #f8fafc;      /* neredeyse beyaz */
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+body.dark p,
+body.dark span,
+body.dark li {
+  color: #cbd5e1;
+}
+
+body.dark a {
+  color: #38bdf8;
+}
+body.dark a:hover {
+  color: #f472b6;
+}
+
+body.dark .product-card {
+  background: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #334155;
+}
