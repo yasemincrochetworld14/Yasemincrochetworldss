@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    .card { background: #fff; padding: 20px; border-radius: 12px; max-width: 500px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h2 { text-align: center; }
+    input, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; }
+    button { background: #6c63ff; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #5848c2; }
+    .hidden { display: none; }
+    .product { border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Giriş Formu -->
+  <div class="card" id="loginDiv">
+    <h2>Admin Girişi</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+  </div>
+
+  <!-- Panel -->
+  <div class="card hidden" id="panelDiv">
+    <h2>Ürün Yönetimi</h2>
+    <button onclick="logout()">Çıkış Yap</button>
+    <hr>
+    <h3>Yeni Ürün Ekle</h3>
+    <input type="text" id="pName" placeholder="Ürün Adı">
+    <input type="number" id="pPrice" placeholder="Fiyat">
+    <input type="text" id="pImage" placeholder="Resim URL">
+    <button onclick="addProduct()">Ekle</button>
+    <hr>
+    <h3>Mevcut Ürünler</h3>
+    <div id="productList"></div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
+      authDomain: "yasemincrochetworld.firebaseapp.com",
+      projectId: "yasemincrochetworld",
+      storageBucket: "yasemincrochetworld.firebasestorage.app",
+      messagingSenderId: "875729953548",
+      appId: "1:875729953548:web:7189d80814a81c27475f29"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loginDiv = document.getElementById("loginDiv");
+    const panelDiv = document.getElementById("panelDiv");
+    const productList = document.getElementById("productList");
+
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        alert("Hata: " + error.message);
+      }
+    }
+
+    function logout() {
+      signOut(auth);
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginDiv.classList.add("hidden");
+        panelDiv.classList.remove("hidden");
+        loadProducts();
+      } else {
+        loginDiv.classList.remove("hidden");
+        panelDiv.classList.add("hidden");
+      }
+    });
+
+    async function addProduct() {
+      const name = document.getElementById("pName").value;
+      const price = document.getElementById("pPrice").value;
+      const image = document.getElementById("pImage").value;
+
+      if (!name || !price || !image) {
+        alert("Lütfen tüm alanları doldurun!");
+        return;
+      }
+
+      await addDoc(collection(db, "products"), {
+        name, price, image
+      });
+      loadProducts();
+    }
+
+    async function loadProducts() {
+      productList.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "products"));
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <strong>${data.name}</strong><br>
+          Fiyat: ${data.price} ₺<br>
+          <img src="${data.image}" alt="" width="100"><br>
+          <button onclick="deleteProduct('${docSnap.id}')">Sil</button>
+        `;
+        productList.appendChild(div);
+      });
+    }
+
+    async function deleteProduct(id) {
+      await deleteDoc(doc(db, "products", id));
+      loadProducts();
+    }
+
+    // Fonksiyonları global yap
+    window.login = login;
+    window.logout = logout;
+    window.addProduct = addProduct;
+    window.deleteProduct = deleteProduct;
+
+  </script>
+</body>
+</html>
