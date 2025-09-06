@@ -412,5 +412,26 @@ Siz de bu serüvenin bir parçası olun ve el emeğinin sıcaklığını evinize
     emailjs.init("VY8onhHUwwqnQoo0b"); // buraya EmailJS Public Key gelecek
   })();
 </script>
+    <!-- Firebase SDK (compat sürüm) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+<!-- Firebase Config -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDJDi1LyAKemqWo-iI7jyVi58-1yh2guq4",
+    authDomain: "yasemincrochetworld.firebaseapp.com",
+    projectId: "yasemincrochetworld",
+    storageBucket: "yasemincrochetworld.firebasestorage.app",
+    messagingSenderId: "875729953548",
+    appId: "1:875729953548:web:7189d80814a81c27475f29"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  window.db = firebase.firestore(); // yorumlar kodu için global erişim
+</script>
+
+<!-- Senin script.js -->
+<script src="script.js"></script>
 </body>
         </html>
