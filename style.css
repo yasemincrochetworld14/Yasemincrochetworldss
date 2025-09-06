@@ -769,3 +769,35 @@ body.dark .product-card {
   color: #f1f5f9;
   border: 1px solid #334155;
 }
+/* === Dark Mode Ürün Kartları === */
+body.dark .product-card {
+  background: #1e293b;       /* kart zemini */
+  border: 1px solid #334155; /* kenarlık */
+  color: #f1f5f9;            /* genel yazı */
+}
+
+/* Başlıklar */
+body.dark .product-card h3 {
+  color: #e2e8f0 !important;
+}
+
+/* Açıklamalar */
+body.dark .product-card p {
+  color: #cbd5e1 !important;
+}
+
+/* Fiyatlar */
+body.dark .product-card .price {
+  color: #38bdf8 !important; /* mavi */
+  font-weight: 600;
+}
+
+/* Butonlar */
+body.dark .product-card .btn {
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
+}
+body.dark .product-card .btn:hover {
+  background: #475569;
+}
