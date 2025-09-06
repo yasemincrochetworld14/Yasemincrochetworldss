@@ -420,3 +420,20 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   transform: scale(1.1);
   background: #20b358;
 }
+.footer-socials {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-socials a {
+  font-size: 22px;
+  color: var(--muted);
+  transition: color 0.3s, transform 0.2s;
+}
+
+.footer-socials a:hover {
+  color: var(--brand);
+  transform: scale(1.2);
+}
