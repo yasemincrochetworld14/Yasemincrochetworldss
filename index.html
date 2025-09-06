@@ -383,6 +383,32 @@ Siz de bu serüvenin bir parçası olun ve el emeğinin sıcaklığını evinize
     </a>
   </div>
 </footer> 
+  <section id="contact">
+  <h2>İletişim</h2>
+  <p>İletişim için şikayetleriniz için bize mesaj bırakın.</p>
+
+  <form id="contactForm" class="contact-form">
+    <div class="form-group">
+      <span class="icon"><i class="fa fa-user"></i></span>
+      <input type="text" name="name" placeholder="Adınız" required>
+    </div>
+
+    <div class="form-group">
+      <span class="icon"><i class="fa fa-envelope"></i></span>
+      <input type="email" name="email" placeholder="E-posta" required>
+    </div>
+
+    <div class="form-group">
+      <span class="icon"><i class="fa fa-comment"></i></span>
+      <textarea name="message" rows="5" placeholder="Mesajınız" required></textarea>
+    </div>
+
+    <button type="submit" class="btn primary">Gönder</button>
+  </form>
+
+  <!-- Başarı/Hata Mesajı -->
+  <div id="formMessage" class="form-message"></div>
+</section>
   <!-- Ürün Detay Modal -->
 <div id="productModal" class="modal">
   <div class="modal-content">
