@@ -320,10 +320,25 @@
 
   <!-- İletişim -->
   <section id="iletisim" class="contact">
-    <div class="container">
-      <h2>İletişim</h2>
-      <p>Bize Instagram üzerinden ulaşabilirsiniz: <a href="https://www.instagram.com/yasemincrochetworld" target="_blank">@yasemincrochetworld</a></p>
-    </div>
+  <div class="container">
+    <h2>İletişim</h2>
+
+    <form id="contactForm" class="contact-form">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Adınız" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="E-posta" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" rows="5" placeholder="Mesajınız" required></textarea>
+      </div>
+      <button type="submit" class="btn primary">Gönder</button>
+    </form>
+
+    <!-- Başarı/Hata Mesajı -->
+    <div id="formMessage" class="form-message"></div>
+  </div>
   </section>
 
 <footer class="site-footer">
@@ -361,6 +376,13 @@
    target="_blank" 
    aria-label="WhatsApp ile İletişim">
   <i class="fa-brands fa-whatsapp"></i>
-</a>
+</a> 
+  <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("VY8onhHUwwqnQoo0b"); // buraya EmailJS Public Key gelecek
+  })();
+</script>
 </body>
         </html>
