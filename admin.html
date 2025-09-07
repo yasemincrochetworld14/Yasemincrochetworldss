@@ -125,8 +125,12 @@
       });
     }
 
-    
-                                 
+    // Ürün sil
+    window.deleteProduct = async function (id) {
+      await deleteDoc(doc(db, "products", id));
+      alert("Ürün silindi!");
+      loadProducts();
+    };
 
     // Dinamik fotoğraf input ekle
     window.addImageInput = function () {
@@ -140,63 +144,7 @@
       } else {
         alert("Maksimum 5 fotoğraf eklenebilir.");
       }
-    }; // Ürün sil
-window.deleteProduct = async function (id) {
-  await deleteDoc(doc(db, "products", id));
-  alert("Ürün silindi!");
-  loadProducts();
-};
-
-// Ürün düzenle
-window.editProduct = async function (id) {
-  const ref = doc(db, "products", id);
-  const snap = await getDocs(collection(db, "products"));
-  const data = (await (await getDocs(collection(db, "products"))).docs.find(d => d.id === id)).data();
-
-  // Formu doldur
-  document.getElementById("title").value = data.title;
-  document.getElementById("description").value = data.description || "";
-  document.getElementById("price").value = data.price;
-  document.getElementById("category").value = data.category || "";
-
-  const container = document.getElementById("imagesContainer");
-  container.innerHTML = "";
-  (data.images || []).forEach(img => {
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = img;
-    input.className = "image-input w-full p-2 mb-2 border rounded";
-    container.appendChild(input);
-  });
-
-  // Kaydet butonunu güncelle
-  const addBtn = document.querySelector("button[onclick='addProduct()']");
-  addBtn.textContent = "Ürünü Güncelle";
-  addBtn.onclick = async () => {
-    const newTitle = document.getElementById("title").value;
-    const newDesc = document.getElementById("description").value;
-    const newPrice = parseFloat(document.getElementById("price").value);
-    const newCategory = document.getElementById("category").value;
-    const imageInputs = document.querySelectorAll(".image-input");
-    const newImages = [];
-    imageInputs.forEach((inp) => {
-      if (inp.value.trim() !== "") newImages.push(inp.value.trim());
-    });
-
-    await updateDoc(ref, {
-      title: newTitle,
-      description: newDesc,
-      price: newPrice,
-      category: newCategory,
-      images: newImages,
-    });
-
-    alert("Ürün güncellendi!");
-    addBtn.textContent = "Ürün Ekle";
-    addBtn.setAttribute("onclick", "addProduct()");
-    loadProducts();
-  };
-};
+    };
   </script>
 </head>
 <body class="bg-gray-100">
