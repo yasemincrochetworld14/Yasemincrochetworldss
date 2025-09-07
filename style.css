@@ -796,6 +796,29 @@ body.dark .product-card .price {
 body.dark .product-card .btn {
   background: #334155;
   color: #f8fafc;
+  .icon-btn {
+  position: relative; /* badge’in referansı olsun */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn .badge {
+  position: absolute;
+  top: -6px;   /* ikonun biraz üstüne çıkar */
+  right: -6px; /* ikonun sağına kaydır */
+  background: linear-gradient(45deg, var(--brand), var(--brand-2));
+  color: #fff;
+  border-radius: 50%;
+  min-width: 18px;       /* yuvarlak görünmesi için sabit genişlik */
+  height: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
   border: 1px solid #475569;
 }
 body.dark .product-card .btn:hover {
