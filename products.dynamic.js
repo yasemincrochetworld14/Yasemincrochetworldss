@@ -176,3 +176,107 @@
     loadProducts();
   }
 })();
+function attachInteractions(card){
+  // Sepete ekle
+  var btn = card.querySelector(".add-to-cart");
+  if(btn){
+    btn.addEventListener("click", function(){
+      var name  = card.querySelector("h3").textContent.trim();
+      var price = parseFloat(card.dataset.price);
+      if(typeof updateCart === "function"){
+        if(typeof cart === "undefined"){ window.cart = []; }
+        var existing = cart.find(i => i.name === name);
+        if(existing) existing.qty += 1;
+        else cart.push({ name, price, qty:1 });
+        updateCart();
+        if(typeof animateBadge === "function") animateBadge();
+        if(typeof showToast === "function") showToast("Sepete eklendi ✅");
+      }
+    });
+  }
+
+  // Favorilere ekle
+  var fav = card.querySelector(".fav-btn");
+  if(fav){
+    fav.addEventListener("click", function(){
+      var name = card.querySelector("h3").textContent.trim();
+      if(typeof toggleFavorite === "function"){
+        toggleFavorite(name);
+      } else {
+        let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+        if(!favs.includes(name)) favs.push(name);
+        localStorage.setItem("favorites", JSON.stringify(favs));
+        fav.textContent = "❤️";
+        if(typeof showToast === "function") showToast("Favorilere eklendi ❤️");
+      }
+    });
+  }
+
+  // Detayları gör (modal)
+  var details = card.querySelector(".details-btn");
+  if(details){
+    details.addEventListener("click", function(){
+      var modal = document.getElementById("productModal");
+      if(!modal) return;
+
+      var modalTitle = document.getElementById("modalTitle");
+      var modalDesc  = document.getElementById("modalDesc");
+      var modalPrice = document.getElementById("modalPrice");
+      var slidesContainer = modal.querySelector(".slides");
+      var mPrev = modal.querySelector(".prev");
+      var mNext = modal.querySelector(".next");
+
+      modalTitle.textContent = card.querySelector("h3").textContent.trim();
+      modalDesc.textContent  = card.querySelector("p").textContent.trim();
+      modalPrice.textContent = card.querySelector(".price").textContent.trim();
+
+      // resimleri doldur
+      slidesContainer.innerHTML = "";
+      var imgs = card.querySelectorAll(".slider img");
+      imgs.forEach(function(img, i){
+        var clone = img.cloneNode();
+        if(i === 0) clone.classList.add("active");
+        slidesContainer.appendChild(clone);
+      });
+
+      // modal slider kontrolü
+      var mImgs = slidesContainer.querySelectorAll("img");
+      var idx = 0;
+      function show(k){
+        mImgs.forEach(im => im.classList.remove("active"));
+        if(mImgs[k]) mImgs[k].classList.add("active");
+      }
+      if(mPrev && mNext){
+        mPrev.onclick = function(){ idx = (idx - 1 + mImgs.length) % mImgs.length; show(idx); };
+        mNext.onclick = function(){ idx = (idx + 1) % mImgs.length; show(idx); };
+      }
+
+      modal.classList.add("active");
+
+      var closeBtn = modal.querySelector(".close-btn");
+      if(closeBtn) closeBtn.onclick = () => modal.classList.remove("active");
+      modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("active"); });
+    });
+  }
+
+  // Slider
+  var slider = card.querySelector(".slider");
+  if(slider){
+    var images = slider.querySelectorAll("img");
+    if(images.length){
+      var currentIndex = 0;
+      function show(i){
+        images.forEach(img => img.classList.remove("active"));
+        images[i].classList.add("active");
+      }
+      slider.querySelector(".prev").addEventListener("click", function(){
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        show(currentIndex);
+      });
+      slider.querySelector(".next").addEventListener("click", function(){
+        currentIndex = (currentIndex + 1) % images.length;
+        show(currentIndex);
+      });
+    }
+  }
+}
