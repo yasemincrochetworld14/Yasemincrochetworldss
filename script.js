@@ -403,3 +403,98 @@ if (reviewForm && window.db) {
       });
     });
 }
+// Firestore'dan gelen ürünü ekrana basma (GLOBAL)
+window.renderCard = function renderCard(raw) {
+  const container = document.querySelector(".product-grid");
+  if (!container) return;
+
+  // Alan adlarını normalize et
+  const product = {
+    name: raw.title || "",
+    desc: raw.description || "",
+    price: Number(raw.price) || 0,
+    images: Array.isArray(raw.images) ? raw.images.slice(0, 5) : [],
+    category: raw.category || ""
+  };
+
+  const card = document.createElement("article");
+  card.className = "product-card";
+  card.dataset.price = product.price;
+
+  card.innerHTML = `
+    <div class="slider">
+      ${product.images.map((img, i) =>
+        `<img src="${img}" alt="${product.name}" class="${i===0 ? 'active' : ''}">`
+      ).join("")}
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    </div>
+    <h3>${product.name}</h3>
+    <p>${product.desc}</p>
+    <div class="price-line">
+      <span class="price">₺${product.price.toFixed(2)}</span>
+      <button class="btn details-btn">Detayları Gör</button>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="fav-btn">🤍</button>
+    </div>
+  `;
+
+  container.appendChild(card);
+// --- Slider eventleri ---
+  const slider = card.querySelector(".slider");
+  let imgs = slider.querySelectorAll("img");
+  let idx = 0;
+  const show = (i) => {
+    imgs.forEach(img => img.classList.remove("active"));
+    imgs[i].classList.add("active");
+  };
+  const prev = slider.querySelector(".prev");
+  const next = slider.querySelector(".next");
+  if (prev && next && imgs.length > 1) {
+    prev.addEventListener("click", () => { idx = (idx - 1 + imgs.length) % imgs.length; show(idx); });
+    next.addEventListener("click", () => { idx = (idx + 1) % imgs.length; show(idx); });
+    setInterval(() => { idx = (idx + 1) % imgs.length; show(idx); }, 4000);
+  }
+  
+ // --- Sepet butonu ---
+const addToCartBtn = card.querySelector(".add-to-cart");
+if (addToCartBtn) {
+  addToCartBtn.addEventListener("click", () => {
+    const existing = cart.find(i => i.name === product.name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name: product.name, price: product.price, qty: 1 });
+    updateCart();
+    showToast("Sepete eklendi ✅");
+    animateBadge();
+  });
+}
+
+// --- Favori butonu ---
+const favBtn = card.querySelector(".fav-btn");
+if (favBtn) {
+  favBtn.addEventListener("click", () => {
+    if (favorites.includes(product.name)) {
+      favorites = favorites.filter(t => t !== product.name);
+      favBtn.classList.remove("active"); favBtn.innerHTML = "🤍";
+    } else {
+      favorites.push(product.name);
+      favBtn.classList.add("active"); favBtn.innerHTML = "❤️";
+    }
+    updateFavorites();
+  });
+}
+
+// --- Detaylar butonu ---
+const detailsBtn = card.querySelector(".details-btn");
+if (detailsBtn) {
+  detailsBtn.addEventListener("click", () => {
+    modalTitle.textContent = product.name;
+    modalDesc.textContent  = product.desc;
+    modalPrice.textContent = "₺" + product.price.toFixed(2);
+    slidesContainer.innerHTML = product.images.map((img, i) =>
+      `<img src="${img}" class="${i===0 ? 'active' : ''}">`
+    ).join("");
+    currentSlide = 0;
+    modal.classList.add("active");
+  });
+}
