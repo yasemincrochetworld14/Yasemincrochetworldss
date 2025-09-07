@@ -195,28 +195,30 @@ function attachInteractions(card){
     });
   }
 
-// Favorilere ekle/çıkar
+  // Favorilere ekle / çıkar
 var fav = card.querySelector(".fav-btn");
-if(fav){
+if (fav) {
   var name = card.querySelector("h3").textContent.trim();
 
-  // Sayfa yüklenince kalp durumunu kontrol et
+  // İlk yüklemede kalp durumunu ayarla
   let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-  if(favs.includes(name)){
-    fav.textContent = "❤️";
-  }
+  fav.textContent = favs.includes(name) ? "❤️" : "🤍";
 
-  fav.addEventListener("click", function(){
+  fav.addEventListener("click", function () {
     let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-    if(!favs.includes(name)){
+
+    if (favs.includes(name)) {
+      // ÇIKAR
+      favs = favs.filter(i => i !== name);
+      fav.textContent = "🤍";
+      if (typeof showToast === "function") showToast("Favorilerden çıkarıldı ❌");
+    } else {
+      // EKLE
       favs.push(name);
       fav.textContent = "❤️";
-      if(typeof showToast === "function") showToast("Favorilere eklendi ❤️");
-    } else {
-      favs = favs.filter(item => item !== name);
-      fav.textContent = "🤍";
-      if(typeof showToast === "function") showToast("Favorilerden çıkarıldı ❌");
+      if (typeof showToast === "function") showToast("Favorilere eklendi ❤️");
     }
+
     localStorage.setItem("favorites", JSON.stringify(favs));
   });
 }
