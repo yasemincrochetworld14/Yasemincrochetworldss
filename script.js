@@ -403,3 +403,75 @@ if (reviewForm && window.db) {
       });
     });
 }
+// Firestore'dan gelen ürünü ekrana basma
+function renderCard(product) {
+  const container = document.querySelector(".product-grid"); // ürünlerin kapsayıcısı
+  if (!container) return;
+
+  const card = document.createElement("article");
+  card.className = "product-card";
+  card.dataset.price = product.price;
+
+  card.innerHTML = `
+    <div class="slider">
+      ${product.images.map((img, i) => 
+        `<img src="${img}" alt="${product.name}" class="${i===0 ? 'active' : ''}">`
+      ).join("")}
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    </div>
+    <h3>${product.name}</h3>
+    <p>${product.desc}</p>
+    <div class="price-line">
+      <span class="price">₺${product.price}</span>
+      <button class="btn add-to-cart">Sepete Ekle</button>
+      <button class="btn details-btn">Detayları Gör</button>
+      <button class="fav-btn">🤍</button>
+    </div>
+  `;
+
+  container.appendChild(card);
+
+  // Sepet, favori, detay gibi eventleri bağla
+  const addToCartBtn = card.querySelector(".add-to-cart");
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", () => {
+      const existing = cart.find(i => i.name === product.name);
+      if (existing) existing.qty += 1;
+      else cart.push({ name: product.name, price: product.price, qty: 1 });
+      updateCart();
+      showToast("Sepete eklendi ✅");
+      animateBadge();
+    });
+  }
+
+  const favBtn = card.querySelector(".fav-btn");
+  if (favBtn) {
+    favBtn.addEventListener("click", () => {
+      if (favorites.includes(product.name)) {
+        favorites = favorites.filter(item => item !== product.name);
+        favBtn.classList.remove("active");
+        favBtn.innerHTML = "🤍";
+      } else {
+        favorites.push(product.name);
+        favBtn.classList.add("active");
+        favBtn.innerHTML = "❤️";
+      }
+      updateFavorites();
+    });
+  }
+
+  const detailsBtn = card.querySelector(".details-btn");
+  if (detailsBtn) {
+    detailsBtn.addEventListener("click", () => {
+      modalTitle.textContent = product.name;
+      modalDesc.textContent = product.desc;
+      modalPrice.textContent = "₺" + product.price;
+      slidesContainer.innerHTML = product.images.map((img, i) =>
+        `<img src="${img}" class="${i===0 ? 'active' : ''}">`
+      ).join("");
+      currentSlide = 0;
+      modal.classList.add("active");
+    });
+  }
+}
