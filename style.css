@@ -802,25 +802,40 @@ body.dark .product-card .btn {
   align-items: center;
   justify-content: center;
 }
+/* === Header badge düzeltmeleri === */
+.header-actions { gap: 16px; } /* butonlar arası boşluk arttı */
 
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Eski translate’i iptal edip sağ-üst köşeye sabitliyoruz */
 .icon-btn .badge {
   position: absolute;
-  top: -6px;   /* ikonun biraz üstüne çıkar */
-  right: -6px; /* ikonun sağına kaydır */
+  top: 0 !important;
+  right: 0 !important;
+  transform: translate(45%, -45%) !important; /* köşeden biraz taşı */
   background: linear-gradient(45deg, var(--brand), var(--brand-2));
   color: #fff;
-  border-radius: 50%;
-  min-width: 18px;       /* yuvarlak görünmesi için sabit genişlik */
-  height: 18px;
+  border-radius: 999px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;             /* 2 haneli sayılar için */
   font-size: 11px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  line-height: 1;
+  z-index: 1;
+  border: 2px solid rgba(255,255,255,0.95); /* araya “halka” atarak çakışma görünümünü keser */
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
 }
-  border: 1px solid #475569;
-}
-body.dark .product-card .btn:hover {
-  background: #475569;
+
+/* Dark mode’da halka rengi */
+body.dark .icon-btn .badge {
+  border-color: rgba(31,41,55,0.95); /* header koyu zeminle uyumlu */
 }
