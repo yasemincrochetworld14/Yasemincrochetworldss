@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    // Firebase SDK import
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      deleteDoc,
+      updateDoc,
+      doc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // 🔹 Firebase config (kendi bilgilerinle değiştir)
+    const firebaseConfig = {
+      apiKey: "SENİN_API_KEY",
+      authDomain: "SENİN_AUTH_DOMAIN",
+      projectId: "SENİN_PROJECT_ID",
+      storageBucket: "SENİN_STORAGE_BUCKET",
+      messagingSenderId: "SENİN_MSG_ID",
+      appId: "SENİN_APP_ID",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+
+    // Kullanıcı giriş kontrolü
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("adminPage").classList.remove("hidden");
+        loadProducts();
+      } else {
+        document.getElementById("loginPage").classList.remove("hidden");
+        document.getElementById("adminPage").classList.add("hidden");
+      }
+    });
+
+    // Giriş yap
+    window.login = async function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        alert("Hata: " + err.message);
+      }
+    };
+
+    // Çıkış yap
+    window.logout = async function () {
+      await signOut(auth);
+    };
+
+    // Ürün ekle
+    window.addProduct = async function () {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const price = parseFloat(document.getElementById("price").value);
+      const category = document.getElementById("category").value;
+      const imageInputs = document.querySelectorAll(".image-input");
+      const images = [];
+      imageInputs.forEach((inp) => {
+        if (inp.value.trim() !== "") images.push(inp.value.trim());
+      });
+
+      if (!title || !price) {
+        alert("Başlık ve fiyat zorunlu!");
+        return;
+      }
+
+      await addDoc(collection(db, "products"), {
+        title,
+        description,
+        price,
+        category,
+        images,
+        createdAt: serverTimestamp(),
+      });
+
+      alert("Ürün eklendi!");
+      loadProducts();
+    };
+
+    // Ürünleri listele
+    async function loadProducts() {
+      const container = document.getElementById("productList");
+      container.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "products"));
+      querySnapshot.forEach((docSnap) => {
+        const p = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "bg-white p-4 rounded-xl shadow mb-3";
+        div.innerHTML = `
+          <h3 class="font-bold">${p.title}</h3>
+          <p>${p.description || ""}</p>
+          <p class="font-semibold">${p.price} TL</p>
+          <p class="italic">${p.category}</p>
+          <div class="flex gap-2 mt-2 overflow-x-auto">
+            ${
+              p.images?.map((img) => `<img src="${img}" class="w-16 h-16 object-cover rounded"/>`).join("") || ""
+            }
+          </div>
+          <div class="mt-2 flex gap-2">
+            <button onclick="deleteProduct('${docSnap.id}')" class="bg-red-500 text-white px-2 py-1 rounded">Sil</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Ürün sil
+    window.deleteProduct = async function (id) {
+      await deleteDoc(doc(db, "products", id));
+      alert("Ürün silindi!");
+      loadProducts();
+    };
+
+    // Dinamik fotoğraf input ekle
+    window.addImageInput = function () {
+      const container = document.getElementById("imagesContainer");
+      if (container.children.length < 5) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Fotoğraf linki";
+        input.className = "image-input w-full p-2 mb-2 border rounded";
+        container.appendChild(input);
+      } else {
+        alert("Maksimum 5 fotoğraf eklenebilir.");
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Login Page -->
+  <div id="loginPage" class="flex items-center justify-center h-screen">
+    <div class="bg-white p-6 rounded-xl shadow w-80">
+      <h2 class="text-xl font-bold mb-4">Admin Girişi</h2>
+      <input id="email" type="email" placeholder="Email" class="w-full p-2 mb-2 border rounded"/>
+      <input id="password" type="password" placeholder="Şifre" class="w-full p-2 mb-4 border rounded"/>
+      <button onclick="login()" class="w-full bg-purple-600 text-white p-2 rounded">Giriş Yap</button>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPage" class="hidden p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Ürün Yönetimi</h1>
+      <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">Çıkış Yap</button>
+    </div>
+
+    <!-- Ürün ekleme formu -->
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <h2 class="text-lg font-semibold mb-4">Yeni Ürün Ekle</h2>
+      <input id="title" type="text" placeholder="Ürün Adı" class="w-full p-2 mb-2 border rounded"/>
+      <textarea id="description" placeholder="Açıklama" class="w-full p-2 mb-2 border rounded"></textarea>
+      <input id="price" type="number" placeholder="Fiyat" class="w-full p-2 mb-2 border rounded"/>
+      <input id="category" type="text" placeholder="Kategori" class="w-full p-2 mb-2 border rounded"/>
+
+      <h3 class="font-semibold mt-4 mb-2">Fotoğraf Linkleri</h3>
+      <div id="imagesContainer">
+        <input type="text" placeholder="Fotoğraf linki" class="image-input w-full p-2 mb-2 border rounded"/>
+      </div>
+      <button onclick="addImageInput()" class="bg-gray-200 px-3 py-1 rounded mb-2">+ Fotoğraf Alanı Ekle</button>
+
+      <button onclick="addProduct()" class="w-full bg-green-600 text-white p-2 rounded">Ürün Ekle</button>
+    </div>
+
+    <!-- Ürün listesi -->
+    <div id="productList"></div>
+  </div>
+
+</body>
+                                                       </html>
