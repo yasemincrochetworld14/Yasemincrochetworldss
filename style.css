@@ -839,16 +839,3 @@ body.dark .product-card .btn {
 body.dark .icon-btn .badge {
   border-color: rgba(31,41,55,0.95); /* header koyu zeminle uyumlu */
 }
-/* === Detayları Gör Butonu Zorla Düzenleme === */
-.products .details-btn {
-  color: #fff !important; /* yazıyı beyaz yap */
-  background: linear-gradient(45deg, var(--brand), var(--brand-2)) !important;
-  border: none !important;
-  font-weight: 600 !important;
-  text-shadow: none !important; /* gölgeyi kaldır */
-  box-shadow: var(--shadow) !important;
-}
-
-.products .details-btn:hover {
-  opacity: 0.9 !important;
-                              }
