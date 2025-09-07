@@ -191,7 +191,31 @@ function attachInteractions(card){
         updateCart();
         if(typeof animateBadge === "function") animateBadge();
         if(typeof showToast === "function") showToast("Sepete eklendi ✅");
-      }
+      } // Favorilere ekle/çıkar
+var fav = card.querySelector(".fav-btn");
+if(fav){
+  var name = card.querySelector("h3").textContent.trim();
+
+  // Sayfa yüklenince kalp durumunu kontrol et
+  let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+  if(favs.includes(name)){
+    fav.textContent = "❤️";
+  }
+
+  fav.addEventListener("click", function(){
+    let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+    if(!favs.includes(name)){
+      favs.push(name);
+      fav.textContent = "❤️";
+      if(typeof showToast === "function") showToast("Favorilere eklendi ❤️");
+    } else {
+      favs = favs.filter(item => item !== name);
+      fav.textContent = "🤍";
+      if(typeof showToast === "function") showToast("Favorilerden çıkarıldı ❌");
+    }
+    localStorage.setItem("favorites", JSON.stringify(favs));
+  });
+}
     });
   }
 
