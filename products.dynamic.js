@@ -18,32 +18,32 @@
 
   // Kart HTML şablonu
   function renderCard(p){
-    var images = Array.isArray(p.images) ? p.images : [];
-    if(images.length === 0){
-      images = ["placeholder.jpg"]; // fallback
-    }
-    var html = '';
-    html += '<article class="product-card" data-price="'+ (p.price || 0) +'">';
-    html += '  <div class="slider">';
-    images.forEach(function(fn, i){
-      var cls = i === 0 ? ' class="active"' : '';
-      html += '    <img src="images/'+ fn +'" alt="'+ (p.title || "") +' '+ (i+1) +'"'+ cls +'>';
-    });
-    html += '    <span class="prev">&#10094;</span>';
-    html += '    <span class="next">&#10095;</span>';
-    html += '  </div>';
-    html += '  <h3>'+ (p.title || "") +'</h3>';
-    html += '  <p>' + (p.description || "") + '</p>';
-    html += '  <div class="price-line">';
-    html += '    <span class="price">'+ fmtPrice(p.price) +'</span>';
-    html += '    <button class="btn add-to-cart">Sepete Ekle</button>';
-    html += '    <button class="btn details-btn">Detayları Gör</button>';
-    html += '    <button class="fav-btn">🤍</button>';
-    html += '  </div>';
-    html += '</article>';
-    return html;
+  var images = p.images || []; // Firestore'dan gelen resim listesi
+  if(!images.length){
+    images = ["images/placeholder.jpg"]; // eğer hiç resim yoksa
   }
 
+  var html = `
+    <article class="product-card" data-price="${p.price || 0}">
+      <div class="slider">
+        ${images.map((img,i) => 
+          `<img src="images/${img}" class="${i===0?'active':''}">`
+        ).join("")}
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+      </div>
+      <h3>${p.name || "Ürün İsmi"}</h3>
+      <p>${p.description || "Açıklama yok"}</p>
+      <div class="price">${(p.price || 0).toFixed(2)} ₺</div>
+      <div class="product-actions">
+        <button class="add-to-cart">Sepete Ekle</button>
+        <button class="details-btn">Detayları Gör</button>
+        <button class="fav-btn">🤍</button>
+      </div>
+    </article>
+  `;
+  return html;
+  }
   function initSlider(slider){
     var images = slider.querySelectorAll("img");
     if(!images.length) return;
