@@ -839,3 +839,8 @@ body.dark .product-card .btn {
 body.dark .icon-btn .badge {
   border-color: rgba(31,41,55,0.95); /* header koyu zeminle uyumlu */
 }
+/* Hamburger sadece mobilde */
+#hamburger { display: none !important; }          /* masaüstünde tamamen gizle */
+@media (max-width: 900px){
+  #hamburger { display: inline-flex !important; } /* mobilde göster */
+}
