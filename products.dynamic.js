@@ -70,6 +70,29 @@
     }, 4000);
   }
 
+  
+        });
+
+        var mImgs = slidesContainer.querySelectorAll("img");
+        var i = 0;
+        function show(k){
+          mImgs.forEach(function(im){ im.classList.remove("active"); });
+          if(mImgs[k]) mImgs[k].classList.add("active");
+        }
+        if(mPrev && mNext){
+          mPrev.onclick = function(){ i = (i - 1 + mImgs.length) % mImgs.length; show(i); };
+          mNext.onclick = function(){ i = (i + 1) % mImgs.length; show(i); };
+        }
+
+        modal.classList.add("active");
+        var closeBtn = modal.querySelector(".close-btn");
+        if(closeBtn) closeBtn.onclick = function(){ modal.classList.remove("active"); };
+        modal.addEventListener("click", function(e){ if(e.target === modal) modal.classList.remove("active"); });
+      });
+    }
+
+    var slider = card.querySelector(".slider");
+    if(slider) initSlider(slider);
   }
 
   function loadProducts(){
