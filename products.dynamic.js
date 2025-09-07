@@ -70,7 +70,54 @@
     }, 4000);
   }
 
-  
+  function attachInteractions(card){
+    // Sepete ekle
+    var btn = card.querySelector(".add-to-cart");
+    if(btn){
+      btn.addEventListener("click", function(){
+        try{
+          var name  = card.querySelector("h3").textContent.trim();
+          var price = parseFloat(card.dataset.price);
+          if(typeof updateCart === "function" && typeof showToast === "function"){
+            if(typeof cart === "undefined"){ window.cart = []; }
+            var existing = cart.find(function(i){ return i.name === name; });
+            if(existing) existing.qty += 1;
+            else cart.push({ name:name, price:price, qty:1 });
+            updateCart();
+            if(typeof animateBadge === "function") animateBadge();
+            showToast("Sepete eklendi ✅");
+          }else{
+            alert("Sepete eklendi: " + name);
+          }
+        }catch(e){
+          console.error(e);
+        }
+      });
+    }
+
+    // Detayları gör (modal)
+    var details = card.querySelector(".details-btn");
+    if(details){
+      details.addEventListener("click", function(){
+        var modal = document.getElementById("productModal");
+        if(!modal){ return; }
+        var modalTitle = document.getElementById("modalTitle");
+        var modalDesc  = document.getElementById("modalDesc");
+        var modalPrice = document.getElementById("modalPrice");
+        var slidesContainer = modal.querySelector(".slides");
+        var mPrev = modal.querySelector(".prev");
+        var mNext = modal.querySelector(".next");
+
+        modalTitle.textContent = card.querySelector("h3").textContent.trim();
+        modalDesc.textContent  = card.querySelector("p").textContent.trim();
+        modalPrice.textContent = card.querySelector(".price").textContent.trim();
+
+        slidesContainer.innerHTML = "";
+        var imgs = card.querySelectorAll(".slider img");
+        imgs.forEach(function(img, i){
+          var clone = img.cloneNode();
+          if(i === 0) clone.classList.add("active");
+          slidesContainer.appendChild(clone);
         });
 
         var mImgs = slidesContainer.querySelectorAll("img");
