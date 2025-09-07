@@ -840,14 +840,15 @@ body.dark .icon-btn .badge {
   border-color: rgba(31,41,55,0.95); /* header koyu zeminle uyumlu */
 }
 /* === Detayları Gör Butonu Düzenleme === */
-.btn.details-btn {
-  color: #fff !important;  /* yazıyı beyaz yap */
+a.btn.details-btn {
+  color: #fff !important; /* Yazıyı beyaz yap */
   background: linear-gradient(45deg, var(--brand), var(--brand-2)) !important;
   border: none !important;
-  font-weight: 600;
+  font-weight: 600 !important;
   box-shadow: var(--shadow);
+  text-shadow: none !important; /* gölgeyi kapat */
 }
 
-.btn.details-btn:hover {
+a.btn.details-btn:hover {
   opacity: 0.9;
 }
