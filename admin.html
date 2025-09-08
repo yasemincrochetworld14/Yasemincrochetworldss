@@ -186,20 +186,35 @@
     <!-- Ürün listesi -->
     <div id="productList"></div>
   </div>
-<div class="security-checklist">
-  <h2>🔒 Security Checklist</h2>
-  <ul>
-    <li><input type="checkbox"> HTTPS aktif</li>
-    <li><input type="checkbox"> Güncel kütüphaneler kullanılıyor</li>
-    <li><input type="checkbox"> Firebase güvenlik kuralları ayarlı</li>
-    <li><input type="checkbox"> Admin panel şifre korumalı</li>
-    <li><input type="checkbox"> XSS koruması mevcut</li>
-    <li><input type="checkbox"> Dosya yükleme güvenli</li>
-    <li><input type="checkbox"> Hassas veri localStorage’da yok</li>
-    <li><input type="checkbox"> Şifreler hashlenmiş</li>
-    <li><input type="checkbox"> Düzenli yedekleme var</li>
-    <li><input type="checkbox"> Brute force engeli mevcut</li>
+<div class="security-checklist bg-white p-4 rounded-xl shadow mt-6">
+  <h2 class="text-lg font-bold mb-3">🔒 Security Checklist</h2>
+  <ul class="space-y-2">
+    <li><label><input type="checkbox"> HTTPS aktif</label></li>
+    <li><label><input type="checkbox"> Güncel kütüphaneler kullanılıyor</label></li>
+    <li><label><input type="checkbox"> Firebase güvenlik kuralları ayarlı</label></li>
+    <li><label><input type="checkbox"> Admin panel şifre korumalı</label></li>
+    <li><label><input type="checkbox"> XSS koruması mevcut</label></li>
+    <li><label><input type="checkbox"> Dosya yükleme güvenli</label></li>
+    <li><label><input type="checkbox"> Hassas veri localStorage’da yok</label></li>
+    <li><label><input type="checkbox"> Şifreler hashlenmiş</label></li>
+    <li><label><input type="checkbox"> Düzenli yedekleme var</label></li>
+    <li><label><input type="checkbox"> Brute force engeli mevcut</label></li>
   </ul>
 </div>
+ <script>
+  const checklist = document.querySelectorAll(".security-checklist input[type='checkbox']");
+
+  // Sayfa açıldığında localStorage'daki durumları yükle
+  checklist.forEach((box, index) => {
+    const saved = localStorage.getItem("security-check-" + index);
+    if (saved === "true") {
+      box.checked = true;
+    }
+    // Her değişiklikte kaydet
+    box.addEventListener("change", () => {
+      localStorage.setItem("security-check-" + index, box.checked);
+    });
+  });
+ </script>
 </body> 
 </html>
