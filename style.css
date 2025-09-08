@@ -316,7 +316,6 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   font-size: 14px;
   padding: 6px 12px;
 }
-/* ===== Favoriler Paneli ===== */
 .favorites-panel {
   position: fixed;
   top: 0;
@@ -330,6 +329,17 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   flex-direction: column;
   transition: right 0.3s ease;
   padding: 16px;
+}
+
+.favorites-footer {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+.favorites-footer .btn {
+  width: 100%;
+  margin-top: 8px;
+}
 }
 
 .favorites-footer {
