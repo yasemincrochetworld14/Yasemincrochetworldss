@@ -374,6 +374,13 @@ window.renderCard = function renderCard(raw) {
       updateCart();
       showToast("Sepete eklendi ✅");
       animateBadge();
+       const favToCartBtn = document.getElementById("favToCartBtn");
+if (favToCartBtn) {
+  favToCartBtn.addEventListener("click", () => {
+    closeFav?.click(); // favoriler panelini kapat
+    openCart();        // sepet panelini aç
+  });
+}
     });
   }
 
@@ -381,14 +388,7 @@ window.renderCard = function renderCard(raw) {
   const favBtn = card.querySelector(".fav-btn");
   if (favBtn) {
     favBtn.addEventListener("click", () => {
-      if (favorites.includes(product.name)) {
-        favorites = favorites.filter(t => t !== product.name);
-        favBtn.classList.remove("active"); favBtn.innerHTML = "🤍";
-      } else {
-        favorites.push(product.name);
-        favBtn.classList.add("active"); favBtn.innerHTML = "❤️";
-      }
-      updateFavorites();
+      
     });
   }
 
@@ -413,7 +413,16 @@ window.renderCard = function renderCard(raw) {
 function loadProductsFromFirestore() {
   if (!window.db) return;
 
-  const container = document.querySelector(".product-grid");
+  cif (favorites.includes(product.name)) {
+  favorites = favorites.filter(t => t !== product.name);
+  favBtn.classList.remove("active"); favBtn.innerHTML = "🤍";
+  showToast("Favorilerden çıkarıldı ❌");
+} else {
+  favorites.push(product.name);
+  favBtn.classList.add("active"); favBtn.innerHTML = "❤️";
+  showToast("Favorilere eklendi ✅");
+}
+updateFavorites();onst container = document.querySelector(".product-grid");
   if (!container) return;
 
   // Önce canlı (onSnapshot) ve sıralı dene:
