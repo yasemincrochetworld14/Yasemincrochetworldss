@@ -316,6 +316,7 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   font-size: 14px;
   padding: 6px 12px;
 }
+/* ===== Favoriler Paneli ===== */
 .favorites-panel {
   position: fixed;
   top: 0;
@@ -323,39 +324,6 @@ body.dark .cart-items button { background:#374151; color:#f3f4f6; }
   width: 320px;
   height: 100%;
   background: var(--card, #fff);
-  box-shadow: -2px 0 6px rgba(0,0,0,0.15);
-  z-index: 250;
-  display: flex;
-  flex-direction: column;
-  transition: right 0.3s ease;
-  padding: 16px;
-}
-
-.favorites-footer {
-  padding: 12px;
-  border-top: 1px solid #eee;
-}
-
-.favorites-footer .btn {
-  width: 100%;
-  margin-top: 8px;
-}
-}
-
-.favorites-footer {
-  padding: 12px;
-  border-top: 1px solid #eee;
-}
-
-.favorites-footer .btn {
-  width: 100%;
-  margin-top: 8px;
-}
-
-.favorites-footer .btn {
-  width: 100%;
-  margin-top: 8px;
-}
   box-shadow: -2px 0 6px rgba(0,0,0,0.15);
   z-index: 250;
   display: flex;
